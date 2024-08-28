@@ -1,0 +1,7 @@
+version: '3.8'
+
+services:
+  test:
+    image: hello-world
+    ports:
+      - "8080:8080"

@@ -28,9 +28,10 @@ public class ProductService {
     public Products updateProduct(int id, Products productDetails) {
         Products product = getProductById(id);
         product.setProductName(productDetails.getProductName());
-        product.setPrice(product.getPrice());
-        product.setQuantity(product.getQuantity());
-        product.setCategory(product.getCategory());
+        product.setPrice(productDetails.getPrice());
+        product.setQuantity(productDetails.getQuantity());
+        product.setCategory(productDetails.getCategory());
+        product.setSupplierID(productDetails.getSupplierID());
 
         return productRepository.save(product);
     }

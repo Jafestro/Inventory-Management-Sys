@@ -1,6 +1,5 @@
 package com.reppuhallinta.inventory_management_sys.model;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,14 +9,14 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Transactions")
-public class Transactions {
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TransactionID")
-    private int transactionID;
+    private int transactionId;
 
     @Column(name = "ProductID")
-    private int productID;
+    private int productId;
 
     @Column(name = "TransactionDate")
     private String transactionDate;
@@ -28,36 +27,36 @@ public class Transactions {
     @Column(name = "TransactionType")
     private String transactionType;
 
-    @Column(name = "UserID")
-    private int userID;
+    @Column(name = "UserId")
+    private int userId;
 
-    public Transactions(int productID, String transactionDate, int quantity, String transactionType, int userID) {
+    public Transaction(int productId, String transactionDate, int quantity, String transactionType, int userId) {
         super();
-        this.productID = productID;
+        this.productId = productId;
         this.transactionDate = transactionDate;
         this.quantity = quantity;
         this.transactionType = transactionType;
-        this.userID = userID;
+        this.userId = userId;
     }
 
-    public Transactions() {
+    public Transaction() {
 
     }
 
-    public int getTransactionID() {
-        return transactionID;
+    public int getTransactionId() {
+        return transactionId;
     }
 
-    public void setTransactionID(int transactionID) {
-        this.transactionID = transactionID;
+    public void setTransactionId(int transactionId) {
+        this.transactionId = transactionId;
     }
 
-    public int getProductID() {
-        return productID;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setProductID(int productID) {
-        this.productID = productID;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public String getTransactionDate() {
@@ -84,18 +83,19 @@ public class Transactions {
         this.transactionType = transactionType;
     }
 
-    public int getUserID() {
-        return userID;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Override
     public String toString() {
-        return "Transactions [transactionID=" + transactionID + ", productID=" + productID + ", transactionDate="
-                + transactionDate + ", quantity=" + quantity + ", transactionType=" + transactionType + ", userID="
-                + userID + "]";
+        return "Transactions [transactionId=" + transactionId + ", productId=" + productId + ", transactionDate="
+                + transactionDate + ", quantity=" + quantity + ", transactionType=" + transactionType + ", userId="
+                + userId + "]";
     }
+    
 }

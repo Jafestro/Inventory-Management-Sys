@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,20 +35,20 @@ public class SupplierController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Suppliers> getSupplierById(int id) {
+    public ResponseEntity<Suppliers> getSupplierById(@PathVariable int id) {
         Suppliers supplier = supplierService.getSupplierById(id);
         return new ResponseEntity<>(supplier, HttpStatus.OK);
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<Suppliers> updateSupplier(int id, Suppliers supplierDetails) {
+    public ResponseEntity<Suppliers> updateSupplier(@PathVariable int id, @RequestBody Suppliers supplierDetails) {
         Suppliers updatedSupplier = supplierService.updateSupplier(id, supplierDetails);
 
         return new ResponseEntity<>(updatedSupplier, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSupplier(int id) {
+    public ResponseEntity<Void> deleteSupplier(@PathVariable int id) {
         supplierService.deleteSupplier(id);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

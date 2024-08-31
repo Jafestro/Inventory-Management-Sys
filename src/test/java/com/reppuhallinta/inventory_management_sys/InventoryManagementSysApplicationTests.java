@@ -2,7 +2,7 @@ package com.reppuhallinta.inventory_management_sys;
 
 import com.reppuhallinta.inventory_management_sys.model.Products;
 import com.reppuhallinta.inventory_management_sys.model.Suppliers;
-import com.reppuhallinta.inventory_management_sys.model.Transactions;
+import com.reppuhallinta.inventory_management_sys.model.Transaction;
 import com.reppuhallinta.inventory_management_sys.model.User;
 import com.reppuhallinta.inventory_management_sys.service.ProductService;
 import com.reppuhallinta.inventory_management_sys.service.SupplierService;
@@ -106,33 +106,33 @@ class InventoryManagementSysApplicationTests {
     @Test
 void testTransaction() {
     // Create a new transaction
-    Transactions newTransaction = new Transactions();
-    newTransaction.setProductID(12); // Set appropriate product ID
+    Transaction newTransaction = new Transaction();
+    newTransaction.setProductId(12); // Set appropriate product ID
     newTransaction.setQuantity(10);
     newTransaction.setTransactionDate("2021-01-01");
     newTransaction.setTransactionType("SALE");
-    newTransaction.setUserID(4); // Set appropriate user ID
+    newTransaction.setUserId(4); // Set appropriate user ID
 
-    Transactions savedTransaction = transactionService.createTransaction(newTransaction);
+    Transaction savedTransaction = transactionService.createTransaction(newTransaction);
     //log the saved transaction
     System.out.println("Saved transaction: " + savedTransaction);
     assertThat(savedTransaction).isNotNull();
-    assertThat(savedTransaction.getTransactionID()).isNotNull();
+    assertThat(savedTransaction.getTransactionId()).isNotNull();
 
     // Retrieve the transaction
-    Transactions retrievedTransaction = transactionService.getTransactionById(savedTransaction.getTransactionID());
+    Transaction retrievedTransaction = transactionService.getTransactionById(savedTransaction.getTransactionId());
     assertThat(retrievedTransaction).isNotNull();
-    assertThat(retrievedTransaction.getProductID()).isEqualTo(newTransaction.getProductID());
+    assertThat(retrievedTransaction.getProductId()).isEqualTo(newTransaction.getProductId());
     assertThat(retrievedTransaction.getQuantity()).isEqualTo(newTransaction.getQuantity());
     assertThat(retrievedTransaction.getTransactionDate()).isEqualTo(newTransaction.getTransactionDate());
     assertThat(retrievedTransaction.getTransactionType()).isEqualTo(newTransaction.getTransactionType());
-    assertThat(retrievedTransaction.getUserID()).isEqualTo(newTransaction.getUserID());
+    assertThat(retrievedTransaction.getUserId()).isEqualTo(newTransaction.getUserId());
 
     System.out.println("Retrieved transaction: " + retrievedTransaction);
 
     // Update the transaction
     retrievedTransaction.setQuantity(20);
-    Transactions updatedTransaction = transactionService.updateTransaction(retrievedTransaction.getTransactionID(), retrievedTransaction);
+    Transaction updatedTransaction = transactionService.updateTransaction(retrievedTransaction.getTransactionId(), retrievedTransaction);
     assertThat(updatedTransaction).isNotNull();
     assertThat(updatedTransaction.getQuantity()).isEqualTo(20);
 
@@ -141,8 +141,8 @@ void testTransaction() {
     System.out.println("List of all transactions: " + transactionService.getAllTransactions());
 
     // Delete the transaction
-    transactionService.deleteTransaction(updatedTransaction.getTransactionID());
-    Transactions deletedTransaction = transactionService.getTransactionById(updatedTransaction.getTransactionID());
+    transactionService.removeTransaction(updatedTransaction.getTransactionId());
+    Transaction deletedTransaction = transactionService.getTransactionById(updatedTransaction.getTransactionId());
     assertThat(deletedTransaction).isNull();
 }
 }

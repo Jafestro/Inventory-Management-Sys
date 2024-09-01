@@ -15,8 +15,8 @@ public class Products {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
-    private int id;
+    @Column(name = "ProductID")
+    private int productID;
 
     @Column(name = "Name")
     private String productName;
@@ -48,11 +48,11 @@ public class Products {
     }
 
     public int getId() {
-        return id;
+        return productID;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.productID = id;
     }
 
     public String getProductName() {
@@ -97,7 +97,7 @@ public class Products {
 
     @Override
     public String toString() {
-        return "Products [id=" + id + ", productName=" + productName + ", price=" + price + ", quantity=" + quantity
+        return "Products [ProductID=" + productID + ", productName=" + productName + ", price=" + price + ", quantity=" + quantity
                 + ", category=" + category + ", supplierID=" + supplierID + "]";
     }
 }

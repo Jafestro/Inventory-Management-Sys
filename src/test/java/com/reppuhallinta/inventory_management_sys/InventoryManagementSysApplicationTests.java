@@ -107,11 +107,11 @@ class InventoryManagementSysApplicationTests {
 void testTransaction() {
     // Create a new transaction
     Transaction newTransaction = new Transaction();
-    newTransaction.setProductId(12); // Set appropriate product ID
+    newTransaction.setProductId(4); // Set appropriate product ID
     newTransaction.setQuantity(10);
     newTransaction.setTransactionDate("2021-01-01");
     newTransaction.setTransactionType("SALE");
-    newTransaction.setUserId(4); // Set appropriate user ID
+    newTransaction.setUserId(3); // Set appropriate user ID
 
     Transaction savedTransaction = transactionService.createTransaction(newTransaction);
     //log the saved transaction

@@ -27,20 +27,20 @@ public class Products {
     @Column(name = "Quantity")
     private int quantity;
 
-    @Column(name = "Category")
-    private String category;
-
     @Column(name = "SupplierID")
     private int supplierID;
 
+    @Column(name = "CategoryID")
+    private int categoryId;
 
-    public Products(String productName, BigDecimal price, int quantity, String category, int supplierID) {
+
+    public Products(String productName, BigDecimal price, int quantity, int supplierID, int categoryId) {
         super();
         this.productName = productName;
         this.price = price;
         this.quantity = quantity;
-        this.category = category;
         this.supplierID = supplierID;
+        this.categoryId = categoryId;
     }
 
     public Products() {
@@ -79,14 +79,6 @@ public class Products {
         this.quantity = quantity;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public int getSupplierID() {
         return supplierID;
     }
@@ -95,9 +87,17 @@ public class Products {
         this.supplierID = supplierID;
     }
 
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
     @Override
     public String toString() {
         return "Products [ProductID=" + productID + ", productName=" + productName + ", price=" + price + ", quantity=" + quantity
-                + ", category=" + category + ", supplierID=" + supplierID + "]";
+                + ", categoryId=" + categoryId + ", supplierID=" + supplierID + "]";
     }
 }

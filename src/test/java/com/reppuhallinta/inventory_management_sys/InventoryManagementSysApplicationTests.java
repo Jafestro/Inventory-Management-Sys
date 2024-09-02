@@ -1,9 +1,11 @@
 package com.reppuhallinta.inventory_management_sys;
 
+import com.reppuhallinta.inventory_management_sys.model.Category;
 import com.reppuhallinta.inventory_management_sys.model.Products;
 import com.reppuhallinta.inventory_management_sys.model.Suppliers;
 import com.reppuhallinta.inventory_management_sys.model.Transaction;
 import com.reppuhallinta.inventory_management_sys.model.User;
+import com.reppuhallinta.inventory_management_sys.service.CategoryService;
 import com.reppuhallinta.inventory_management_sys.service.ProductService;
 import com.reppuhallinta.inventory_management_sys.service.SupplierService;
 import com.reppuhallinta.inventory_management_sys.service.TransactionService;
@@ -32,6 +34,9 @@ class InventoryManagementSysApplicationTests {
 
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @Test
     void testUser() {
@@ -78,9 +83,9 @@ class InventoryManagementSysApplicationTests {
         Products product = new Products();
         product.setProductName("Testing Product");
         product.setPrice(BigDecimal.valueOf(19.99));
+        product.setCategoryId(1);
         product.setSupplierID(savedSupplier.getSupplierID());
         product.setQuantity(10);
-        product.setCategory("Testing");
         // Save the product
         Products savedProduct = productService.createProduct(product);
         // Verify the product and supplier were saved
@@ -104,10 +109,44 @@ class InventoryManagementSysApplicationTests {
     }
 
     @Test
+    void testCategory() {
+        Category newCategory = new Category();
+        newCategory.setCategoryName("Test Category1");
+        
+        Category savedCategory = categoryService.createCategory(newCategory);
+
+        System.out.println("Saved category: " + savedCategory);
+        assertThat(savedCategory).isNotNull();
+        assertThat(savedCategory.getId());
+
+        Category retrievedCategory = categoryService.getCategoryById(savedCategory.getId());
+        assertThat(retrievedCategory).isNotNull();
+        assertThat(retrievedCategory.getId()).isEqualTo(newCategory.getId());
+        assertThat(retrievedCategory.getCategoryName()).isEqualTo(newCategory.getCategoryName());
+
+        System.out.println("Retrieved category: " + retrievedCategory);
+
+        retrievedCategory.setCategoryName("Updated Category1");
+        Category updatedCategory = categoryService.updateCategory(retrievedCategory.getId(), retrievedCategory);
+        assertThat(updatedCategory).isNotNull();
+        assertThat(updatedCategory.getCategoryName()).isEqualTo("Updated Category1");
+
+        System.out.println("Updated category: " + updatedCategory);
+
+        System.out.println("List of all categories: " + categoryService.getAllCategories());
+
+        categoryService.deleteCategory(updatedCategory.getId());
+        Category deletedCategory = categoryService.getCategoryById(updatedCategory.getId());
+        assertThat(deletedCategory).isNull();
+
+        System.out.println("All categories after deletion: " + categoryService.getAllCategories());
+    }
+
+    @Test
 void testTransaction() {
     // Create a new transaction
     Transaction newTransaction = new Transaction();
-    newTransaction.setProductId(4); // Set appropriate product ID
+    newTransaction.setProductId(18); // Set appropriate product ID
     newTransaction.setQuantity(10);
     newTransaction.setTransactionDate("2021-01-01");
     newTransaction.setTransactionType("SALE");
@@ -145,4 +184,5 @@ void testTransaction() {
     Transaction deletedTransaction = transactionService.getTransactionById(updatedTransaction.getTransactionId());
     assertThat(deletedTransaction).isNull();
 }
+
 }

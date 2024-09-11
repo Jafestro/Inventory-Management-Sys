@@ -21,7 +21,16 @@ public class InventoryManagementSysApplication extends Application {
 		springContext = SpringApplication.run(InventoryManagementSysApplication.class);
 	}
 
-	@Override
+	public void start(Stage primaryStage) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Products.fxml"));
+		fxmlLoader.setControllerFactory(springContext::getBean);
+		Scene scene = new Scene(fxmlLoader.load(), 1000, 1000);
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Inventory Management System");
+		primaryStage.show();
+	}
+
+	/*@Override
 	public void start(Stage primaryStage) throws IOException {
 
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view/fxml/Products.fxml"));
@@ -30,7 +39,7 @@ public class InventoryManagementSysApplication extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Inventory Management System");
 		primaryStage.show();
-	}
+	}*/
 
 	@Override
 	public void stop() throws Exception {

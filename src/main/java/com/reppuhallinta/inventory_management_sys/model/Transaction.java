@@ -2,6 +2,8 @@ package com.reppuhallinta.inventory_management_sys.model;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "Transactions")
 public class Transaction {
@@ -15,7 +17,7 @@ public class Transaction {
 
     @Column(name = "TransactionDate")
     @Temporal(TemporalType.TIMESTAMP)
-    private String transactionDate;
+    private Date transactionDate;
 
     @Column(name = "Quantity")
     private int quantity;
@@ -29,7 +31,7 @@ public class Transaction {
     public Transaction(int productId, String transactionDate, int quantity, String transactionType, int userId) {
         super();
         this.productId = productId;
-        this.transactionDate = transactionDate;
+        this.transactionDate = new Date();
         this.quantity = quantity;
         this.transactionType = transactionType;
         this.userId = userId;
@@ -55,11 +57,11 @@ public class Transaction {
         this.productId = productId;
     }
 
-    public String getTransactionDate() {
+    public Date getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(String transactionDate) {
+    public void setTransactionDate(Date transactionDate) {
         this.transactionDate = transactionDate;
     }
 

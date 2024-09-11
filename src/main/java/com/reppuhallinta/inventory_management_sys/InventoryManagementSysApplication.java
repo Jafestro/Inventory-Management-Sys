@@ -22,7 +22,7 @@ public class InventoryManagementSysApplication extends Application {
 	}
 
 	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Transactions.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Products.fxml"));
 		fxmlLoader.setControllerFactory(springContext::getBean);
 		Scene scene = new Scene(fxmlLoader.load(), 1000, 1000);
 		primaryStage.setScene(scene);

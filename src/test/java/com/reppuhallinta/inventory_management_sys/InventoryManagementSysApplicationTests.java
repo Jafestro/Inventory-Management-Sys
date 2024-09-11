@@ -73,12 +73,21 @@ class InventoryManagementSysApplicationTests {
 
     @Test
     void testProductAndSupplier() {
+        // Create a new user
+        User user = new User();
+        user.setUsername("testuser");
+        user.setFirstName("Test");
+        user.setLastName("User");
+        user.setPassword("password");
+        user.setAccessLevel("1");
+        User savedUser = userService.createUser(user);
 
         // Create a new supplier
         Suppliers supplier = new Suppliers();
         supplier.setSupplierName("Testing Supplier");
         supplier.setContactEmail("Testing@Supplier.com");
         Suppliers savedSupplier = supplierService.createSupplier(supplier);
+
         // Create a new product
         Products product = new Products();
         product.setProductName("Testing Product");
@@ -86,33 +95,36 @@ class InventoryManagementSysApplicationTests {
         product.setCategoryId(1);
         product.setSupplierID(savedSupplier.getSupplierID());
         product.setQuantity(10);
+
         // Save the product
-        Products savedProduct = productService.createProduct(product);
+        Products savedProduct = productService.createProduct(product, savedUser.getId());
+
         // Verify the product and supplier were saved
         assertThat(savedProduct.getId()).isNotNull();
         assertThat(savedSupplier.getSupplierID()).isNotNull();
+
         // Retrieve the product and supplier
         Products retrievedProduct = productService.getProductById(savedProduct.getId());
         Suppliers retrievedSupplier = supplierService.getSupplierById(savedSupplier.getSupplierID());
+
         // Update the product and supplier
         retrievedProduct.setProductName("Updated Product");
         retrievedSupplier.setSupplierName("Updated Supplier");
+
         // Delete the product and supplier
         productService.deleteProduct(retrievedProduct.getId());
         supplierService.deleteSupplier(retrievedSupplier.getSupplierID());
+
         // Verify the product and supplier were deleted
         assertThat(productService.getProductById(retrievedProduct.getId())).isNull();
         assertThat(supplierService.getSupplierById(retrievedSupplier.getSupplierID())).isNull();
-        // Verify the supplier and product were deleted
-        assertThat(supplierService.getSupplierById(savedSupplier.getSupplierID())).isNull();
-        assertThat(productService.getProductById(savedProduct.getId())).isNull();
     }
 
     @Test
     void testCategory() {
         Category newCategory = new Category();
         newCategory.setCategoryName("Test Category1");
-        
+
         Category savedCategory = categoryService.createCategory(newCategory);
 
         System.out.println("Saved category: " + savedCategory);

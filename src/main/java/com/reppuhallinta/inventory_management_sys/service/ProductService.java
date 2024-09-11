@@ -2,6 +2,7 @@ package com.reppuhallinta.inventory_management_sys.service;
 
 import java.util.List;
 
+import com.reppuhallinta.inventory_management_sys.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,20 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public Products createProduct(Products product) {
+    @Autowired
+    private TransactionService transactionService;
+
+    public Products createProduct(Products product, int userId) {
+
+        Products createdProduct = productRepository.save(product);
+
+
+        Transaction transaction = new Transaction();
+        transaction.setProductId(createdProduct.getId());
+        transaction.setQuantity(createdProduct.getQuantity());
+        transaction.setTransactionType("ADD");
+        transaction.setUserId(userId);
+        transactionService.createTransaction(transaction);
         return productRepository.save(product);
     }
 

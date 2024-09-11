@@ -23,7 +23,8 @@ public class InventoryManagementSysApplication extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/reppuhallinta/inventory_management_sys/view/Products.fxml"));
+
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view/fxml/Products.fxml"));
 		fxmlLoader.setControllerFactory(springContext::getBean);
 		Scene scene = new Scene(fxmlLoader.load());
 		primaryStage.setScene(scene);

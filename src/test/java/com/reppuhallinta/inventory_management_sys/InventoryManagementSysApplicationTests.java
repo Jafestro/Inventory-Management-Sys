@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 @SpringBootTest
 @Transactional
@@ -160,7 +161,7 @@ void testTransaction() {
     Transaction newTransaction = new Transaction();
     newTransaction.setProductId(18); // Set appropriate product ID
     newTransaction.setQuantity(10);
-    newTransaction.setTransactionDate("2021-01-01");
+    newTransaction.setTransactionDate(new Date());
     newTransaction.setTransactionType("SALE");
     newTransaction.setUserId(3); // Set appropriate user ID
 

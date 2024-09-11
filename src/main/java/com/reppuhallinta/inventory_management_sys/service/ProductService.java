@@ -1,6 +1,7 @@
 package com.reppuhallinta.inventory_management_sys.service;
 
 import java.util.List;
+import java.util.Date;
 
 import com.reppuhallinta.inventory_management_sys.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,12 @@ public class ProductService {
     public Products createProduct(Products product, int userId) {
 
         Products createdProduct = productRepository.save(product);
-
-
         Transaction transaction = new Transaction();
         transaction.setProductId(createdProduct.getId());
         transaction.setQuantity(createdProduct.getQuantity());
         transaction.setTransactionType("ADD");
         transaction.setUserId(userId);
+        transaction.setTransactionDate(new Date());
         transactionService.createTransaction(transaction);
         return productRepository.save(product);
     }

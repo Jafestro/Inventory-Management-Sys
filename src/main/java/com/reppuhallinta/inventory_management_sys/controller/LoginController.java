@@ -1,8 +1,8 @@
 package com.reppuhallinta.inventory_management_sys.controller;
 
-import com.reppuhallinta.inventory_management_sys.InventoryManagementSysApplication;
 import com.reppuhallinta.inventory_management_sys.model.User;
 import com.reppuhallinta.inventory_management_sys.service.UserService;
+import com.reppuhallinta.inventory_management_sys.utils.FXMLLoaderUtil;
 import session.CustomSessionManager;
 
 import javafx.fxml.FXML;
@@ -22,8 +22,6 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    private InventoryManagementSysApplication application;
-
     @FXML
     private TextField usernameField;
 
@@ -32,10 +30,6 @@ public class LoginController {
 
     @FXML
     private Button loginButton;
-
-    public void setApplication(InventoryManagementSysApplication application) {
-        this.application = application;
-    }
 
     public void initialize() {
         usernameField.setPromptText("Enter your username");
@@ -80,10 +74,11 @@ public class LoginController {
                 return;
             }
 
-            application.switchScene("/Products.fxml");
-            // Close login window
             Stage stage = (Stage) owner;
-            stage.close();
+            //application.switchScene("/Products.fxml");
+            FXMLLoaderUtil.loadFXML("/Products.fxml", stage, "Products");
+            // Close login window
+            //stage.close();
         } else {
             showAlert(Alert.AlertType.ERROR, owner, "Login failed", "Invalid username or password");
         }

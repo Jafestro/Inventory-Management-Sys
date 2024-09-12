@@ -3,12 +3,15 @@ package com.reppuhallinta.inventory_management_sys.controller;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.reppuhallinta.inventory_management_sys.model.Products;
 import com.reppuhallinta.inventory_management_sys.model.User;
 import com.reppuhallinta.inventory_management_sys.service.ProductService;
+import com.reppuhallinta.inventory_management_sys.utils.FXMLLoaderUtil;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,6 +31,9 @@ public class ProductViewController {
     private TableView<Products> productTable;
 
     @FXML
+    private Button transactionButton;
+
+    @FXML
     private TableColumn<Products, Integer> idColumn;
 
     @FXML
@@ -45,6 +51,7 @@ public class ProductViewController {
     @FXML
     private TableColumn<Products, Integer> categoryIDColumn;
 
+ 
     @FXML
     public void initialize() {
 
@@ -73,5 +80,13 @@ public class ProductViewController {
         List<Products> products = productService.getAllProducts();
         ObservableList<Products> productObservableList = FXCollections.observableArrayList(products);
         productTable.setItems(productObservableList);
+    }
+
+    public void handleTransactionButtonAction() {
+
+        Stage stage = (Stage) transactionButton.getScene().getWindow();
+
+        FXMLLoaderUtil.loadFXML("/Transactions.fxml", stage, "Transactions");
+
     }
 }

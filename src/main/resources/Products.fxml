@@ -44,15 +44,16 @@
             <VBox.margin>
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></TextField>
-            <Button text="Add Product">
+            <Button fx:id="transactionButton" text="Transactions" maxWidth="200.0" minWidth="200.0" onAction="#handleTransactionButtonAction" />
+            <Button text="Add Product" maxWidth="200.0" minWidth="200.0">
             <VBox.margin>
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></Button>
-            <Button text="Edit Product">
+            <Button text="Edit Product" maxWidth="200.0" minWidth="200.0">
             <VBox.margin>
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></Button>
-            <Button text="Delete Product">
+            <Button text="Delete Product" maxWidth="200.0" minWidth="200.0">
             <VBox.margin>
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></Button>
@@ -65,7 +66,7 @@
                 <columns>
                     <TableColumn fx:id="idColumn" prefWidth="113.0" text="ID" />
                     <TableColumn fx:id="nameColumn" prefWidth="326.0" text="Name" />
-                    <TableColumn fx:id="quantityColumn" minWidth="0.0" prefWidth="114.0" text="Quantity" />
+                    <TableColumn fx:id="quantityColumn" minWidth="0.0" text="Quantity" />
                     <TableColumn fx:id="priceColumn" prefWidth="347.0" text="Price" />
                     <TableColumn fx:id="supplierIDColumn" text="SupplierID" />
                     <TableColumn fx:id="categoryIDColumn" text="CategoryID" />

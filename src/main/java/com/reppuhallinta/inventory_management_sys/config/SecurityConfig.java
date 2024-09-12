@@ -19,7 +19,18 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/users", "/api/products").permitAll()
                         .anyRequest().authenticated()
-                );
+                )
+                .formLogin(form -> form
+                .loginPage("/login")
+                .permitAll()
+        )
+        .logout(logout -> logout
+                .permitAll()
+        )
+        .sessionManagement(session -> session
+                .maximumSessions(1)
+                .expiredUrl("/login?expired")
+        );
         return http.build();
     }
 

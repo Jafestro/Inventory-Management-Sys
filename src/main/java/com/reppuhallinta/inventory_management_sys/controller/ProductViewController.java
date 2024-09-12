@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.reppuhallinta.inventory_management_sys.model.Products;
+import com.reppuhallinta.inventory_management_sys.model.User;
 import com.reppuhallinta.inventory_management_sys.service.ProductService;
 
 import javafx.collections.FXCollections;
@@ -15,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import session.CustomSessionManager;
 
 @Controller
 public class ProductViewController {
@@ -38,11 +40,31 @@ public class ProductViewController {
     private TableColumn<Products, BigDecimal> priceColumn;
 
     @FXML
+    private TableColumn<Products, Integer> supplierIDColumn;
+
+    @FXML
+    private TableColumn<Products, Integer> categoryIDColumn;
+
+    @FXML
     public void initialize() {
+
+        String sessionId = CustomSessionManager.getSessionId();
+        System.out.println("Session ID in ProductViewController: " + sessionId);
+
+        User user = (User) CustomSessionManager.getAttribute("user");
+
+        if (user != null) {
+            System.out.println("Logged in user: " + user.getUsername());
+        } else {
+            System.out.println("No user logged in");
+        }
+
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("productName"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        supplierIDColumn.setCellValueFactory(new PropertyValueFactory<>("supplierID"));
+        categoryIDColumn.setCellValueFactory(new PropertyValueFactory<>("categoryId"));
 
         loadProductData();
     }
@@ -52,5 +74,4 @@ public class ProductViewController {
         ObservableList<Products> productObservableList = FXCollections.observableArrayList(products);
         productTable.setItems(productObservableList);
     }
-    
 }

@@ -48,4 +48,14 @@ public class UserService {
         User user = getUserById(id);
         userRepository.delete(user);
     }
+
+    public User authenticate(String username, String password) {
+        User user = userRepository.findByUsername(username);
+
+        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+            return user;
+        }
+
+        return null;
+    }
 }

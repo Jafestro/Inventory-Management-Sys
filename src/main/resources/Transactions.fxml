@@ -40,56 +40,48 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
-  <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-      <TableView prefHeight="573.0" prefWidth="800.0">
-        <columns>
-          <TableColumn maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="ID" />
-          <TableColumn maxWidth="200.0" minWidth="100.0" prefWidth="200.0" text="Date" />
-            <TableColumn maxWidth="200.0" minWidth="100.0" prefWidth="200.0" text="Type" />
-            <TableColumn maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="Quantity" />
-            <TableColumn maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="ProductID" />
-            <TableColumn maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="UserID" />
-        </columns>
-      </TableView>
-  </children>
+<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22"
+      fx:controller="com.reppuhallinta.inventory_management_sys.controller.TransactionViewController"
+      xmlns:fx="http://javafx.com/fxml/1">
+  <MenuBar VBox.vgrow="NEVER">
+    <Menu mnemonicParsing="false" text="File">
+      <MenuItem mnemonicParsing="false" text="New"/>
+      <MenuItem mnemonicParsing="false" text="Open…"/>
+      <Menu mnemonicParsing="false" text="Open Recent"/>
+      <SeparatorMenuItem mnemonicParsing="false"/>
+      <MenuItem mnemonicParsing="false" text="Close"/>
+      <MenuItem mnemonicParsing="false" text="Save"/>
+      <MenuItem mnemonicParsing="false" text="Save As…"/>
+      <MenuItem mnemonicParsing="false" text="Revert"/>
+      <SeparatorMenuItem mnemonicParsing="false"/>
+      <MenuItem mnemonicParsing="false" text="Preferences…"/>
+      <SeparatorMenuItem mnemonicParsing="false"/>
+      <MenuItem mnemonicParsing="false" text="Quit"/>
+    </Menu>
+    <Menu mnemonicParsing="false" text="Edit">
+      <MenuItem mnemonicParsing="false" text="Undo"/>
+      <MenuItem mnemonicParsing="false" text="Redo"/>
+      <SeparatorMenuItem mnemonicParsing="false"/>
+      <MenuItem mnemonicParsing="false" text="Cut"/>
+      <MenuItem mnemonicParsing="false" text="Copy"/>
+      <MenuItem mnemonicParsing="false" text="Paste"/>
+      <MenuItem mnemonicParsing="false" text="Delete"/>
+      <SeparatorMenuItem mnemonicParsing="false"/>
+      <MenuItem mnemonicParsing="false" text="Select All"/>
+      <MenuItem mnemonicParsing="false" text="Unselect All"/>
+    </Menu>
+    <Menu mnemonicParsing="false" text="Help">
+      <MenuItem mnemonicParsing="false" text="About MyHelloApp"/>
+    </Menu>
+  </MenuBar>
+  <TableView fx:id="transactionTable" prefHeight="573.0" prefWidth="800.0">
+    <columns>
+      <TableColumn fx:id="idColumn" maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="ID"/>
+      <TableColumn fx:id="dateColumn" maxWidth="200.0" minWidth="100.0" prefWidth="200.0" text="Date"/>
+      <TableColumn fx:id="typeColumn" maxWidth="200.0" minWidth="100.0" prefWidth="200.0" text="Type"/>
+      <TableColumn fx:id="quantityColumn" maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="Quantity"/>
+      <TableColumn fx:id="productIdColumn" maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="ProductID"/>
+      <TableColumn fx:id="userIdColumn" maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="UserID"/>
+    </columns>
+  </TableView>
 </VBox>

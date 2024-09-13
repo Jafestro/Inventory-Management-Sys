@@ -1,22 +1,22 @@
 package com.reppuhallinta.inventory_management_sys.utils;
 
+import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import lombok.Setter;
 import org.springframework.context.ApplicationContext;
 
-import java.io.IOException;
-
 public class FXMLLoaderUtil {
-    private static ApplicationContext springContext;
 
-    public static void setSpringContext(ApplicationContext context) {
-        springContext = context;
-    }
+    @Setter
+    private static ApplicationContext springContext;
 
     public static void loadFXML(String fxmlPath, Stage stage, String title) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(FXMLLoaderUtil.class.getResource(fxmlPath));
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                FXMLLoaderUtil.class.getResource(fxmlPath)
+            );
             fxmlLoader.setControllerFactory(springContext::getBean);
             Scene scene = new Scene(fxmlLoader.load(), 1000, 1000);
 
@@ -27,9 +27,8 @@ public class FXMLLoaderUtil {
             stage.setScene(scene);
             stage.setTitle(title);
             stage.show();
-
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error loading FXML " + fxmlPath + ": " + e.getMessage());
         }
     }
 }

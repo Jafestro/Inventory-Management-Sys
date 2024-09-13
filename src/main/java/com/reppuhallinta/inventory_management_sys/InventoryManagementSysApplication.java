@@ -3,9 +3,6 @@ package com.reppuhallinta.inventory_management_sys;
 import com.reppuhallinta.inventory_management_sys.utils.FXMLLoaderUtil;
 import javafx.application.Application;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -15,8 +12,6 @@ public class InventoryManagementSysApplication extends Application {
 
     private ConfigurableApplicationContext springContext;
 
-
-
     @Override
     public void init() {
         springContext = SpringApplication.run(InventoryManagementSysApplication.class);
@@ -24,16 +19,12 @@ public class InventoryManagementSysApplication extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
-
+    public void start(Stage primaryStage) {
         FXMLLoaderUtil.loadFXML("/Login.fxml", primaryStage, "Login");
-
     }
 
-    
-
     @Override
-    public void stop() throws Exception {
+    public void stop() {
         springContext.stop();
     }
 

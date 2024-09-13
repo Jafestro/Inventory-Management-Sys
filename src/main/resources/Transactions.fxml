@@ -1,43 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
-  All rights reserved. Use is subject to license terms.
-
-  This file is available and licensed under the following license:
-
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions
-  are met:
-
-  - Redistributions of source code must retain the above copyright
-    notice, this list of conditions and the following disclaimer.
-  - Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in
-    the documentation and/or other materials provided with the distribution.
-  - Neither the name of Oracle Corporation nor the names of its
-    contributors may be used to endorse or promote products derived
-    from this software without specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--->
-
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22"
@@ -71,17 +44,50 @@
       <MenuItem mnemonicParsing="false" text="Unselect All"/>
     </Menu>
     <Menu mnemonicParsing="false" text="Help">
-      <MenuItem mnemonicParsing="false" text="About MyHelloApp"/>
+      <MenuItem mnemonicParsing="false" text="About Inventory Management System"/>
     </Menu>
   </MenuBar>
-  <TableView fx:id="transactionTable" prefHeight="573.0" prefWidth="800.0">
-    <columns>
-      <TableColumn fx:id="idColumn" maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="ID"/>
-      <TableColumn fx:id="dateColumn" maxWidth="200.0" minWidth="100.0" prefWidth="200.0" text="Date"/>
-      <TableColumn fx:id="typeColumn" maxWidth="200.0" minWidth="100.0" prefWidth="200.0" text="Type"/>
-      <TableColumn fx:id="quantityColumn" maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="Quantity"/>
-      <TableColumn fx:id="productIdColumn" maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="ProductID"/>
-      <TableColumn fx:id="userIdColumn" maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="UserID"/>
-    </columns>
-  </TableView>
+
+  <HBox VBox.vgrow="ALWAYS">
+        <VBox spacing="10.0">
+            <TextField fx:id="searchField" promptText="Search...">
+            <VBox.margin>
+               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+            </VBox.margin></TextField>
+            <Button fx:id="productsButton" text="Products" maxWidth="200.0" minWidth="200.0" onAction="#handleProductsButton" />
+            <Button text="Add Transaction" maxWidth="200.0" minWidth="200.0">
+            <VBox.margin>
+               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+            </VBox.margin></Button>
+            <Button text="Edit Transaction" maxWidth="200.0" minWidth="200.0">
+            <VBox.margin>
+               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+            </VBox.margin></Button>
+            <Button text="Delete Transaction" maxWidth="200.0" minWidth="200.0">
+            <VBox.margin>
+               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+            </VBox.margin></Button>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+        </VBox>
+        <AnchorPane HBox.hgrow="ALWAYS">
+            <TableView fx:id="transactionTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <columns>
+                    <TableColumn fx:id="idColumn" maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="ID"/>
+                    <TableColumn fx:id="dateColumn" maxWidth="200.0" minWidth="100.0" prefWidth="200.0" text="Date"/>
+                    <TableColumn fx:id="typeColumn" maxWidth="200.0" minWidth="100.0" prefWidth="200.0" text="Type"/>
+                    <TableColumn fx:id="quantityColumn" maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="Quantity"/>
+                    <TableColumn fx:id="productIdColumn" maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="ProductID"/>
+                    <TableColumn fx:id="userIdColumn" maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="UserID"/>
+                </columns>
+            <padding>
+               <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+            </padding>
+            </TableView>
+        </AnchorPane>
+      <VBox.margin>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </VBox.margin>
+    </HBox>
 </VBox>

@@ -45,15 +45,15 @@
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></TextField>
             <Button fx:id="transactionButton" text="Transactions" maxWidth="200.0" minWidth="200.0" onAction="#handleTransactionButtonAction" />
-            <Button text="Add Product" maxWidth="200.0" minWidth="200.0">
+            <Button fx:id="createProductButton" text="Create Product" maxWidth="200.0" minWidth="200.0" onAction="#handleCreateProductButtonAction" >
             <VBox.margin>
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></Button>
-            <Button text="Edit Product" maxWidth="200.0" minWidth="200.0">
+            <Button fx:id="editProductButton" text="Edit Product" maxWidth="200.0" minWidth="200.0">
             <VBox.margin>
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></Button>
-            <Button text="Delete Product" maxWidth="200.0" minWidth="200.0">
+            <Button fx:id="deleteProductButton" text="Delete Product" maxWidth="200.0" minWidth="200.0">
             <VBox.margin>
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></Button>

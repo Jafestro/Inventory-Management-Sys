@@ -3,12 +3,16 @@ package com.reppuhallinta.inventory_management_sys.controller;
 import com.reppuhallinta.inventory_management_sys.model.Transaction;
 import com.reppuhallinta.inventory_management_sys.model.User;
 import com.reppuhallinta.inventory_management_sys.service.TransactionService;
+import com.reppuhallinta.inventory_management_sys.utils.FXMLLoaderUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import session.CustomSessionManager;
@@ -24,6 +28,9 @@ public class TransactionViewController {
 
     @FXML
     private TableView<Transaction> transactionTable;
+
+    @FXML
+    private Button productsButton;
 
     @FXML
     private TableColumn<Transaction, Integer> idColumn;
@@ -72,6 +79,12 @@ public class TransactionViewController {
         List<Transaction> transactions = transactionService.getAllTransactions();
         ObservableList<Transaction> transactionObservableList = FXCollections.observableArrayList(transactions);
         transactionTable.setItems(transactionObservableList);
+    }
+
+    public void handleProductsButton() {
+        Stage stage = (Stage) productsButton.getScene().getWindow();
+
+        FXMLLoaderUtil.loadFXML("/Products.fxml", stage, "Products", 1200, 1200);
     }
 
 }

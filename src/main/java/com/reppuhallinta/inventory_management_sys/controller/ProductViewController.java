@@ -86,7 +86,13 @@ public class ProductViewController {
 
         Stage stage = (Stage) transactionButton.getScene().getWindow();
 
-        FXMLLoaderUtil.loadFXML("/Transactions.fxml", stage, "Transactions");
+        FXMLLoaderUtil.loadFXML("/Transactions.fxml", stage, "Transactions", 1200, 1200);
 
+    }
+
+    public void handleCreateProductButtonAction() {
+        Stage stage = new Stage();
+
+        FXMLLoaderUtil.loadFXML("/CreateProduct.fxml", stage, "Create Product", 400, 350);
     }
 }

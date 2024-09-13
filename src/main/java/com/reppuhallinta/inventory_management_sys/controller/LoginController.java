@@ -76,7 +76,7 @@ public class LoginController {
 
             Stage stage = (Stage) owner;
             //application.switchScene("/Products.fxml");
-            FXMLLoaderUtil.loadFXML("/Products.fxml", stage, "Products");
+            FXMLLoaderUtil.loadFXML("/Products.fxml", stage, "Products", 1200, 1200);
             // Close login window
             //stage.close();
         } else {

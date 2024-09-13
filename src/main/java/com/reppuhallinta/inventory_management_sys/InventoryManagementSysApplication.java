@@ -20,7 +20,7 @@ public class InventoryManagementSysApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        FXMLLoaderUtil.loadFXML("/Login.fxml", primaryStage, "Login");
+        FXMLLoaderUtil.loadFXML("/Login.fxml", primaryStage, "Login", 400, 350);
     }
 
     @Override

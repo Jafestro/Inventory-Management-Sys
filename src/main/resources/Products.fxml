@@ -44,19 +44,20 @@
             <VBox.margin>
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></TextField>
-            <Button fx:id="transactionButton" text="Transactions" maxWidth="200.0" minWidth="200.0" onAction="#handleTransactionButtonAction" />
-            <Button fx:id="createProductButton" text="Create Product" maxWidth="200.0" minWidth="200.0" onAction="#handleCreateProductButtonAction" >
+            <Button fx:id="transactionButton" maxWidth="200.0" minWidth="200.0" onAction="#handleTransactionButtonAction" text="Transactions" />
+            <Button fx:id="createProductButton" maxWidth="200.0" minWidth="200.0" onAction="#handleCreateProductButtonAction" text="Create Product">
             <VBox.margin>
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></Button>
-            <Button fx:id="editProductButton" text="Edit Product" maxWidth="200.0" minWidth="200.0">
+            <Button fx:id="editProductButton" maxWidth="200.0" minWidth="200.0" text="Edit Product">
             <VBox.margin>
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></Button>
-            <Button fx:id="deleteProductButton" text="Delete Product" maxWidth="200.0" minWidth="200.0">
+            <Button fx:id="deleteProductButton" maxWidth="200.0" minWidth="200.0" text="Delete Product" onAction="#handleDeleteProductButtonAction" >
             <VBox.margin>
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></Button>
+         <Button fx:id="refreshButton" layoutX="12.0" layoutY="168.0" maxWidth="200.0" minWidth="200.0" text="Refresh" onAction="#handleRefreshButtonAction" />
          <HBox.margin>
             <Insets />
          </HBox.margin>

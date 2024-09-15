@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.reppuhallinta.inventory_management_sys.model.Transaction;
 import com.reppuhallinta.inventory_management_sys.repository.TransactionRepository;
 
+import jakarta.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,6 +52,11 @@ public class TransactionService {
     public void removeTransaction(int id) {
         Transaction transaction = getTransactionById(id);
         transactionRepository.delete(transaction);
+    }
+
+    @Transactional
+    public void removeTransactionByProductId(int productId) {
+        transactionRepository.deleteTransactionByProductId(productId);
     }
     
 }

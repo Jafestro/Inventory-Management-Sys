@@ -13,6 +13,7 @@ import com.reppuhallinta.inventory_management_sys.service.ProductService;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import session.CustomSessionManager;
 
 import java.math.BigDecimal;
@@ -40,10 +41,10 @@ public class CreateProductController {
     private TextField quantityField;
 
     @FXML
-    private ComboBox categoryComboBox;
+    private ComboBox<String> categoryComboBox;
 
     @FXML
-    private ComboBox supplierComboBox;
+    private ComboBox<String> supplierComboBox;
 
     @FXML
     private Button createButton;
@@ -119,10 +120,11 @@ public class CreateProductController {
             product.setCategoryId(categoryId);
             product.setSupplierID(supplierId);
 
-            System.out.println("Product that's being created: " + product);
-
             assert user != null;
             productService.createProduct(product, user.getId());
+
+            success();
+            
         } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Error", "Please enter all the fields correctly.");
         }
@@ -144,6 +146,18 @@ public class CreateProductController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    private void success() {
+        showAlert(AlertType.CONFIRMATION, "Success", "Product created!");
+
+        productNameField.clear();
+        productPriceField.clear();
+        quantityField.clear();
+        
+        categoryComboBox.valueProperty().set(null);
+        supplierComboBox.valueProperty().set(null);
+
     }
 
 }

@@ -1,7 +1,6 @@
 package com.reppuhallinta.inventory_management_sys.service;
 
 import java.util.List;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,12 +8,15 @@ import org.springframework.stereotype.Service;
 import com.reppuhallinta.inventory_management_sys.model.Transaction;
 import com.reppuhallinta.inventory_management_sys.repository.TransactionRepository;
 
+import jakarta.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 @Service
 public class TransactionService {
+
     @Autowired
     private TransactionRepository transactionRepository;
 
@@ -50,6 +52,11 @@ public class TransactionService {
     public void removeTransaction(int id) {
         Transaction transaction = getTransactionById(id);
         transactionRepository.delete(transaction);
+    }
+
+    @Transactional
+    public void removeTransactionByProductId(int productId) {
+        transactionRepository.deleteTransactionByProductId(productId);
     }
     
 }

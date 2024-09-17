@@ -1,12 +1,8 @@
 package com.reppuhallinta.inventory_management_sys;
 
+import com.reppuhallinta.inventory_management_sys.utils.FXMLLoaderUtil;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -14,44 +10,25 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class InventoryManagementSysApplication extends Application {
 
-	private ConfigurableApplicationContext springContext;
+    private ConfigurableApplicationContext springContext;
 
-	@Override
-	public void init() {
-		springContext = SpringApplication.run(InventoryManagementSysApplication.class);
-	}
+    @Override
+    public void init() {
+        springContext = SpringApplication.run(InventoryManagementSysApplication.class);
+        FXMLLoaderUtil.setSpringContext(springContext);
+    }
 
-	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Products.fxml"));
-		fxmlLoader.setControllerFactory(springContext::getBean);
-		Scene scene = new Scene(fxmlLoader.load(), 1000, 1000);
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("Inventory Management System");
-		primaryStage.show();
-	}
+    @Override
+    public void start(Stage primaryStage) {
+        FXMLLoaderUtil.loadFXML("/Login.fxml", primaryStage, "Login", 400, 350);
+    }
 
-	/*@Override
-	public void start(Stage primaryStage) throws IOException {
+    @Override
+    public void stop() {
+        springContext.stop();
+    }
 
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view/fxml/Products.fxml"));
-		fxmlLoader.setControllerFactory(springContext::getBean);
-		Scene scene = new Scene(fxmlLoader.load());
-		primaryStage.setScene(scene);
-		primaryStage.setTitle("Inventory Management System");
-		primaryStage.show();
-	}*/
-
-	@Override
-	public void stop() throws Exception {
-		springContext.stop();
-	}
-
-	public static void main(String[] args) {
-		launch(args);
-	}
-
-	/*public static void main(String[] args) {
-		SpringApplication.run(InventoryManagementSysApplication.class, args);
-	}*/
-
+    public static void main(String[] args) {
+        launch(args);
+    }
 }

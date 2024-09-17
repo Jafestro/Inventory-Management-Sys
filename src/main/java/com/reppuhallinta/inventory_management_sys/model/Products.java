@@ -30,7 +30,7 @@ public class Products {
     @Column(name = "SupplierID")
     private int supplierID;
 
-    @Column(name = "CategoryID")
+    @Column(name = "CategoryId")
     private int categoryId;
 
 

@@ -2,9 +2,9 @@ package com.reppuhallinta.inventory_management_sys.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,8 +18,6 @@ import com.reppuhallinta.inventory_management_sys.utils.FXMLLoaderUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import session.CustomSessionManager;
@@ -56,9 +54,6 @@ public class ProductViewController {
 
     @FXML
     private TableColumn<Products, Integer> categoryIDColumn;
-
-    @FXML
-    private Button refreshButton;
 
  
     @FXML
@@ -119,14 +114,27 @@ public class ProductViewController {
             return;
         }
 
-        int productId = selectedProduct.getId();
-        transactionService.removeTransactionByProductId(productId);
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to delete this product?");
 
-        productService.deleteProduct(selectedProduct.getId());
-        loadProductData();
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent()) {
+            if (result.get() == ButtonType.OK) {
+                int productId = selectedProduct.getId();
+                transactionService.removeTransactionByProductId(productId);
+
+                productService.deleteProduct(selectedProduct.getId());
+                loadProductData();
+            }
+        }
+
     }
 
     public void handleRefreshButtonAction() {
         loadProductData();
     }
+
 }

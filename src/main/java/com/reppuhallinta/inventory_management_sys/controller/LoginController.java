@@ -51,7 +51,7 @@ public class LoginController {
         User user = userService.authenticate(username, password);
 
         if (user != null) {
-            Alert successAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
             successAlert.setTitle("Login Successful!");
             successAlert.setHeaderText(null);
             successAlert.setContentText("Welcome " + usernameField.getText() + "!");

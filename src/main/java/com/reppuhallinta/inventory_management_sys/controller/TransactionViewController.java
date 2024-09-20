@@ -3,7 +3,7 @@ package com.reppuhallinta.inventory_management_sys.controller;
 import com.reppuhallinta.inventory_management_sys.model.Transaction;
 import com.reppuhallinta.inventory_management_sys.model.User;
 import com.reppuhallinta.inventory_management_sys.service.TransactionService;
-import com.reppuhallinta.inventory_management_sys.utils.FXMLLoaderUtil;
+import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -83,7 +83,7 @@ public class TransactionViewController {
     public void handleProductsButton() {
         Stage stage = (Stage) productsButton.getScene().getWindow();
 
-        FXMLLoaderUtil.loadFXML("/Products.fxml", stage, "Products", 1200, 1200);
+        UIUtils.loadFXML("/Products.fxml", stage, "Products", 1200, 1200, null);
     }
 
 }

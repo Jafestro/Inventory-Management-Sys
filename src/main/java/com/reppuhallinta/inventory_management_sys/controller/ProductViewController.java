@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +16,11 @@ import com.reppuhallinta.inventory_management_sys.model.Products;
 import com.reppuhallinta.inventory_management_sys.model.User;
 import com.reppuhallinta.inventory_management_sys.service.ProductService;
 import com.reppuhallinta.inventory_management_sys.service.TransactionService;
-import com.reppuhallinta.inventory_management_sys.utils.FXMLLoaderUtil;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import session.CustomSessionManager;
@@ -90,14 +93,14 @@ public class ProductViewController {
 
         Stage stage = (Stage) transactionButton.getScene().getWindow();
 
-        FXMLLoaderUtil.loadFXML("/Transactions.fxml", stage, "Transactions", 1200, 1200);
+        UIUtils.loadFXML("/Transactions.fxml", stage, "Transactions", 1200, 1200, null);
 
     }
 
     public void handleCreateProductButtonAction() {
         Stage stage = new Stage();
 
-        FXMLLoaderUtil.loadFXML("/CreateProduct.fxml", stage, "Create Product", 400, 350);
+        UIUtils.loadFXML("/CreateProduct.fxml", stage, "Create Product", 400, 350, null);
     }
 
     @FXML
@@ -105,21 +108,11 @@ public class ProductViewController {
         Products selectedProduct = productTable.getSelectionModel().getSelectedItem();
 
         if (selectedProduct == null) {
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.setTitle("Warning");
-            alert.setHeaderText(null);
-            alert.setContentText("Please select a product to delete.");
-            alert.showAndWait();
-
+            UIUtils.showAlert(AlertType.WARNING, "Warning", null, "Please select a product to delete");
             return;
         }
 
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation");
-        alert.setHeaderText(null);
-        alert.setContentText("Are you sure you want to delete this product?");
-
-        Optional<ButtonType> result = alert.showAndWait();
+        Optional<ButtonType> result = UIUtils.showConfirmationDialog("Confirmation", null, "Are you sure you want to delete this product?");
 
         if (result.isPresent()) {
             if (result.get() == ButtonType.OK) {
@@ -132,6 +125,31 @@ public class ProductViewController {
         }
 
     }
+
+   @FXML
+private void handleEditProduct() {
+    Products selectedProduct = productTable.getSelectionModel().getSelectedItem();
+    if (selectedProduct == null) {
+        UIUtils.showAlert(AlertType.WARNING, "Warning", null, "Please select a product to edit");
+        return;
+    }
+
+    try {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/EditProduct.fxml"));
+        fxmlLoader.setControllerFactory(UIUtils.getSpringContext()::getBean);
+        Parent root = fxmlLoader.load();
+
+        EditProductController editProductController = fxmlLoader.getController();
+        editProductController.setProduct(selectedProduct);
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root, 400, 350));
+        stage.setTitle("Edit Product");
+        stage.show();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
 
     public void handleRefreshButtonAction() {
         loadProductData();

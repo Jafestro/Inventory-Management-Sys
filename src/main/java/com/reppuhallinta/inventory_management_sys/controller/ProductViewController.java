@@ -2,10 +2,10 @@ package com.reppuhallinta.inventory_management_sys.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -18,14 +18,19 @@ import com.reppuhallinta.inventory_management_sys.utils.FXMLLoaderUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import session.CustomSessionManager;
 
 @Controller
 public class ProductViewController {
+
+    private static final int REORDER_THRESHOLD = 3; // Threshold value for reordering
 
     @Autowired
     private ProductService productService;
@@ -60,6 +65,7 @@ public class ProductViewController {
     @FXML
     private Button refreshButton;
 
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
  
     @FXML
     public void initialize() {
@@ -83,12 +89,35 @@ public class ProductViewController {
         categoryIDColumn.setCellValueFactory(new PropertyValueFactory<>("categoryId"));
 
         loadProductData();
+
+        scheduler.scheduleAtFixedRate(this::checkStockLevels, 0, 1, TimeUnit.MINUTES);
     }
 
     private void loadProductData() {
         List<Products> products = productService.getAllProducts();
         ObservableList<Products> productObservableList = FXCollections.observableArrayList(products);
         productTable.setItems(productObservableList);
+    }
+
+    private void checkStockLevels() {
+        List<Products> products = productService.getAllProducts();
+        for (Products product : products) {
+            if (product.getQuantity() < REORDER_THRESHOLD) {
+                triggerReorder(product);
+            }
+        }
+    }
+
+    private void triggerReorder(Products product) {
+        // Implement the reorder logic here
+        // For example, create a new order or notify the supplier
+        System.out.println("Reordering product: " + product.getProductName());
+        // You can also show an alert to the user
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Reorder Notification");
+        alert.setHeaderText(null);
+        alert.setContentText("Product " + product.getProductName() + " is below the threshold. Reordering now.");
+        alert.showAndWait();
     }
 
     public void handleTransactionButtonAction() {

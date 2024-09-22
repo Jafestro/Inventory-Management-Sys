@@ -1,23 +1,26 @@
 package com.reppuhallinta.inventory_management_sys.controller;
 
+import java.sql.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
 import com.reppuhallinta.inventory_management_sys.model.Transaction;
 import com.reppuhallinta.inventory_management_sys.model.User;
 import com.reppuhallinta.inventory_management_sys.service.TransactionService;
 import com.reppuhallinta.inventory_management_sys.utils.FXMLLoaderUtil;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import session.CustomSessionManager;
-
-import java.sql.Date;
-import java.util.List;
 
 @Controller
 public class TransactionViewController {
@@ -49,6 +52,9 @@ public class TransactionViewController {
     @FXML
     private TableColumn<Transaction, Integer> userIdColumn;
 
+    @FXML
+    private TextField searchField;
+
 
     @FXML
     public void initialize() {
@@ -64,6 +70,10 @@ public class TransactionViewController {
             System.out.println("No user logged in");
         }
 
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterTransactionList(newValue);
+        });
+
         idColumn.setCellValueFactory(new PropertyValueFactory<>("transactionId"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("transactionDate"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("transactionType"));
@@ -72,6 +82,18 @@ public class TransactionViewController {
         userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
 
         loadTransactionData();
+    }
+
+    private void filterTransactionList(String searchWord){
+        ObservableList<Transaction> filteredList = FXCollections.observableArrayList();
+
+            for (Transaction transaction : transactionService.getAllTransactions()) {
+                if (String.valueOf(transaction.getTransactionId()).contains(searchWord.toLowerCase())) {
+                    filteredList.add(transaction);
+                }
+            }
+
+            transactionTable.setItems(filteredList);
     }
 
     private void loadTransactionData() {

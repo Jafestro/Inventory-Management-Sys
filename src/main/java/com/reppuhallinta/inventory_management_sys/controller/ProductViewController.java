@@ -3,9 +3,6 @@ package com.reppuhallinta.inventory_management_sys.controller;
 import java.math.BigDecimal;
 import java.util.List;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -18,10 +15,14 @@ import com.reppuhallinta.inventory_management_sys.utils.FXMLLoaderUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import session.CustomSessionManager;
 
 @Controller
@@ -60,6 +61,9 @@ public class ProductViewController {
     @FXML
     private Button refreshButton;
 
+    @FXML
+    private TextField searchField;
+
  
     @FXML
     public void initialize() {
@@ -75,6 +79,10 @@ public class ProductViewController {
             System.out.println("No user logged in");
         }
 
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterProductList(newValue);
+        });
+
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("productName"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
@@ -83,6 +91,18 @@ public class ProductViewController {
         categoryIDColumn.setCellValueFactory(new PropertyValueFactory<>("categoryId"));
 
         loadProductData();
+    }
+
+    private void filterProductList(String searchWord) {
+        ObservableList<Products> filteredList = FXCollections.observableArrayList();
+
+        for (Products product : productService.getAllProducts()) {
+            if (product.getProductName().toLowerCase().contains(searchWord.toLowerCase())) {
+                filteredList.add(product);
+            }
+        }
+    
+        productTable.setItems(filteredList);
     }
 
     private void loadProductData() {

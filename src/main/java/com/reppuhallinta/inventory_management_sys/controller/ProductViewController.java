@@ -2,6 +2,9 @@ package com.reppuhallinta.inventory_management_sys.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +30,8 @@ import session.CustomSessionManager;
 
 @Controller
 public class ProductViewController {
+
+    private static final int REORDER_THRESHOLD = 3; // Threshold value for reordering
 
     @Autowired
     private ProductService productService;
@@ -61,9 +66,9 @@ public class ProductViewController {
     @FXML
     private Button refreshButton;
 
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     @FXML
     private TextField searchField;
-
  
     @FXML
     public void initialize() {
@@ -89,8 +94,31 @@ public class ProductViewController {
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         supplierIDColumn.setCellValueFactory(new PropertyValueFactory<>("supplierID"));
         categoryIDColumn.setCellValueFactory(new PropertyValueFactory<>("categoryId"));
+      
+        addSortEventHandler(idColumn);
+        addSortEventHandler(nameColumn);
+        addSortEventHandler(quantityColumn);
+        addSortEventHandler(priceColumn);
+        addSortEventHandler(supplierIDColumn);
+        addSortEventHandler(categoryIDColumn);
 
         loadProductData();
+
+        scheduler.scheduleAtFixedRate(this::checkStockLevels, 0, 1, TimeUnit.MINUTES);
+    }
+  
+    private <T> void addSortEventHandler(TableColumn<Products, T> column) {
+       Label label = new Label(column.getText());
+       column.setGraphic(label);
+       label.setOnMouseClicked(event -> {
+            if (column.getSortType() == TableColumn.SortType.ASCENDING) {
+               column.setSortType(TableColumn.SortType.DESCENDING);
+            } else {
+                column.setSortType(TableColumn.SortType.ASCENDING);
+            }
+            productTable.getSortOrder().clear();
+            productTable.getSortOrder().add(column);
+        });
     }
 
     private void filterProductList(String searchWord) {
@@ -109,6 +137,27 @@ public class ProductViewController {
         List<Products> products = productService.getAllProducts();
         ObservableList<Products> productObservableList = FXCollections.observableArrayList(products);
         productTable.setItems(productObservableList);
+    }
+
+    private void checkStockLevels() {
+        List<Products> products = productService.getAllProducts();
+        for (Products product : products) {
+            if (product.getQuantity() < REORDER_THRESHOLD) {
+                triggerReorder(product);
+            }
+        }
+    }
+
+    private void triggerReorder(Products product) {
+        // Implement the reorder logic here
+        // For example, create a new order or notify the supplier
+        System.out.println("Reordering product: " + product.getProductName());
+        // You can also show an alert to the user
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Reorder Notification");
+        alert.setHeaderText(null);
+        alert.setContentText("Product " + product.getProductName() + " is below the threshold. Reordering now.");
+        alert.showAndWait();
     }
 
     public void handleTransactionButtonAction() {

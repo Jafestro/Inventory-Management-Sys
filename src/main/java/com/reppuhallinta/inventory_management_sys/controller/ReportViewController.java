@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.util.List;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+
 
 @Controller
 public class ReportViewController {
@@ -27,14 +30,26 @@ public class ReportViewController {
     @Autowired
     private ProductService productService;
 
+    LocalDateTime notFormattedTime = LocalDateTime.now();
+    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     LocalDate date = LocalDate.now();
+    String time = notFormattedTime.format(myFormatObj);
 
     @FXML
     private void GetAllStockProductReportButtonAction() {
         List<Products> products = productService.getAllProducts();
-        StringBuilder report = new StringBuilder("All Stock Products:\n");
+        StringBuilder report = new StringBuilder("All stock products " + time + "\n\n");
+        report.append(String.format("%-10s %-20s %-10s %-10s %-10s %-10s\n", "ID", "Name", "Price", "Quantity", "Category", "Supplier"));
+        report.append("--------------------------------------------------------------------------\n");
         for (Products product : products) {
-            report.append(product.toString()).append("\n");
+            report.append(String.format("%-10d %-20s %-10.2f %-10d %-10d %-10d\n",
+                    product.getId(),
+                    product.getProductName(),
+                    product.getPrice(),
+                    product.getQuantity(),
+                    product.getCategoryId(),
+                    product.getSupplierID()));
+            report.append("--------------------------------------------------------------------------\n");
         }
         generateDownloadableFile(report.toString());
     }
@@ -42,7 +57,7 @@ public class ReportViewController {
     private void generateDownloadableFile(String content) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Report");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("AllStockProducts " + date, "*.txt"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("AllStockProducts " + time, "*.txt"));
         fileChooser.setInitialFileName("AllStockProducts " + date + ".txt");
         Stage stage = (Stage) GetAllStockProductReportButton.getScene().getWindow();
         File file = fileChooser.showSaveDialog(stage);;

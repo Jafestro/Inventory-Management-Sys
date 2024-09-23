@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.reppuhallinta.inventory_management_sys.controller.ProductViewController">
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.reppuhallinta.inventory_management_sys.controller.ProductViewController">
     <MenuBar>
         <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" text="New" />
@@ -53,11 +53,12 @@
             <VBox.margin>
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></Button>
-            <Button fx:id="deleteProductButton" maxWidth="200.0" minWidth="200.0" text="Delete Product" onAction="#handleDeleteProductButtonAction" >
+            <Button fx:id="deleteProductButton" maxWidth="200.0" minWidth="200.0" onAction="#handleDeleteProductButtonAction" text="Delete Product">
             <VBox.margin>
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></Button>
-         <Button fx:id="refreshButton" layoutX="12.0" layoutY="168.0" maxWidth="200.0" minWidth="200.0" text="Refresh" onAction="#handleRefreshButtonAction" />
+         <Button fx:id="refreshButton" layoutX="12.0" layoutY="168.0" maxWidth="200.0" minWidth="200.0" onAction="#handleRefreshButtonAction" text="Refresh" />
+         <Button fx:id="reportsButton" minWidth="200.0" mnemonicParsing="false" text="Reports" onAction="#handleReportsButtonAction" />
          <HBox.margin>
             <Insets />
          </HBox.margin>

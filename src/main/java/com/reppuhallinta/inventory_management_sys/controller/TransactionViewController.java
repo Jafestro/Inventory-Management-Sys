@@ -93,7 +93,7 @@ public class TransactionViewController {
         loadTransactionData();
     }
     private <T> void addSortEventHandler(TableColumn<Transaction, T> column) {
-        Label label = new Label(column.getText());
+        Label label = new Label();
         column.setGraphic(label);
         label.setOnMouseClicked(event -> {
             if (column.getSortType() == TableColumn.SortType.ASCENDING) {

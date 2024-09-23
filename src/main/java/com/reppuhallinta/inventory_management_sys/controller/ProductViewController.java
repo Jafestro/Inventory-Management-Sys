@@ -6,6 +6,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +18,6 @@ import com.reppuhallinta.inventory_management_sys.model.Products;
 import com.reppuhallinta.inventory_management_sys.model.User;
 import com.reppuhallinta.inventory_management_sys.service.ProductService;
 import com.reppuhallinta.inventory_management_sys.service.TransactionService;
-import com.reppuhallinta.inventory_management_sys.utils.FXMLLoaderUtil;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -160,14 +163,39 @@ public class ProductViewController {
 
         Stage stage = (Stage) transactionButton.getScene().getWindow();
 
-        FXMLLoaderUtil.loadFXML("/Transactions.fxml", stage, "Transactions", 1200, 1200);
+        UIUtils.loadFXML("/Transactions.fxml", stage, "Transactions", 1200, 1200, null);
 
     }
 
     public void handleCreateProductButtonAction() {
         Stage stage = new Stage();
 
-        FXMLLoaderUtil.loadFXML("/CreateProduct.fxml", stage, "Create Product", 400, 350);
+        UIUtils.loadFXML("/CreateProduct.fxml", stage, "Create Product", 400, 350, null);
+    }
+
+    @FXML
+    private void handleEditProduct() {
+        Products selectedProduct = productTable.getSelectionModel().getSelectedItem();
+        if (selectedProduct == null) {
+            UIUtils.showAlert(AlertType.WARNING, "Warning", null, "Please select a product to edit");
+            return;
+        }
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/EditProduct.fxml"));
+            fxmlLoader.setControllerFactory(UIUtils.getSpringContext()::getBean);
+            Parent root = fxmlLoader.load();
+
+            EditProductController editProductController = fxmlLoader.getController();
+            editProductController.setProduct(selectedProduct);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root, 400, 350));
+            stage.setTitle("Edit Product");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

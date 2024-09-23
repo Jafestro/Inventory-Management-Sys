@@ -204,7 +204,7 @@ public class ProductViewController {
     public void handleReportsButtonAction() {
         Stage stage = new Stage();
 
-        FXMLLoaderUtil.loadFXML("/Reports.fxml", stage, "Reports", 400, 350);
+        UIUtils.loadFXML("/Reports.fxml", stage, "Reports", 400, 350, null);
     }
 
     @FXML

@@ -65,6 +65,9 @@ public class ProductViewController {
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     @FXML
     private TextField searchField;
+
+    @FXML
+    private Button reportsButton;
  
     @FXML
     public void initialize() {
@@ -168,6 +171,12 @@ public class ProductViewController {
         Stage stage = new Stage();
 
         FXMLLoaderUtil.loadFXML("/CreateProduct.fxml", stage, "Create Product", 400, 350);
+    }
+
+    public void handleReportsButtonAction() {
+        Stage stage = new Stage();
+
+        FXMLLoaderUtil.loadFXML("/Reports.fxml", stage, "Reports", 400, 350);
     }
 
     @FXML

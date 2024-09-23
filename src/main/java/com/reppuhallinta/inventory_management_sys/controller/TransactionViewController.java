@@ -3,13 +3,13 @@ package com.reppuhallinta.inventory_management_sys.controller;
 import java.sql.Date;
 import java.util.List;
 
+import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.reppuhallinta.inventory_management_sys.model.Transaction;
 import com.reppuhallinta.inventory_management_sys.model.User;
 import com.reppuhallinta.inventory_management_sys.service.TransactionService;
-import com.reppuhallinta.inventory_management_sys.utils.FXMLLoaderUtil;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -128,7 +128,7 @@ public class TransactionViewController {
     public void handleProductsButton() {
         Stage stage = (Stage) productsButton.getScene().getWindow();
 
-        FXMLLoaderUtil.loadFXML("/Products.fxml", stage, "Products", 1200, 1200);
+        UIUtils.loadFXML("/Products.fxml", stage, "Products", 1200, 1200, null);
     }
 
 }

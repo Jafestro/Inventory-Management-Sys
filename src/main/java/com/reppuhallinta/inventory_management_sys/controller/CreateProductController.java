@@ -3,9 +3,11 @@ package com.reppuhallinta.inventory_management_sys.controller;
 import com.reppuhallinta.inventory_management_sys.model.*;
 import com.reppuhallinta.inventory_management_sys.service.CategoryService;
 import com.reppuhallinta.inventory_management_sys.service.SupplierService;
+import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -105,7 +107,7 @@ public class CreateProductController {
 
 
         if (productName.isEmpty() || productPrice.isEmpty() || quantity.isEmpty() || categoryComboBox.getValue() == null || supplierComboBox.getValue() == null ) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Please enter all the fields correctly.");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please enter all the fields correctly.");
             return;
         }
 
@@ -124,9 +126,9 @@ public class CreateProductController {
             productService.createProduct(product, user.getId());
 
             success();
-            
+
         } catch (Exception e) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Please enter all the fields correctly.");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please enter all the fields correctly.");
         }
     }
 
@@ -139,24 +141,11 @@ public class CreateProductController {
         return supplierService.getAllSuppliers();
     }
 
-
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
     private void success() {
-        showAlert(AlertType.CONFIRMATION, "Success", "Product created!");
+        UIUtils.showAlert(AlertType.CONFIRMATION, "Success", null, "Product created!");
 
-        productNameField.clear();
-        productPriceField.clear();
-        quantityField.clear();
-        
-        categoryComboBox.valueProperty().set(null);
-        supplierComboBox.valueProperty().set(null);
+        Stage currentStage = (Stage) createButton.getScene().getWindow();
+        currentStage.close();
 
     }
 

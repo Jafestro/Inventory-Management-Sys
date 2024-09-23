@@ -18,9 +18,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import session.CustomSessionManager;
@@ -61,6 +61,9 @@ public class ProductViewController {
     @FXML
     private Button refreshButton;
 
+    @FXML
+    private TextField searchField;
+
  
     @FXML
     public void initialize() {
@@ -76,35 +79,30 @@ public class ProductViewController {
             System.out.println("No user logged in");
         }
 
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterProductList(newValue);
+        });
+
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("productName"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         supplierIDColumn.setCellValueFactory(new PropertyValueFactory<>("supplierID"));
         categoryIDColumn.setCellValueFactory(new PropertyValueFactory<>("categoryId"));
-        
-        addSortEventHandler(idColumn);
-        addSortEventHandler(nameColumn);
-        addSortEventHandler(quantityColumn);
-        addSortEventHandler(priceColumn);
-        addSortEventHandler(supplierIDColumn);
-        addSortEventHandler(categoryIDColumn);
 
         loadProductData();
     }
 
-    private <T> void addSortEventHandler(TableColumn<Products, T> column) {
-        Label label = new Label(column.getText());
-        column.setGraphic(label);
-        label.setOnMouseClicked(event -> {
-            if (column.getSortType() == TableColumn.SortType.ASCENDING) {
-                column.setSortType(TableColumn.SortType.DESCENDING);
-            } else {
-                column.setSortType(TableColumn.SortType.ASCENDING);
+    private void filterProductList(String searchWord) {
+        ObservableList<Products> filteredList = FXCollections.observableArrayList();
+
+        for (Products product : productService.getAllProducts()) {
+            if (product.getProductName().toLowerCase().contains(searchWord.toLowerCase())) {
+                filteredList.add(product);
             }
-            productTable.getSortOrder().clear();
-            productTable.getSortOrder().add(column);
-        });
+        }
+    
+        productTable.setItems(filteredList);
     }
 
     private void loadProductData() {

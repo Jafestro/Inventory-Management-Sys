@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import session.CustomSessionManager;
@@ -52,6 +53,9 @@ public class TransactionViewController {
     @FXML
     private TableColumn<Transaction, Integer> userIdColumn;
 
+    @FXML
+    private TextField searchField;
+
 
     @FXML
     public void initialize() {
@@ -66,6 +70,10 @@ public class TransactionViewController {
         } else {
             System.out.println("No user logged in");
         }
+
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterTransactionList(newValue);
+        });
 
         idColumn.setCellValueFactory(new PropertyValueFactory<>("transactionId"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("transactionDate"));
@@ -98,6 +106,18 @@ public class TransactionViewController {
         });
     }
 
+
+    private void filterTransactionList(String searchWord){
+        ObservableList<Transaction> filteredList = FXCollections.observableArrayList();
+
+            for (Transaction transaction : transactionService.getAllTransactions()) {
+                if (String.valueOf(transaction.getTransactionId()).contains(searchWord.toLowerCase())) {
+                    filteredList.add(transaction);
+                }
+            }
+
+            transactionTable.setItems(filteredList);
+    }
 
     private void loadTransactionData() {
         List<Transaction> transactions = transactionService.getAllTransactions();

@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Hyperlink?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.reppuhallinta.inventory_management_sys.controller.RegisterController"
@@ -22,5 +23,6 @@
         <Label text="Confirm password" />
         <PasswordField fx:id="confirmPasswordField" promptText="Confirm password" maxWidth="300.0" />
         <Button fx:id="registerButton" text="Register" onAction="#handleRegister" maxWidth="300.0" />
+        <Hyperlink fx:id="loginLink" text="Are you a user already?" onAction="#handleLoginLink" />
     </VBox>
 </AnchorPane>

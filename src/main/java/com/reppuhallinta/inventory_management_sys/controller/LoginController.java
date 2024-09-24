@@ -29,7 +29,7 @@ public class LoginController {
     private Button loginButton;
 
     @FXML
-    private Hyperlink loginLink;
+    private Hyperlink registerLink;
 
 
     public void initialize() {
@@ -76,7 +76,7 @@ public class LoginController {
 
     @FXML
     public void handleLoginLink() {
-        Stage stage = (Stage) loginLink.getScene().getWindow();
+        Stage stage = (Stage) registerLink.getScene().getWindow();
         UIUtils.loadFXML("/Register.fxml", stage, "Register", 600, 400, null);
     }
 }

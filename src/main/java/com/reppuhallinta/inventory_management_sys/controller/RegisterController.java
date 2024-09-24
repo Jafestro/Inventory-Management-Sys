@@ -12,8 +12,6 @@ import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import javax.swing.text.Utilities;
-
 @Controller
 public class RegisterController {
 
@@ -84,5 +82,14 @@ public class RegisterController {
                 UIUtils.showAlert(Alert.AlertType.ERROR, "Error",  null, e.getMessage());
             }
         }
+    }
+
+    @FXML
+    public void handleLoginLink() {
+        Stage stage = (Stage) registerButton.getScene().getWindow();
+
+        UIUtils.loadFXML("/Login.fxml", new Stage(), "Login", 400, 350, null);
+
+        stage.close();
     }
 }

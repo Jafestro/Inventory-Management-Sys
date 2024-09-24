@@ -3,13 +3,10 @@ package com.reppuhallinta.inventory_management_sys.controller;
 import com.reppuhallinta.inventory_management_sys.model.User;
 import com.reppuhallinta.inventory_management_sys.service.UserService;
 import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
+import javafx.scene.control.*;
 import session.CustomSessionManager;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -30,6 +27,10 @@ public class LoginController {
 
     @FXML
     private Button loginButton;
+
+    @FXML
+    private Hyperlink loginLink;
+
 
     public void initialize() {
         usernameField.setPromptText("Enter your username");
@@ -71,5 +72,11 @@ public class LoginController {
         } else {
             UIUtils.showAlert(Alert.AlertType.ERROR, "Login fail", null, "Invalid username or password");
         }
+    }
+
+    @FXML
+    public void handleLoginLink() {
+        Stage stage = (Stage) loginLink.getScene().getWindow();
+        UIUtils.loadFXML("/Register.fxml", stage, "Register", 600, 400, null);
     }
 }

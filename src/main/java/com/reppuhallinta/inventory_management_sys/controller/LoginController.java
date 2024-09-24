@@ -2,14 +2,11 @@ package com.reppuhallinta.inventory_management_sys.controller;
 
 import com.reppuhallinta.inventory_management_sys.model.User;
 import com.reppuhallinta.inventory_management_sys.service.UserService;
-import com.reppuhallinta.inventory_management_sys.utils.FXMLLoaderUtil;
+import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
+import javafx.scene.control.*;
 import session.CustomSessionManager;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -31,6 +28,10 @@ public class LoginController {
     @FXML
     private Button loginButton;
 
+    @FXML
+    private Hyperlink registerLink;
+
+
     public void initialize() {
         usernameField.setPromptText("Enter your username");
         passwordField.setPromptText("Enter your password");
@@ -44,52 +45,38 @@ public class LoginController {
         String password = passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, owner, "Form Error!", "Please enter username and password!");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please enter username and password!");
             return;
         }
 
         User user = userService.authenticate(username, password);
 
         if (user != null) {
-            Alert successAlert = new Alert(Alert.AlertType.CONFIRMATION);
-            successAlert.setTitle("Login Successful!");
-            successAlert.setHeaderText(null);
-            successAlert.setContentText("Welcome " + usernameField.getText() + "!");
-            successAlert.initOwner(owner);
-            successAlert.showAndWait();
+            UIUtils.showAlert(Alert.AlertType.INFORMATION, "Success", null, "You are logged in!");
 
             try {
-                // Regenerate session ID for new login
                 CustomSessionManager.regenerateSessionId();
 
-                // Set session attributes using CustomSessionManager
                 CustomSessionManager.setAttribute("user", user);
 
-                // Access the session ID
                 String sessionId = CustomSessionManager.getSessionId();
                 System.out.println("Session ID: " + sessionId);
             } catch (Exception e) {
                 System.out.println("Something with session id went wrong, here is stacktrace" + e.getMessage());
-                showAlert(Alert.AlertType.ERROR, owner, "Session Error", "Failed to set session attributes.");
+                UIUtils.showAlert(Alert.AlertType.ERROR, "Session Error", null, "Failed to set session attributes.");
                 return;
             }
 
             Stage stage = (Stage) owner;
-            //application.switchScene("/Products.fxml");
-            FXMLLoaderUtil.loadFXML("/Products.fxml", stage, "Products", 1200, 1200);
-            // Close login window
-            //stage.close();
+            UIUtils.loadFXML("/Products.fxml", stage, "Products", 1200, 1200, null);
         } else {
-            showAlert(Alert.AlertType.ERROR, owner, "Login failed", "Invalid username or password");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "Login fail", null, "Invalid username or password");
         }
     }
 
-    private static void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.initOwner(owner);
-        alert.show();
+    @FXML
+    public void handleLoginLink() {
+        Stage stage = (Stage) registerLink.getScene().getWindow();
+        UIUtils.loadFXML("/Register.fxml", stage, "Register", 600, 400, null);
     }
 }

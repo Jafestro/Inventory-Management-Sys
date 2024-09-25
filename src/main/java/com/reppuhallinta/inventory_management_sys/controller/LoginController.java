@@ -32,6 +32,7 @@ public class LoginController {
     private Hyperlink registerLink;
 
 
+
     public void initialize() {
         usernameField.setPromptText("Enter your username");
         passwordField.setPromptText("Enter your password");
@@ -52,7 +53,7 @@ public class LoginController {
         User user = userService.authenticate(username, password);
 
         if (user != null) {
-            UIUtils.showAlert(Alert.AlertType.INFORMATION, "Success", null, "You are logged in!");
+            // UIUtils.showAlert(Alert.AlertType.INFORMATION, "Success", null, "You are logged in!");
 
             try {
                 CustomSessionManager.regenerateSessionId();

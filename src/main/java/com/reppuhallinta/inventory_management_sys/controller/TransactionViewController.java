@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 import session.CustomSessionManager;
 
 @Controller
-public class TransactionViewController {
+public class TransactionViewController extends LogoutController {
 
     @Autowired
     private TransactionService transactionService;

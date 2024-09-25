@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 import session.CustomSessionManager;
 
 @Controller
-public class ProductViewController {
+public class ProductViewController extends LogoutController {
 
     private static final int REORDER_THRESHOLD = 3; // Threshold value for reordering
 
@@ -71,7 +71,8 @@ public class ProductViewController {
 
     @FXML
     private Button reportsButton;
- 
+
+
     @FXML
     public void initialize() {
 

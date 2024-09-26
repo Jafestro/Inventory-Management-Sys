@@ -2,6 +2,7 @@ package com.reppuhallinta.inventory_management_sys.controller;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import com.reppuhallinta.inventory_management_sys.model.Transaction;
 import com.reppuhallinta.inventory_management_sys.model.User;
 import com.reppuhallinta.inventory_management_sys.service.TransactionService;
+import com.reppuhallinta.inventory_management_sys.service.UserService;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,6 +30,9 @@ public class TransactionViewController extends LogoutController {
 
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    private UserService userService;
 
     @FXML
     private TableView<Transaction> transactionTable;
@@ -51,7 +56,7 @@ public class TransactionViewController extends LogoutController {
     private TableColumn<Transaction, Integer> productIdColumn;
 
     @FXML
-    private TableColumn<Transaction, Integer> userIdColumn;
+    private TableColumn<Transaction, String> usernameColumn;
 
     @FXML
     private TextField searchField;
@@ -80,7 +85,9 @@ public class TransactionViewController extends LogoutController {
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("transactionType"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         productIdColumn.setCellValueFactory(new PropertyValueFactory<>("productId"));
-        userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+
+
 
         // Add sort event handlers
         addSortEventHandler(idColumn);
@@ -88,7 +95,7 @@ public class TransactionViewController extends LogoutController {
         addSortEventHandler(typeColumn);
         addSortEventHandler(quantityColumn);
         addSortEventHandler(productIdColumn);
-        addSortEventHandler(userIdColumn);
+        addSortEventHandler(usernameColumn);
 
         loadTransactionData();
     }
@@ -121,7 +128,13 @@ public class TransactionViewController extends LogoutController {
 
     private void loadTransactionData() {
         List<Transaction> transactions = transactionService.getAllTransactions();
-        ObservableList<Transaction> transactionObservableList = FXCollections.observableArrayList(transactions);
+        List<Transaction> transactionsWithUsernames = transactions.stream().map(transaction -> {
+            User user = userService.getUserById(transaction.getUserId());
+            transaction.setUsername(user != null ? user.getUsername() : "Unknown");
+            return transaction;
+        }).collect(Collectors.toList());
+
+        ObservableList<Transaction> transactionObservableList = FXCollections.observableArrayList(transactionsWithUsernames);
         transactionTable.setItems(transactionObservableList);
     }
 

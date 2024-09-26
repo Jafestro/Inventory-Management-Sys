@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 import session.CustomSessionManager;
 
 @Controller
-public class TransactionViewController {
+public class TransactionViewController extends LogoutController {
 
     @Autowired
     private TransactionService transactionService;
@@ -93,7 +93,7 @@ public class TransactionViewController {
         loadTransactionData();
     }
     private <T> void addSortEventHandler(TableColumn<Transaction, T> column) {
-        Label label = new Label(column.getText());
+        Label label = new Label();
         column.setGraphic(label);
         label.setOnMouseClicked(event -> {
             if (column.getSortType() == TableColumn.SortType.ASCENDING) {

@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 import session.CustomSessionManager;
 
 @Controller
-public class ProductViewController {
+public class ProductViewController extends LogoutController {
 
     private static final int REORDER_THRESHOLD = 3; // Threshold value for reordering
 
@@ -68,7 +68,11 @@ public class ProductViewController {
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     @FXML
     private TextField searchField;
- 
+
+    @FXML
+    private Button reportsButton;
+
+
     @FXML
     public void initialize() {
 
@@ -107,7 +111,7 @@ public class ProductViewController {
     }
   
     private <T> void addSortEventHandler(TableColumn<Products, T> column) {
-       Label label = new Label(column.getText());
+       Label label = new Label();
        column.setGraphic(label);
        label.setOnMouseClicked(event -> {
             if (column.getSortType() == TableColumn.SortType.ASCENDING) {
@@ -196,6 +200,12 @@ public class ProductViewController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void handleReportsButtonAction() {
+        Stage stage = new Stage();
+
+        UIUtils.loadFXML("/Reports.fxml", stage, "Reports", 400, 350, null);
     }
 
     @FXML

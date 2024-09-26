@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -10,9 +11,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.reppuhallinta.inventory_management_sys.controller.ReportViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="424.0" prefWidth="303.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.reppuhallinta.inventory_management_sys.controller.ReportViewController">
    <children>
-      <GridPane prefHeight="400.0" prefWidth="284.0">
+      <GridPane prefHeight="414.0" prefWidth="303.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
@@ -23,50 +24,62 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="GetAllStockProductReportButton" mnemonicParsing="false" onAction="#GetAllStockProductReportButtonAction" text="Get Report" GridPane.rowIndex="2">
+            <Button fx:id="GetAllStockProductReportButton" mnemonicParsing="false" onAction="#GetAllStockProductReportButtonAction" text="Export" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <GridPane.margin>
-                  <Insets left="110.0" top="50.0" />
+                  <Insets />
                </GridPane.margin>
             </Button>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="All products in stock" wrappingWidth="156.56494140625" GridPane.rowIndex="2">
+            <Button fx:id="transByIdButton"  mnemonicParsing="false" onAction="#GetTransActionsByProductId" text="Export" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <GridPane.margin>
-                  <Insets bottom="25.0" left="70.0" />
-               </GridPane.margin>
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="All transactions">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets bottom="25.0" left="90.0" />
-               </GridPane.margin>
-            </Text>
-            <Button fx:id="GetAllTransactionsReportButton" mnemonicParsing="false" text="Get Report">
-               <GridPane.margin>
-                  <Insets left="110.0" top="50.0" />
+                  <Insets />
                </GridPane.margin>
             </Button>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Transaction by product " GridPane.rowIndex="1">
-               <font>
-                  <Font size="18.0" />
-               </font>
+            <TextField fx:id="transByIdField" maxWidth="100.0" promptText="Enter product id..." GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets bottom="50.0" left="60.0" />
-               </GridPane.margin>
-            </Text>
-            <TextField fx:id="TransByProductTextField" prefHeight="26.0" prefWidth="237.0" promptText="Enter product id..." GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets left="50.0" right="50.0" />
+                  <Insets />
                </GridPane.margin>
             </TextField>
-            <Button fx:id="GetTransactionByProductReportButton" mnemonicParsing="false" text="Get Report" GridPane.rowIndex="1">
+            <Button fx:id="TransByUserButton" onAction="#GetTransActionsByUserId" mnemonicParsing="false" text="Export" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                <GridPane.margin>
-                  <Insets left="110.0" top="70.0" />
+                  <Insets />
                </GridPane.margin>
             </Button>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="All products in stock" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Transactions by product id" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BASELINE">
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Transactions by user id" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BASELINE">
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="transByUserField" maxWidth="100.0" promptText="Enter user id" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <DatePicker fx:id="TransByDateDate" maxWidth="100.0" promptText="Select date" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </DatePicker>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Transactions by date" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Button fx:id="TransByDateButton" onAction="#GetTransActionsByDate" mnemonicParsing="false" text="Export" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />
          </children>
       </GridPane>
    </children>

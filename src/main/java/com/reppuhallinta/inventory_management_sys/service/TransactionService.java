@@ -1,5 +1,7 @@
 package com.reppuhallinta.inventory_management_sys.service;
 
+
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +60,16 @@ public class TransactionService {
     public void removeTransactionByProductId(int productId) {
         transactionRepository.deleteTransactionByProductId(productId);
     }
-    
+
+    public List<Transaction> getTransactionsByProductId(int productId) {
+        return transactionRepository.findByProductId(productId);
+    }
+
+    public List<Transaction> getTransactionsByUserId(int userId) {
+        return transactionRepository.findByUserId(userId);
+    }
+
+    public List<Transaction> getTransactionsByDateRange(Date startDate, Date endDate) {
+        return transactionRepository.findByTransactionDateBetween(startDate, endDate);
+    }
 }

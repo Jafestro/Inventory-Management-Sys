@@ -205,7 +205,7 @@ public class ProductViewController extends LogoutController {
     public void handleReportsButtonAction() {
         Stage stage = new Stage();
 
-        UIUtils.loadFXML("/Reports.fxml", stage, "Reports", 400, 350, null);
+        UIUtils.loadFXML("/Reports.fxml", stage, "Reports", 424, 303, null);
     }
 
     @FXML

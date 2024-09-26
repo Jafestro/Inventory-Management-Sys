@@ -12,5 +12,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 
     @Transactional
     void deleteTransactionByProductId(int productId);
+
+    
     
 }

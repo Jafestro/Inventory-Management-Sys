@@ -38,15 +38,13 @@ public class TransactionService {
         return transactionRepository.findById(id).orElse(null); // May need to change this
     }
 
+    @Transactional
     public Transaction updateTransaction(int id, Transaction transactionDetails) {
-        Transaction transaction = getTransactionById(id);
-        transaction.setProductId(transactionDetails.getProductId());
-        transaction.setQuantity(transactionDetails.getQuantity());
+        Transaction transaction = transactionRepository.findById(id).orElse(null);
         transaction.setTransactionType(transactionDetails.getTransactionType());
-        transaction.setTransactionDate(transactionDetails.getTransactionDate());
+        transaction.setQuantity(transactionDetails.getQuantity());
         transaction.setUserId(transactionDetails.getUserId());
-
-        return transaction;
+        return transactionRepository.save(transaction);
     }
 
     public void removeTransaction(int id) {

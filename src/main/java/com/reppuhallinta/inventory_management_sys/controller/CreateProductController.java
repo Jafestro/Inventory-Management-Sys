@@ -3,6 +3,7 @@ package com.reppuhallinta.inventory_management_sys.controller;
 import com.reppuhallinta.inventory_management_sys.model.*;
 import com.reppuhallinta.inventory_management_sys.service.CategoryService;
 import com.reppuhallinta.inventory_management_sys.service.SupplierService;
+import com.reppuhallinta.inventory_management_sys.service.TransactionService;
 import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -19,6 +20,7 @@ import javafx.scene.control.Alert.AlertType;
 import session.CustomSessionManager;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -26,6 +28,9 @@ public class CreateProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private TransactionService transactionService;
 
     @Autowired
     private CategoryService categoryService;
@@ -57,6 +62,7 @@ public class CreateProductController {
 
     @FXML
     public void initialize() {
+
         categories = getAllTransactions();
         suppliers = getAllSuppliers();
 
@@ -94,16 +100,7 @@ public class CreateProductController {
         }
 
 
-        String sessionId = CustomSessionManager.getSessionId();
-        System.out.println("Session ID in CreateProductController: " + sessionId);
-
         User user = (User) CustomSessionManager.getAttribute("user");
-
-        if (user != null) {
-            System.out.println("Logged in user: " + user.getUsername());
-        } else {
-            System.out.println("No user logged in");
-        }
 
 
         if (productName.isEmpty() || productPrice.isEmpty() || quantity.isEmpty() || categoryComboBox.getValue() == null || supplierComboBox.getValue() == null ) {
@@ -122,10 +119,15 @@ public class CreateProductController {
             product.setCategoryId(categoryId);
             product.setSupplierID(supplierId);
 
-            assert user != null;
-            productService.createProduct(product, user.getId());
+            if (user != null) {
+                productService.createProduct(product, user.getId());
 
-            success();
+                success();
+            } else {
+                UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please log in to create a product.");
+                return;
+            }
+            
 
         } catch (Exception e) {
             UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please enter all the fields correctly.");

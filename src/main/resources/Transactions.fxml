@@ -22,7 +22,7 @@
             <VBox.margin>
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></Button>
-            <Button maxWidth="200.0" minWidth="200.0" text="Edit Transaction">
+            <Button maxWidth="200.0" minWidth="200.0" text="Edit Transaction" onAction="#handleEditTransaction" >
             <VBox.margin>
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></Button>

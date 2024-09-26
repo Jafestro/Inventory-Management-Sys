@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -16,18 +20,12 @@ import com.reppuhallinta.inventory_management_sys.service.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import session.CustomSessionManager;
 
 @Controller
 public class TransactionViewController extends LogoutController {
-
     @Autowired
     private TransactionService transactionService;
 
@@ -61,10 +59,8 @@ public class TransactionViewController extends LogoutController {
     @FXML
     private TextField searchField;
 
-
     @FXML
     public void initialize() {
-
         String sessionId = CustomSessionManager.getSessionId();
         System.out.println("Current session id: " + sessionId);
 
@@ -87,8 +83,6 @@ public class TransactionViewController extends LogoutController {
         productIdColumn.setCellValueFactory(new PropertyValueFactory<>("productId"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
 
-
-
         // Add sort event handlers
         addSortEventHandler(idColumn);
         addSortEventHandler(dateColumn);
@@ -99,6 +93,7 @@ public class TransactionViewController extends LogoutController {
 
         loadTransactionData();
     }
+
     private <T> void addSortEventHandler(TableColumn<Transaction, T> column) {
         Label label = new Label();
         column.setGraphic(label);
@@ -113,17 +108,8 @@ public class TransactionViewController extends LogoutController {
         });
     }
 
-
-    private void filterTransactionList(String searchWord){
-        ObservableList<Transaction> filteredList = FXCollections.observableArrayList();
-
-            for (Transaction transaction : transactionService.getAllTransactions()) {
-                if (String.valueOf(transaction.getTransactionId()).contains(searchWord.toLowerCase())) {
-                    filteredList.add(transaction);
-                }
-            }
-
-            transactionTable.setItems(filteredList);
+    private void filterTransactionList(String searchWord) {
+        // Implement filtering logic
     }
 
     private void loadTransactionData() {
@@ -140,8 +126,31 @@ public class TransactionViewController extends LogoutController {
 
     public void handleProductsButton() {
         Stage stage = (Stage) productsButton.getScene().getWindow();
-
         UIUtils.loadFXML("/Products.fxml", stage, "Products", 1200, 1200, null);
     }
 
+    @FXML
+    private void handleEditTransaction() {
+        Transaction selectedTransaction = transactionTable.getSelectionModel().getSelectedItem();
+        if (selectedTransaction == null) {
+            UIUtils.showAlert(Alert.AlertType.WARNING, "Warning", null, "Please select a transaction to edit");
+            return;
+        }
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/EditTransaction.fxml"));
+            fxmlLoader.setControllerFactory(UIUtils.getSpringContext()::getBean);
+            Parent root = fxmlLoader.load();
+
+            EditTransactionController editTransactionController = fxmlLoader.getController();
+            editTransactionController.setTransaction(selectedTransaction);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root, 400, 350));
+            stage.setTitle("Edit Transaction");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

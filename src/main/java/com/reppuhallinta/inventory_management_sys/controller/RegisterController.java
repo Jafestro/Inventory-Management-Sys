@@ -45,51 +45,49 @@ public class RegisterController {
         String password = this.passwordField.getText();
         String confirmPassword = this.confirmPasswordField.getText();
 
-        System.out.println("Username: " + username);
-        System.out.println("First Name: " + firstName);
-        System.out.println("Last Name: " + lastName);
-        System.out.println("Password: " + password);
-        System.out.println("Confirm Password: " + confirmPassword);
+        if (!validateFields(username, firstName, lastName, password, confirmPassword)) {
+            return;
+        }
 
-        if (username.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "Error",  null, "Please fill all the fields");
-        } else {
-            if (!password.equals(confirmPassword)) {
-                UIUtils.showAlert(Alert.AlertType.ERROR, "Error",  null, "Passwords do not match");
+        try {
+            User userCheck = userService.findUserByUsername(username);
+
+            if (userCheck != null) {
+                UIUtils.showAlert(Alert.AlertType.ERROR, "Error",  null, "Username already exists");
                 return;
             }
-            try {
-                User userCheck = userService.findUserByUsername(username);
 
-                if (userCheck != null) {
-                    UIUtils.showAlert(Alert.AlertType.ERROR, "Error",  null, "User already exists");
-                    return;
-                }
+            User user = new User(username, firstName, lastName, password, "user");
 
-                User user = new User(firstName, lastName, username, password, "user");
+            userService.createUser(user);
 
-                System.out.println("Registering user: " + user);
-
-                userService.createUser(user);
-
-                Stage stage = (Stage) registerButton.getScene().getWindow();
-
-                UIUtils.loadFXML("/Login.fxml", new Stage(), "Login", 400, 350, null);
-
-                stage.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-                UIUtils.showAlert(Alert.AlertType.ERROR, "Error",  null, e.getMessage());
-            }
+            Stage stage = (Stage) registerButton.getScene().getWindow();
+            UIUtils.showAlert(Alert.AlertType.INFORMATION, "Success",  null, "User registered successfully");
+            UIUtils.loadFXML("/Login.fxml", new Stage(), "Login", 400, 350, null);
+            stage.close();
+        } catch (Exception e) {
+            UIUtils.showAlert(Alert.AlertType.ERROR, "Error",  null, "An error occurred while registering user");
         }
+    }
+
+    private boolean validateFields(String username, String firstName, String lastName, String password, String confirmPassword) {
+        if (username.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            UIUtils.showAlert(Alert.AlertType.ERROR, "Error",  null, "Please fill all the fields");
+            return false;
+        }
+
+        if (!password.equals(confirmPassword)) {
+            UIUtils.showAlert(Alert.AlertType.ERROR, "Error",  null, "Passwords do not match");
+            return false;
+        }
+
+        return true;
     }
 
     @FXML
     public void handleLoginLink() {
-        Stage stage = (Stage) registerButton.getScene().getWindow();
-
+        Stage stage = (Stage) registerButton.getScene().getWindow();   
         UIUtils.loadFXML("/Login.fxml", new Stage(), "Login", 400, 350, null);
-
         stage.close();
     }
 }

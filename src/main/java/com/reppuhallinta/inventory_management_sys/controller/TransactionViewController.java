@@ -5,10 +5,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.scene.control.*;
+import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -60,6 +65,9 @@ public class TransactionViewController extends LogoutController {
     private TextField searchField;
 
     @FXML
+    private ProgressBar autoRefreshProgressBar;
+
+    @FXML
     public void initialize() {
         String sessionId = CustomSessionManager.getSessionId();
         System.out.println("Current session id: " + sessionId);
@@ -92,6 +100,16 @@ public class TransactionViewController extends LogoutController {
         addSortEventHandler(usernameColumn);
 
         loadTransactionData();
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(0), event -> {
+                    loadTransactionData();
+                    updateProgressBar();
+                }),
+                new KeyFrame(Duration.seconds(15))
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
     }
 
     private <T> void addSortEventHandler(TableColumn<Transaction, T> column) {
@@ -153,4 +171,18 @@ public class TransactionViewController extends LogoutController {
             e.printStackTrace();
         }
     }
+}
+        UIUtils.loadFXML("/Products.fxml", stage, "Products", 1200, 800, null);
+    }
+
+    private void updateProgressBar() {
+        Timeline progressBarTimeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(autoRefreshProgressBar.progressProperty(), 0)),
+                new KeyFrame(Duration.seconds(15), new KeyValue(autoRefreshProgressBar.progressProperty(), 1))
+        );
+        progressBarTimeline.setCycleCount(1);
+        progressBarTimeline.play();
+    }
+
+
 }

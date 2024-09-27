@@ -7,10 +7,14 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -72,6 +76,9 @@ public class ProductViewController extends LogoutController {
     @FXML
     private Button reportsButton;
 
+    @FXML
+    private ProgressBar autoRefreshProgressBar;
+
 
     @FXML
     public void initialize() {
@@ -106,6 +113,16 @@ public class ProductViewController extends LogoutController {
         addSortEventHandler(categoryIDColumn);
 
         loadProductData();
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(0), event -> {
+                    loadProductData();
+                    updateProgressBar();
+                }),
+                new KeyFrame(Duration.seconds(15))
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
 
         scheduler.scheduleAtFixedRate(this::checkStockLevels, 0, 1, TimeUnit.MINUTES);
     }
@@ -205,7 +222,7 @@ public class ProductViewController extends LogoutController {
     public void handleReportsButtonAction() {
         Stage stage = new Stage();
 
-        UIUtils.loadFXML("/Reports.fxml", stage, "Reports", 400, 350, null);
+        UIUtils.loadFXML("/Reports.fxml", stage, "Reports", 424, 303, null);
     }
 
     @FXML
@@ -231,5 +248,14 @@ public class ProductViewController extends LogoutController {
 
     public void handleRefreshButtonAction() {
         loadProductData();
+    }
+
+    private void updateProgressBar() {
+        Timeline progressBarTimeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(autoRefreshProgressBar.progressProperty(), 0)),
+                new KeyFrame(Duration.seconds(15), new KeyValue(autoRefreshProgressBar.progressProperty(), 1))
+        );
+        progressBarTimeline.setCycleCount(1);
+        progressBarTimeline.play();
     }
 }

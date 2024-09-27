@@ -36,7 +36,7 @@
         </rowConstraints>
     </GridPane>
 
-        <Button fx:id="editButton" alignment="CENTER" prefWidth="110.0" text="Edit Transaction" onAction="#updateTransactionButtonOnAction" >
+        <Button fx:id="editButton" alignment="CENTER" prefWidth="120.0" text="Edit Transaction" onAction="#updateTransactionButtonOnAction" >
         <VBox.margin>
             <Insets top="15.0" />
         </VBox.margin>

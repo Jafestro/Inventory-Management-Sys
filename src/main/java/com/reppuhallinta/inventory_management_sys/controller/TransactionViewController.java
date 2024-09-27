@@ -4,6 +4,11 @@ import java.sql.Date;
 import java.util.List;
 
 import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.scene.control.*;
+import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -14,11 +19,6 @@ import com.reppuhallinta.inventory_management_sys.service.TransactionService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import session.CustomSessionManager;
@@ -56,6 +56,9 @@ public class TransactionViewController extends LogoutController {
     @FXML
     private TextField searchField;
 
+    @FXML
+    private ProgressBar autoRefreshProgressBar;
+
 
     @FXML
     public void initialize() {
@@ -91,6 +94,16 @@ public class TransactionViewController extends LogoutController {
         addSortEventHandler(userIdColumn);
 
         loadTransactionData();
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(0), event -> {
+                    loadTransactionData();
+                    updateProgressBar();
+                }),
+                new KeyFrame(Duration.seconds(15))
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
     }
     private <T> void addSortEventHandler(TableColumn<Transaction, T> column) {
         Label label = new Label();
@@ -127,8 +140,17 @@ public class TransactionViewController extends LogoutController {
 
     public void handleProductsButton() {
         Stage stage = (Stage) productsButton.getScene().getWindow();
-
-        UIUtils.loadFXML("/Products.fxml", stage, "Products", 1200, 1200, null);
+        UIUtils.loadFXML("/Products.fxml", stage, "Products", 1200, 800, null);
     }
+
+    private void updateProgressBar() {
+        Timeline progressBarTimeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(autoRefreshProgressBar.progressProperty(), 0)),
+                new KeyFrame(Duration.seconds(15), new KeyValue(autoRefreshProgressBar.progressProperty(), 1))
+        );
+        progressBarTimeline.setCycleCount(1);
+        progressBarTimeline.play();
+    }
+
 
 }

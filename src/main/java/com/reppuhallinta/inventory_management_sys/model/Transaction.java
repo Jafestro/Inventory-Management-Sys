@@ -27,6 +27,9 @@ public class Transaction {
 
     @Column(name = "UserId")
     private int userId;
+    
+    @Transient
+    private String username;
 
     public Transaction(int productId, String transactionDate, int quantity, String transactionType, int userId) {
         super();
@@ -87,6 +90,14 @@ public class Transaction {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override

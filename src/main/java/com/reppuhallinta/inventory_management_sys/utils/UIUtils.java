@@ -3,6 +3,7 @@ package com.reppuhallinta.inventory_management_sys.utils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import lombok.Setter;
@@ -59,5 +60,13 @@ public class UIUtils {
 
     public static ApplicationContext getSpringContext() {
         return springContext;
+    }
+
+    public static void closeWindow(Button button) {
+
+        Stage stage = (Stage) button.getScene().getWindow();
+
+        stage.close();
+
     }
 }

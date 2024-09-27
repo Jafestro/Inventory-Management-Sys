@@ -16,10 +16,11 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 
     @Transactional
     void deleteTransactionByProductId(int productId);
-
+    
     List<Transaction> findByProductId(int productId);
 
     List<Transaction> findByUserId(int userId);
 
     List<Transaction> findByTransactionDateBetween(Date startDate, Date endDate);
+
 }

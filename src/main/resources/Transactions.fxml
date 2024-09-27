@@ -24,7 +24,7 @@
             <VBox.margin>
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></Button>
-            <Button maxWidth="200.0" minWidth="200.0" text="Edit Transaction">
+            <Button maxWidth="200.0" minWidth="200.0" text="Edit Transaction" onAction="#handleEditTransaction" >
             <VBox.margin>
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></Button>
@@ -46,7 +46,7 @@
                     <TableColumn fx:id="typeColumn" maxWidth="200.0" minWidth="100.0" prefWidth="200.0" text="Type" />
                     <TableColumn fx:id="quantityColumn" maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="Quantity" />
                     <TableColumn fx:id="productIdColumn" maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="ProductID" />
-                    <TableColumn fx:id="userIdColumn" maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="UserID" />
+                    <TableColumn fx:id="usernameColumn" maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="Username" />
                 </columns>
             <padding>
                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />

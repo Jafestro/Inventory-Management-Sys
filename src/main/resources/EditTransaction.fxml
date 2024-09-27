@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.ComboBox?>
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" 
+    fx:controller="com.reppuhallinta.inventory_management_sys.controller.EditTransactionController">
+
+    <GridPane alignment="CENTER" hgap="10" vgap="10">
+        <Label text="Transaction Type:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <ComboBox fx:id="transactionTypeComboBox" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+
+        <Label text="User:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <ComboBox fx:id="usernameComboBox" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+
+        <Label text="Quantity:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField fx:id="quantityField" promptText="Quantity..." GridPane.columnIndex="0" GridPane.rowIndex="5" />
+
+        <columnConstraints>
+            <ColumnConstraints />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+        </rowConstraints>
+    </GridPane>
+
+        <Button fx:id="editButton" alignment="CENTER" prefWidth="120.0" text="Edit Transaction" onAction="#updateTransactionButtonOnAction" >
+        <VBox.margin>
+            <Insets top="15.0" />
+        </VBox.margin>
+    </Button>
+</VBox>

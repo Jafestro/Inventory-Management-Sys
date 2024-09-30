@@ -184,7 +184,7 @@ public class ProductViewController extends LogoutController {
 
         Stage stage = (Stage) transactionButton.getScene().getWindow();
 
-        UIUtils.loadFXML("/Transactions.fxml", stage, "Transactions", 1200, 1200, null);
+        UIUtils.loadFXML("/Transactions.fxml", stage, "Transactions", 1250, 500, null);
 
     }
 

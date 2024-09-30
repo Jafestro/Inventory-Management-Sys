@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ProgressBar?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.ProgressBar?>
 <VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.reppuhallinta.inventory_management_sys.controller.ProductViewController">
     
     <HBox VBox.vgrow="ALWAYS">
@@ -19,29 +18,32 @@
             <VBox.margin>
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></TextField>
-            <Button fx:id="transactionButton" maxWidth="200.0" minWidth="200.0" onAction="#handleTransactionButtonAction" text="Transactions" />
+            <Button fx:id="transactionButton" maxWidth="200.0" minWidth="200.0" onAction="#handleTransactionButtonAction" text="Transactions">
+            <VBox.margin>
+               <Insets />
+            </VBox.margin></Button>
             <Button fx:id="createProductButton" maxWidth="200.0" minWidth="200.0" onAction="#handleCreateProductButtonAction" text="Create Product">
             <VBox.margin>
-               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               <Insets />
             </VBox.margin></Button>
             <Button fx:id="editProductButton" maxWidth="200.0" minWidth="200.0" onAction="#handleEditProduct" text="Edit Product">
             <VBox.margin>
-               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               <Insets />
             </VBox.margin></Button>
             <Button fx:id="deleteProductButton" maxWidth="200.0" minWidth="200.0" onAction="#handleDeleteProductButtonAction" text="Delete Product">
             <VBox.margin>
-               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               <Insets />
             </VBox.margin></Button>
          <Button fx:id="reportsButton" minWidth="200.0" mnemonicParsing="false" onAction="#handleReportsButtonAction" text="Reports" />
          <Button fx:id="refreshButton" layoutX="12.0" layoutY="168.0" maxWidth="200.0" minWidth="200.0" onAction="#handleRefreshButtonAction" text="Refresh" />
-         <Button fx:id="logOutButton" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#handleLogOutButtonAction" prefWidth="200.0" text="Logout">
+         <Button fx:id="logOutButton" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#handleLogOutButtonAction" text="Logout">
             <VBox.margin>
                <Insets />
             </VBox.margin>
          </Button>
-         <ProgressBar fx:id="autoRefreshProgressBar" prefHeight="25.0" prefWidth="200.0" progress="0.0" />
+         <ProgressBar fx:id="autoRefreshProgressBar" maxWidth="200.0" minWidth="200.0" progress="0.0" />
          <HBox.margin>
-            <Insets />
+            <Insets right="10.0" />
          </HBox.margin>
         </VBox>
         <AnchorPane HBox.hgrow="ALWAYS">

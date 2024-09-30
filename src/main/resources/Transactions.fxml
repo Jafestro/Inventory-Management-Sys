@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ProgressBar?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.ProgressBar?>
 <VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.reppuhallinta.inventory_management_sys.controller.TransactionViewController">
 
   <HBox VBox.vgrow="ALWAYS">
@@ -22,20 +21,20 @@
             <Button fx:id="productsButton" maxWidth="200.0" minWidth="200.0" onAction="#handleProductsButton" text="Products" />
             <Button maxWidth="200.0" minWidth="200.0" text="Add Transaction">
             <VBox.margin>
-               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               <Insets />
             </VBox.margin></Button>
-            <Button maxWidth="200.0" minWidth="200.0" text="Edit Transaction" onAction="#handleEditTransaction" >
+            <Button maxWidth="200.0" minWidth="200.0" onAction="#handleEditTransaction" text="Edit Transaction">
             <VBox.margin>
-               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               <Insets />
             </VBox.margin></Button>
             <Button maxWidth="200.0" minWidth="200.0" text="Delete Transaction">
             <VBox.margin>
-               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               <Insets />
             </VBox.margin></Button>
          <Button fx:id="logOutButton" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#handleLogOutButtonAction" text="Logout" />
-         <ProgressBar fx:id="autoRefreshProgressBar" prefHeight="25.0" prefWidth="200.0" progress="0.0" />
+         <ProgressBar fx:id="autoRefreshProgressBar" maxWidth="200.0" minWidth="200.0" progress="0.0" />
          <HBox.margin>
-            <Insets />
+            <Insets right="10.0" />
          </HBox.margin>
         </VBox>
         <AnchorPane HBox.hgrow="ALWAYS">

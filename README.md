@@ -52,7 +52,7 @@ The system allows for easy tracking, updating, and management of inventory, ensu
   - MariaDB
   - JUnit
 
-!![image2](https://github.com/user-attachments/assets/9fe66af1-6763-4b66-995f-974c2558c119)
+![image2](https://github.com/user-attachments/assets/9fe66af1-6763-4b66-995f-974c2558c119)
 
 
 ![image](https://github.com/user-attachments/assets/3c305bc0-eafb-402d-9f24-f49847513607)

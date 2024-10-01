@@ -9,15 +9,16 @@ The system allows for easy tracking, updating, and management of inventory, ensu
 
 ## Main Features
 
-**Add, delete, edit products in the inventory**
 
-**Track transactions by product, and see whos made changes**
+- Add, delete, edit products in the inventory
 
-**Automated reorder from supplier if wanted**
+- Track transactions by product, and see whos made changes
 
-**Reports exported to computer from your stock changes**
+- Automated reorder from supplier if wanted
 
-**Make your users either admins or normal users, admins with more permissions**
+- Reports exported to computer from your stock changes
+
+- Make your users either admins or normal users, admins with more permissions
 
 ## Getting started
 
@@ -57,6 +58,7 @@ The system allows for easy tracking, updating, and management of inventory, ensu
   - JUnit
 
 ![image2](https://github.com/user-attachments/assets/9fe66af1-6763-4b66-995f-974c2558c119)
+
 
 
 ![image](https://github.com/user-attachments/assets/3c305bc0-eafb-402d-9f24-f49847513607)

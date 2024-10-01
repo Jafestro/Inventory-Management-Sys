@@ -29,6 +29,8 @@ The system allows for easy tracking, updating, and management of inventory, ensu
 2. **Create database**
    ```sh
    create database {yourdatabasename}
+   ```
+   ```sh
    use database {yourdatabasename}
    ```
    After that use [THIS](https://github.com/Jafestro/Inventory-Management-Sys/blob/main/sqlscript) sql script to add needed tables and columns
@@ -40,6 +42,8 @@ The system allows for easy tracking, updating, and management of inventory, ensu
    Run these commands
    ```sh
    mvn clean install
+   ```
+   ```sh
    mvn clean javafx:run
    ```
    

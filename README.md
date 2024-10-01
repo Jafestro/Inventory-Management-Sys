@@ -43,5 +43,13 @@ The system allows for easy tracking, updating, and management of inventory, ensu
    mvn clean javafx:run
    ```
    
+## Technologies Used
+
+  - Java
+  - Spring Boot
+  - Mavent
+  - JavaFX
+  - MariaDB
+  - JUnit
 
 ![image](https://github.com/user-attachments/assets/3c305bc0-eafb-402d-9f24-f49847513607)

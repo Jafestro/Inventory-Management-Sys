@@ -62,4 +62,8 @@ public class UserService {
     public User findUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+    public List<User> getUsersByIds(List<Integer> userIds) {
+        return userRepository.findByIdIn(userIds);
+    }
 }

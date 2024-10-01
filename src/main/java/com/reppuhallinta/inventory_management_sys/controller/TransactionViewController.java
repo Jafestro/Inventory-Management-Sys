@@ -2,6 +2,7 @@ package com.reppuhallinta.inventory_management_sys.controller;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,15 +137,28 @@ public class TransactionViewController extends LogoutController {
     }
 
     private void loadTransactionData() {
+
         List<Transaction> transactions = transactionService.getAllTransactions();
+
+        List<Integer> userIds = transactions.stream()
+                .map(Transaction::getUserId)
+                .distinct()
+                .collect(Collectors.toList());
+
+        List<User> users = userService.getUsersByIds(userIds);
+
+        Map<Integer, User> userMap = users.stream()
+                .collect(Collectors.toMap(User::getId, user -> user));
+
         List<Transaction> transactionsWithUsernames = transactions.stream().map(transaction -> {
-            User user = userService.getUserById(transaction.getUserId());
+            User user = userMap.get(transaction.getUserId());
             transaction.setUsername(user != null ? user.getUsername() : "Unknown");
             return transaction;
         }).collect(Collectors.toList());
 
         ObservableList<Transaction> transactionObservableList = FXCollections.observableArrayList(transactionsWithUsernames);
         transactionTable.setItems(transactionObservableList);
+
     }
 
     public void handleProductsButton() {

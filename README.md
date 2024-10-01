@@ -1,28 +1,43 @@
 # Inventory-Management-Sys
-University Project for Inventory Management system 
+School project
 
 
-Product Vision
-For small to medium-sized businesses who struggle with manual and error-prone inventory
-management, the [Inventory Management App] is a comprehensive digital solution that provides
-real-time tracking, automated alerts, and reports/charts. Unlike traditional spreadsheets or
-outdated software, our app offers an intuitive interface and advanced analytics, making
-inventory management more accurate, efficient, and strategic.
+ ## Project Overview:
 
+This project is a simple and efficient inventory management system designed to help users manage their item catalogs. 
+The system allows for easy tracking, updating, and management of inventory, ensuring smooth operations for various user needs.
 
-Description of ER Diagram Entities and Relationships:
-● Users: Represents the users who interact with the system. Each user has attributes like
-username, first name, last name, password, access level, and UserID (primary key).
-● Products: Represents the products in the inventory. Each product has attributes like
-ProductID (primary key), name, price, quantity, category, and supplier. Products are
-linked to Categories and Suppliers through foreign keys.
-● Suppliers: Contains supplier information, including SupplierID (primary key), name, and
-contact email.
-● Category: Holds product categories. Each category has a CategoryID (primary key) and
-name.
-● Transactions: Tracks transactions performed on the products by users. Each
-transaction includes attributes such as TransactionID (primary key), transaction date,
-quantity, transaction type (e.g., sale or return), ProductID, and UserID (foreign keys to
-link with the Products and Users tables).
+## Main Features
+
+**Add, delete, edit products in the inventory**
+**Track transactions by product, and see whos made changes**
+**Automated reorder from supplier if wanted**
+**Reports exported to computer from your stock changes**
+**Make your users either admins or normal users, admins with more permissions**
+
+## Getting started
+
+1. **Clone the repository:**
+    ```sh
+    git clone https://github.com/Jafestro/Inventory-Management-Sys.git
+    ```
+
+2. **Create database**
+   ```sh
+   create database {yourdatabasename}
+   use database {yourdatabasename}
+   ```
+   After that use [THIS](https://github.com/Jafestro/Inventory-Management-Sys/blob/main/sqlscript) sql script to add needed tables and columns
+
+4. **Set up database connection**
+   In the project search for file application.properties and fill in your correct database info to connect
+
+5. **Starting the app**
+   Run these commands
+   ```sh
+   mvn clean install
+   mvn clean javafx:run
+   ```
+   
 
 ![image](https://github.com/user-attachments/assets/3c305bc0-eafb-402d-9f24-f49847513607)

@@ -9,6 +9,7 @@ The system allows for easy tracking, updating, and management of inventory, ensu
 
 ## Main Features
 
+
 - Add, delete, edit products in the inventory
 
 - Track transactions by product, and see whos made changes
@@ -29,6 +30,8 @@ The system allows for easy tracking, updating, and management of inventory, ensu
 2. **Create database**
    ```sh
    create database {yourdatabasename}
+   ```
+   ```sh
    use database {yourdatabasename}
    ```
    After that use [THIS](https://github.com/Jafestro/Inventory-Management-Sys/blob/main/sqlscript) sql script to add needed tables and columns
@@ -40,8 +43,22 @@ The system allows for easy tracking, updating, and management of inventory, ensu
    Run these commands
    ```sh
    mvn clean install
+   ```
+   ```sh
    mvn clean javafx:run
    ```
    
+## Technologies Used
+
+  - Java
+  - Spring Boot
+  - Mavent
+  - JavaFX
+  - MariaDB
+  - JUnit
+
+![image2](https://github.com/user-attachments/assets/9fe66af1-6763-4b66-995f-974c2558c119)
+
+
 
 ![image](https://github.com/user-attachments/assets/3c305bc0-eafb-402d-9f24-f49847513607)

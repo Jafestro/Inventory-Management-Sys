@@ -36,10 +36,11 @@ The system allows for easy tracking, updating, and management of inventory, ensu
    ```
    After that use [THIS](https://github.com/Jafestro/Inventory-Management-Sys/blob/main/sqlscript) sql script to add needed tables and columns
 
-4. **Set up database connection**
+3. **Set up database connection**
+   
    In the project search for file application.properties and fill in your correct database info to connect
 
-5. **Starting the app**
+4. **Starting the app**
    Run these commands
    ```sh
    mvn clean install
@@ -52,10 +53,12 @@ The system allows for easy tracking, updating, and management of inventory, ensu
 
   - Java
   - Spring Boot
-  - Mavent
+  - Maven
   - JavaFX
   - MariaDB
   - JUnit
+  - Jacoco
+  - Jenkins
 
 ![image2](https://github.com/user-attachments/assets/9fe66af1-6763-4b66-995f-974c2558c119)
 

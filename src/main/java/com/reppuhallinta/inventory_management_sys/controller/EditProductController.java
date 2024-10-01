@@ -3,18 +3,21 @@ package com.reppuhallinta.inventory_management_sys.controller;
 import com.reppuhallinta.inventory_management_sys.model.Category;
 import com.reppuhallinta.inventory_management_sys.model.Products;
 import com.reppuhallinta.inventory_management_sys.model.Suppliers;
+import com.reppuhallinta.inventory_management_sys.model.User;
 import com.reppuhallinta.inventory_management_sys.service.CategoryService;
 import com.reppuhallinta.inventory_management_sys.service.ProductService;
 import com.reppuhallinta.inventory_management_sys.service.SupplierService;
 
 import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import session.CustomSessionManager;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -48,6 +51,8 @@ public class EditProductController {
     @FXML
     private Button editButton;
 
+    private User user;
+
     private Products product;
 
     private List<Category> categories;
@@ -77,6 +82,11 @@ public class EditProductController {
         if (product != null) {
             prefillFields();
         }
+
+        String sessionId = CustomSessionManager.getSessionId();
+        System.out.println("Session ID in ProductViewController: " + sessionId);
+
+        user = (User) CustomSessionManager.getAttribute("user");
     }
 
     private void prefillFields() {
@@ -126,7 +136,12 @@ public class EditProductController {
             }
         }
 
-        productService.updateProduct(product.getId(), updatedProduct);
+        if (user != null) {
+            productService.updateProduct(product.getId(), updatedProduct, user.getId());
+        } else {
+            UIUtils.showAlert(Alert.AlertType.ERROR, "User error", null, "Please log in!");
+        }
+
 
         UIUtils.showConfirmationDialog("Product Edit Successful", null, "Product has been edited!");
 

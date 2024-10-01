@@ -239,9 +239,6 @@ public class ProductViewController extends LogoutController {
             return;
         }
 
-        int productId = selectedProduct.getId();
-        transactionService.removeTransactionByProductId(productId);
-
         productService.deleteProduct(selectedProduct.getId());
         loadProductData();
     }

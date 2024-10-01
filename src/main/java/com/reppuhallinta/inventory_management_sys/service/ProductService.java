@@ -21,13 +21,16 @@ public class ProductService {
     public Products createProduct(Products product, int userId) {
 
         Products createdProduct = productRepository.save(product);
+
         Transaction transaction = new Transaction();
         transaction.setProductId(createdProduct.getId());
         transaction.setQuantity(createdProduct.getQuantity());
         transaction.setTransactionType("ADD");
         transaction.setUserId(userId);
         transaction.setTransactionDate(new Date());
+
         transactionService.createTransaction(transaction);
+
         return productRepository.save(product);
     }
 
@@ -39,7 +42,7 @@ public class ProductService {
         return productRepository.findById(id).orElse(null); // May need to change this
     }
 
-    public Products updateProduct(int id, Products productDetails) {
+    public Products updateProduct(int id, Products productDetails, int userId) {
         Products product = getProductById(id);
         product.setProductName(productDetails.getProductName());
         product.setPrice(productDetails.getPrice());
@@ -47,11 +50,25 @@ public class ProductService {
         product.setCategoryId(productDetails.getCategoryId());
         product.setSupplierID(productDetails.getSupplierID());
 
-        return productRepository.save(product);
+        Products updatedProduct = productRepository.save(product);
+
+        Transaction transaction = new Transaction();
+        transaction.setProductId(id);
+        transaction.setQuantity(productDetails.getQuantity());
+        transaction.setTransactionType("UPDATE");
+        transaction.setTransactionDate(new Date());
+        transaction.setUserId(userId);
+
+        transactionService.createTransaction(transaction);
+
+        return updatedProduct;
+
     }
 
     public void deleteProduct(int id) {
         Products product = getProductById(id);
+
+        transactionService.removeTransactionByProductId(id);
 
         productRepository.delete(product);
     }

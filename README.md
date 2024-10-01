@@ -9,15 +9,15 @@ The system allows for easy tracking, updating, and management of inventory, ensu
 
 ## Main Features
 
-**Add, delete, edit products in the inventory**
+- Add, delete, edit products in the inventory
 
-**Track transactions by product, and see whos made changes**
+- Track transactions by product, and see whos made changes
 
-**Automated reorder from supplier if wanted**
+- Automated reorder from supplier if wanted
 
-**Reports exported to computer from your stock changes**
+- Reports exported to computer from your stock changes
 
-**Make your users either admins or normal users, admins with more permissions**
+- Make your users either admins or normal users, admins with more permissions
 
 ## Getting started
 

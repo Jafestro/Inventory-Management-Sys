@@ -1,19 +1,17 @@
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:21-jdk-alpine
+# Use Maven image to build the application
+FROM maven:latest
 
-# Set the working directory inside the container
+# Set working directory inside the container
 WORKDIR /app
 
-# Copy the Maven build file and project files
-COPY pom.xml /app
-COPY src /app/src
+# Copy the pom.xml to download dependencies first (caching optimization)
+COPY pom.xml /app/
 
-# Install Maven and build the project
-RUN apk add --no-cache maven
-RUN mvn -f /app/pom.xml clean package -DskipTests
+# Copy the entire project to the container
+COPY . /app/
 
-# Expose the port the app runs on
-EXPOSE 8080
+# Package the application using Maven
+RUN mvn package
 
-# Define the command to run the application
-CMD ["java", "-jar", "/main/java/com/reppuhallinta/inventory_management_sys/InventoryManagementSysApplication.java"]
+# Run the main class from the built JAR
+CMD ["java", "-jar", "target/App.jar"]

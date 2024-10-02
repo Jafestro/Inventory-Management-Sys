@@ -61,6 +61,18 @@ public class CreateProductController {
     List<Suppliers> suppliers;
 
     @FXML
+    private Button addNewCategoryButton;
+
+    @FXML
+    private Button AddNewSupplierButton;
+
+    @FXML
+    private TextField newSupplierTextField;
+
+    @FXML
+    private TextField newCategoryTextField;
+
+    @FXML
     public void initialize() {
 
         categories = getAllTransactions();
@@ -151,4 +163,43 @@ public class CreateProductController {
 
     }
 
+    @FXML
+    private void handleAddNewCategory() {
+    	String newCategory = newCategoryTextField.getText();
+
+    	if (newCategory.isEmpty()) {
+            UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please enter a category name.");
+            return;
+        }
+
+    	Category category = new Category();
+    	category.setCategoryName(newCategory);
+
+    	categoryService.createCategory(category);
+
+    	categoryComboBox.getItems().add(newCategory);
+
+    	newCategoryTextField.clear();
+        UIUtils.showAlert(AlertType.INFORMATION, "Success", null, "Category added!");
+    }
+
+    @FXML
+    private void handleAddNewSupplier() {
+    	String newSupplier = newSupplierTextField.getText();
+
+    	if (newSupplier.isEmpty()) {
+            UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please enter a supplier name.");
+            return;
+        }
+
+    	Suppliers supplier = new Suppliers();
+    	supplier.setSupplierName(newSupplier);
+
+    	supplierService.createSupplier(supplier);
+
+    	supplierComboBox.getItems().add(newSupplier);
+
+    	newSupplierTextField.clear();
+        UIUtils.showAlert(AlertType.INFORMATION, "Success", null, "Supplier added!");
+    }
 }

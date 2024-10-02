@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.reppuhallinta.inventory_management_sys.controller.TransactionViewController">
+<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.reppuhallinta.inventory_management_sys.controller.TransactionViewController">
 
   <HBox VBox.vgrow="ALWAYS">
         <VBox spacing="10.0">
@@ -19,15 +19,7 @@
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></TextField>
             <Button fx:id="productsButton" maxWidth="200.0" minWidth="200.0" onAction="#handleProductsButton" text="Products" />
-            <Button maxWidth="200.0" minWidth="200.0" text="Add Transaction">
-            <VBox.margin>
-               <Insets />
-            </VBox.margin></Button>
-            <Button maxWidth="200.0" minWidth="200.0" onAction="#handleEditTransaction" text="Edit Transaction">
-            <VBox.margin>
-               <Insets />
-            </VBox.margin></Button>
-            <Button maxWidth="200.0" minWidth="200.0" text="Delete Transaction">
+            <Button fx:id="editTransactionButton" maxWidth="200.0" minWidth="200.0" onAction="#handleEditTransaction" text="Edit Transaction">
             <VBox.margin>
                <Insets />
             </VBox.margin></Button>

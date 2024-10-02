@@ -156,7 +156,7 @@ public class CreateProductController {
     }
 
     private void success() {
-        UIUtils.showAlert(AlertType.CONFIRMATION, "Success", null, "Product created!");
+        UIUtils.showAlert(AlertType.INFORMATION, "Success", null, "Product created!");
 
         Stage currentStage = (Stage) createButton.getScene().getWindow();
         currentStage.close();
@@ -177,7 +177,13 @@ public class CreateProductController {
 
     	categoryService.createCategory(category);
 
-    	categoryComboBox.getItems().add(newCategory);
+    	categoryComboBox.getItems().clear();
+
+        categories = getAllTransactions();
+
+        for (Category c : categories) {
+            categoryComboBox.getItems().add(c.getCategoryName());
+        }
 
     	newCategoryTextField.clear();
         UIUtils.showAlert(AlertType.INFORMATION, "Success", null, "Category added!");
@@ -197,7 +203,13 @@ public class CreateProductController {
 
     	supplierService.createSupplier(supplier);
 
-    	supplierComboBox.getItems().add(newSupplier);
+    	supplierComboBox.getItems().clear();
+
+        suppliers = getAllSuppliers();
+
+        for (Suppliers s : suppliers) {
+            supplierComboBox.getItems().add(s.getSupplierName());
+        }
 
     	newSupplierTextField.clear();
         UIUtils.showAlert(AlertType.INFORMATION, "Success", null, "Supplier added!");

@@ -69,7 +69,7 @@ public class LoginController {
             }
 
             Stage stage = (Stage) owner;
-            UIUtils.loadFXML("/Products.fxml", stage, "Products", 1250, 500, null);
+            UIUtils.loadFXML("/Products.fxml", stage, "Products", 1270, 600, null);
         } else {
             UIUtils.showAlert(Alert.AlertType.ERROR, "Login fail", null, "Invalid username or password");
         }

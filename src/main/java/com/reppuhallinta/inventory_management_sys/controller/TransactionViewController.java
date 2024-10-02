@@ -163,7 +163,7 @@ public class TransactionViewController extends LogoutController {
 
     public void handleProductsButton() {
         Stage stage = (Stage) productsButton.getScene().getWindow();
-        UIUtils.loadFXML("/Products.fxml", stage, "Products", 1250, 500, null);
+        UIUtils.loadFXML("/Products.fxml", stage, "Products", 1270, 600, null);
     }
 
     private void updateProgressBar() {

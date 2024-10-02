@@ -39,9 +39,6 @@ public class ProductViewController extends LogoutController {
     @Autowired
     private ProductService productService;
 
-    @Autowired
-    private TransactionService transactionService;
-
     @FXML
     private TableView<Products> productTable;
 
@@ -77,6 +74,15 @@ public class ProductViewController extends LogoutController {
     private Button reportsButton;
 
     @FXML
+    private Button createProductButton;
+
+    @FXML
+    private Button editProductButton;
+
+    @FXML
+    private Button deleteProductButton;
+
+    @FXML
     private ProgressBar autoRefreshProgressBar;
 
 
@@ -89,10 +95,17 @@ public class ProductViewController extends LogoutController {
         User user = (User) CustomSessionManager.getAttribute("user");
 
         if (user != null) {
-            System.out.println("Logged in user: " + user.getUsername());
-        } else {
-            System.out.println("No user logged in");
-        }
+            if (!"admin".equals(user.getAccessLevel())) {
+                createProductButton.setDisable(true);
+                editProductButton.setDisable(true);
+                deleteProductButton.setDisable(true);
+                
+                Tooltip tooltip = new Tooltip("You do not have permission to perform this action");
+                createProductButton.setTooltip(tooltip);
+                editProductButton.setTooltip(tooltip);
+                deleteProductButton.setTooltip(tooltip);
+            }
+        } 
 
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             filterProductList(newValue);

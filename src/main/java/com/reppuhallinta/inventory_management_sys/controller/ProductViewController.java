@@ -99,11 +99,6 @@ public class ProductViewController extends LogoutController {
                 createProductButton.setDisable(true);
                 editProductButton.setDisable(true);
                 deleteProductButton.setDisable(true);
-                
-                Tooltip tooltip = new Tooltip("You do not have permission to perform this action");
-                createProductButton.setTooltip(tooltip);
-                editProductButton.setTooltip(tooltip);
-                deleteProductButton.setTooltip(tooltip);
             }
         } 
 

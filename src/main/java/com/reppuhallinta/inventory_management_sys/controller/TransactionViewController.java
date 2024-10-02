@@ -50,6 +50,9 @@ public class TransactionViewController extends LogoutController {
     private Button productsButton;
 
     @FXML
+    private Button editTransactionButton;
+
+    @FXML
     private TableColumn<Transaction, Integer> idColumn;
 
     @FXML
@@ -75,17 +78,16 @@ public class TransactionViewController extends LogoutController {
 
     @FXML
     public void initialize() {
+
         String sessionId = CustomSessionManager.getSessionId();
-        System.out.println("Current session id: " + sessionId);
+        System.out.println("Session ID in ProductViewController: " + sessionId);
 
         User user = (User) CustomSessionManager.getAttribute("user");
 
         if (user != null) {
-            System.out.println("Current user id: " + user.getId());
-        } else {
-            System.out.println("No user logged in");
-        }
-
+            if (!"admin".equals(user.getAccessLevel())) 
+                editTransactionButton.setDisable(true);
+        } 
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             filterTransactionList(newValue);
         });

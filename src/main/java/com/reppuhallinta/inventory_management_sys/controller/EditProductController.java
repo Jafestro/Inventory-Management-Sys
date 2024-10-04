@@ -87,6 +87,10 @@ public class EditProductController {
         System.out.println("Session ID in ProductViewController: " + sessionId);
 
         user = (User) CustomSessionManager.getAttribute("user");
+
+        if (user == null) {
+            UIUtils.showAlert(Alert.AlertType.ERROR, "User Error", null, "Please log in!");
+        }
     }
 
     private void prefillFields() {
@@ -119,6 +123,30 @@ public class EditProductController {
             return;
         }
 
+        BigDecimal price;
+
+        try {
+            price = new BigDecimal(productPrice);
+            if (price.compareTo(BigDecimal.ZERO) <= 0) {
+                UIUtils.showAlert(Alert.AlertType.ERROR, "Validation Error", null, "Product price must be positive.");
+            }
+        } catch (NumberFormatException e) {
+            UIUtils.showAlert(Alert.AlertType.ERROR, "Validation Error", null, "Product price must be a number.");
+            return;
+        }
+
+        int quantityInt;
+
+        try {
+            quantityInt = Integer.parseInt(quantity);
+            if (quantityInt < 0) {
+                UIUtils.showAlert(Alert.AlertType.ERROR, "Validation Error", null, "Product quantity must be non-negative.");
+            }
+        } catch (NumberFormatException e) {
+            UIUtils.showAlert(Alert.AlertType.ERROR, "Validation Error", null, "Product quantity must be a number.");
+            return;
+        }
+
         Products updatedProduct = new Products();
         updatedProduct.setProductName(productName);
         updatedProduct.setPrice(BigDecimal.valueOf(Double.parseDouble(productPrice)));
@@ -138,16 +166,13 @@ public class EditProductController {
 
         if (user != null) {
             productService.updateProduct(product.getId(), updatedProduct, user.getId());
+
+            UIUtils.showConfirmationDialog("Product Edit Successful", null, "Product has been edited!");
+            Stage currentStage = (Stage) editButton.getScene().getWindow();
+            currentStage.close();
         } else {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "User error", null, "Please log in!");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "User Error", null, "Please log in!");
         }
-
-
-        UIUtils.showConfirmationDialog("Product Edit Successful", null, "Product has been edited!");
-
-        Stage currentStage = (Stage) editButton.getScene().getWindow();
-
-        currentStage.close();
     }
 
     private List<Category> getAllCategories() {

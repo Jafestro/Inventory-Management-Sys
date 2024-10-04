@@ -53,7 +53,7 @@ public class RegisterController {
             User userCheck = userService.findUserByUsername(username);
 
             if (userCheck != null) {
-                UIUtils.showAlert(Alert.AlertType.ERROR, "Error",  null, "Username already exists");
+                UIUtils.showAlert(Alert.AlertType.ERROR, "Error",  null, "Username already exists!");
                 return;
             }
 

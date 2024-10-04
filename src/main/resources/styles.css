@@ -1,0 +1,31 @@
+.button {
+    -fx-background-color: #00A991;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+}
+
+.button:hover {
+    -fx-background-color: #009580;
+}
+
+.AnchorPane {
+    -fx-background-color: #F5F7F9;
+}
+
+.Hyperlink {
+    -fx-text-fill: #007F6D;
+}
+
+.VBox {
+    -fx-background-color: #F5F7F9;
+}
+
+.TableView {
+    -fx-background-color: #E8EDF1;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #00A991;
+    -fx-text-fill: white;
+}

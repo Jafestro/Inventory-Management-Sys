@@ -7,10 +7,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.Hyperlink?>
+<?import java.net.URL?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.reppuhallinta.inventory_management_sys.controller.RegisterController"
-            >
+            fx:controller="com.reppuhallinta.inventory_management_sys.controller.RegisterController">
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
     <VBox alignment="CENTER" spacing="10.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <Label text="First name" />
         <TextField fx:id="firstnameField" promptText="First name" maxWidth="300.0" />
@@ -23,6 +26,6 @@
         <Label text="Confirm password" />
         <PasswordField fx:id="confirmPasswordField" promptText="Confirm password" maxWidth="300.0" />
         <Button fx:id="registerButton" text="Register" onAction="#handleRegister" maxWidth="300.0" />
-        <Hyperlink fx:id="loginLink" text="Are you a user already?" onAction="#handleLoginLink" />
+        <Hyperlink styleClass="Hyperlink" fx:id="loginLink" text="Are you a user already?" onAction="#handleLoginLink" />
     </VBox>
 </AnchorPane>

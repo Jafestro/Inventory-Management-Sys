@@ -10,8 +10,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.reppuhallinta.inventory_management_sys.controller.TransactionViewController">
-
+<?import java.net.URL?>
+<VBox styleClass="VBox" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.reppuhallinta.inventory_management_sys.controller.TransactionViewController">
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
   <HBox VBox.vgrow="ALWAYS">
         <VBox spacing="10.0">
             <TextField fx:id="searchField" promptText="Search...">
@@ -30,7 +33,7 @@
          </HBox.margin>
         </VBox>
         <AnchorPane HBox.hgrow="ALWAYS">
-            <TableView id="logOutButton" fx:id="transactionTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView styleClass="TableView" id="logOutButton" fx:id="transactionTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <columns>
                     <TableColumn fx:id="idColumn" maxWidth="110.0" minWidth="60.0" prefWidth="100.0" text="ID" />
                     <TableColumn fx:id="dateColumn" maxWidth="200.0" minWidth="100.0" prefWidth="200.0" text="Date" />

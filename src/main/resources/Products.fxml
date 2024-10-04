@@ -10,8 +10,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.reppuhallinta.inventory_management_sys.controller.ProductViewController">
-    
+<?import java.net.URL?>
+<VBox styleClass="VBox" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.reppuhallinta.inventory_management_sys.controller.ProductViewController">
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
     <HBox VBox.vgrow="ALWAYS">
         <VBox spacing="10.0">
             <TextField fx:id="searchField" promptText="Search...">
@@ -47,7 +50,7 @@
          </HBox.margin>
         </VBox>
         <AnchorPane HBox.hgrow="ALWAYS">
-            <TableView fx:id="productTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView styleClass="TableView" fx:id="productTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <columns>
                     <TableColumn fx:id="idColumn" prefWidth="113.0" text="ID" />
                     <TableColumn fx:id="nameColumn" prefWidth="326.0" text="Name" />

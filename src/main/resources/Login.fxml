@@ -6,16 +6,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Hyperlink?>
-<AnchorPane xmlns="http://javafx.com/javafx"
+<?import java.net.URL?>
+<AnchorPane styleClass="AnchorPane" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.reppuhallinta.inventory_management_sys.controller.LoginController"
-            >
+            fx:controller="com.reppuhallinta.inventory_management_sys.controller.LoginController">
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
     <VBox alignment="CENTER" spacing="10.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <Label text="Username" />
         <TextField fx:id="usernameField" promptText="Username" maxWidth="300.0"/>
         <Label text="Password" />
         <PasswordField fx:id="passwordField" promptText="Password" maxWidth="300.0" />
         <Button fx:id="loginButton" text="Login" onAction="#handleLogin" maxWidth="300.0" />
-        <Hyperlink fx:id="registerLink" text="Are you not registered yet?" onAction="#handleLoginLink" />
+        <Hyperlink styleClass="Hyperlink" fx:id="registerLink" text="Are you not registered yet?" onAction="#handleLoginLink" />
     </VBox>
 </AnchorPane>

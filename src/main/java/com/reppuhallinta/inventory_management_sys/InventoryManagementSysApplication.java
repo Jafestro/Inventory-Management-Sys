@@ -23,8 +23,6 @@ public class InventoryManagementSysApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("src/main/resources/V_1.png")));
-        primaryStage.getIcons().add(icon);
         UIUtils.loadFXML("/Login.fxml", primaryStage, "Login", 400, 350, null);
     }
 

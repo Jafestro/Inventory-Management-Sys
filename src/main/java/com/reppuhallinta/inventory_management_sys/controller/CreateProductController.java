@@ -3,7 +3,6 @@ package com.reppuhallinta.inventory_management_sys.controller;
 import com.reppuhallinta.inventory_management_sys.model.*;
 import com.reppuhallinta.inventory_management_sys.service.CategoryService;
 import com.reppuhallinta.inventory_management_sys.service.SupplierService;
-import com.reppuhallinta.inventory_management_sys.service.TransactionService;
 import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -20,7 +19,6 @@ import javafx.scene.control.Alert.AlertType;
 import session.CustomSessionManager;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -29,8 +27,6 @@ public class CreateProductController {
     @Autowired
     private ProductService productService;
 
-    @Autowired
-    private TransactionService transactionService;
 
     @Autowired
     private CategoryService categoryService;

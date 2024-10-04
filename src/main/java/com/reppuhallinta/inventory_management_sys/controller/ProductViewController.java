@@ -21,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import com.reppuhallinta.inventory_management_sys.model.Products;
 import com.reppuhallinta.inventory_management_sys.model.User;
 import com.reppuhallinta.inventory_management_sys.service.ProductService;
-import com.reppuhallinta.inventory_management_sys.service.TransactionService;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

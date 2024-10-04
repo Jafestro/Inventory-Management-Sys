@@ -107,6 +107,29 @@ public class CreateProductController {
             }
         }
 
+        BigDecimal productPriceBigDecimal;
+        
+        try {
+            productPriceBigDecimal = new BigDecimal(productPrice);
+            if (productPriceBigDecimal.compareTo(BigDecimal.ZERO) < 0) {
+                UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please enter a valid price.");
+            }
+        } catch (Exception e) {
+            UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please enter a valid price.");
+            return;
+        }
+
+        int quantityInt;
+
+        try {
+            quantityInt = Integer.parseInt(quantity);
+            if (quantityInt < 0) {
+                UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please enter a valid quantity.");
+            }
+        } catch (Exception e) {
+            UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please enter a valid quantity.");
+            return;
+        }
 
         User user = (User) CustomSessionManager.getAttribute("user");
 
@@ -117,9 +140,6 @@ public class CreateProductController {
         }
 
         try {
-            BigDecimal productPriceBigDecimal = new BigDecimal(productPrice);
-            int quantityInt = Integer.parseInt(quantity);
-
             Products product = new Products();
             product.setProductName(productName);
             product.setPrice(productPriceBigDecimal);

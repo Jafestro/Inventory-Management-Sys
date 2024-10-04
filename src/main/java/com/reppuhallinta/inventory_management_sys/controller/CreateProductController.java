@@ -112,10 +112,10 @@ public class CreateProductController {
         try {
             productPriceBigDecimal = new BigDecimal(productPrice);
             if (productPriceBigDecimal.compareTo(BigDecimal.ZERO) < 0) {
-                UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please enter a valid price.");
+                UIUtils.showAlert(Alert.AlertType.ERROR, "Validation Error", null, "Product price must be positive.");
             }
         } catch (Exception e) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please enter a valid price.");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "Validation Error", null, "Invalid product price.");
             return;
         }
 
@@ -124,10 +124,10 @@ public class CreateProductController {
         try {
             quantityInt = Integer.parseInt(quantity);
             if (quantityInt < 0) {
-                UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please enter a valid quantity.");
+                UIUtils.showAlert(Alert.AlertType.ERROR, "Validation Error", null, "Quantity cannot be negative.");
             }
         } catch (Exception e) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please enter a valid quantity.");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "Validation Error", null, "Invalid quantity.");
             return;
         }
 

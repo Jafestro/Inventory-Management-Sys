@@ -33,6 +33,12 @@ public class Products {
     @Column(name = "CategoryId")
     private int categoryId;
 
+    @Column(name = "SupplierName")
+    private String supplierName; // New field
+
+    @Column(name = "CategoryName")
+    private String categoryName; // New field
+
 
     public Products(String productName, BigDecimal price, int quantity, int supplierID, int categoryId) {
         super();
@@ -46,6 +52,8 @@ public class Products {
     public Products() {
 
     }
+
+
 
     public int getId() {
         return productID;
@@ -94,6 +102,12 @@ public class Products {
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
+
+    public String getSupplierName() { return supplierName; }
+    public void setSupplierName(String supplierName) { this.supplierName = supplierName; }
+
+    public String getCategoryName() { return categoryName; }
+    public void setCategoryName(String categoryName) { this.categoryName = categoryName; }
 
     @Override
     public String toString() {

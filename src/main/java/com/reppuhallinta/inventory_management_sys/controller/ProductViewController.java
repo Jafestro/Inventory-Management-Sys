@@ -109,8 +109,8 @@ public class ProductViewController extends LogoutController {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("productName"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        supplierIDColumn.setCellValueFactory(new PropertyValueFactory<>("supplierID"));
-        categoryIDColumn.setCellValueFactory(new PropertyValueFactory<>("categoryId"));
+        supplierIDColumn.setCellValueFactory(new PropertyValueFactory<>("supplierName"));
+        categoryIDColumn.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
       
         addSortEventHandler(idColumn);
         addSortEventHandler(nameColumn);
@@ -191,7 +191,7 @@ public class ProductViewController extends LogoutController {
 
         Stage stage = (Stage) transactionButton.getScene().getWindow();
 
-        UIUtils.loadFXML("/Transactions.fxml", stage, "Transactions", 1300, 600, null);
+        UIUtils.loadFXML("/Transactions.fxml", stage, "Transactions", 1050, 600, null);
 
     }
 

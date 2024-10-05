@@ -2,13 +2,19 @@ package com.reppuhallinta.inventory_management_sys.service;
 
 import java.util.List;
 import java.util.Date;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.reppuhallinta.inventory_management_sys.model.Transaction;
+import com.reppuhallinta.inventory_management_sys.repository.CategoryRepository;
+import com.reppuhallinta.inventory_management_sys.repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.reppuhallinta.inventory_management_sys.model.Products;
 import com.reppuhallinta.inventory_management_sys.repository.ProductRepository;
+import com.reppuhallinta.inventory_management_sys.model.Suppliers;
+import com.reppuhallinta.inventory_management_sys.model.Category;
 
 @Service
 public class ProductService {
@@ -17,6 +23,12 @@ public class ProductService {
 
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    private SupplierRepository supplierRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     public Products createProduct(Products product, int userId) {
 
@@ -35,7 +47,31 @@ public class ProductService {
     }
 
     public List<Products> getAllProducts() {
-        return productRepository.findAll();
+        List<Products> products = productRepository.findAll();
+        // Haetaan Supplier IDt tuotteista
+        List<Integer> supplierIds = products.stream()
+                .map(Products::getSupplierID)
+                .distinct()
+                .collect(Collectors.toList());
+        // Haetaan kategoria IDt Tuotteistas
+        List<Integer> categoryIds = products.stream()
+                .map(Products::getCategoryId)
+                .distinct()
+                .collect(Collectors.toList());
+        // Haetaan toimittajien nimet ID perusteella ja tallennetaan Mappiin
+        Map<Integer, String> supplierNames = supplierRepository.findAllById(supplierIds).stream()
+                .collect(Collectors.toMap(Suppliers::getSupplierID, Suppliers::getSupplierName));
+        // Haetaan kategorioiden nimet ID perusteella ja tallennetaan Mappiin
+        Map<Integer, String> categoryNames = categoryRepository.findAllById(categoryIds).stream()
+                .collect(Collectors.toMap(Category::getId, Category::getCategoryName));
+        // Lisätään tuotteille toimittajien ja kategorioiden nimet
+        List<Products> productsWithNames = products.stream().map(product -> {
+            product.setSupplierName(supplierNames.get(product.getSupplierID()));
+            product.setCategoryName(categoryNames.get(product.getCategoryId()));
+            return product;
+        }).collect(Collectors.toList());
+
+        return productsWithNames;
     }
 
     public Products getProductById(int id) {

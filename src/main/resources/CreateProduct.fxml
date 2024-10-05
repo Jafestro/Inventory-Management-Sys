@@ -10,8 +10,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
+<?import java.net.URL?>
 <VBox alignment="CENTER" prefHeight="471.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.reppuhallinta.inventory_management_sys.controller.CreateProductController">
-
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
     <GridPane alignment="CENTER" hgap="10" prefHeight="413.0" prefWidth="600.0" vgap="10">
         <Label text="Product Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <TextField fx:id="productNameField" promptText="Product Name..." GridPane.columnIndex="0" GridPane.rowIndex="1" />

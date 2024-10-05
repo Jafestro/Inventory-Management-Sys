@@ -56,8 +56,8 @@
                     <TableColumn fx:id="nameColumn" prefWidth="326.0" text="Name" />
                     <TableColumn fx:id="quantityColumn" minWidth="0.0" text="Quantity" />
                     <TableColumn fx:id="priceColumn" prefWidth="347.0" text="Price" />
-                    <TableColumn fx:id="supplierIDColumn" text="SupplierID" />
-                    <TableColumn fx:id="categoryIDColumn" text="CategoryID" />
+                    <TableColumn fx:id="supplierIDColumn" text="Supplier" />
+                    <TableColumn fx:id="categoryIDColumn" text="Category" />
                 </columns>
             <padding>
                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />

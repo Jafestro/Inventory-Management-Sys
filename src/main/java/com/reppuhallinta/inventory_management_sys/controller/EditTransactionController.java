@@ -83,10 +83,17 @@ public class EditTransactionController {
             return;
         }
 
-        int quantityInt = Integer.parseInt(quantity);
+        int quantityInt;
+
+        try {
+            quantityInt = Integer.parseInt(quantity);
+        } catch (NumberFormatException e) {
+            UIUtils.showAlert(Alert.AlertType.ERROR,"Error", null, "Quantity must be a valid number");
+            return;
+        }
 
         if (quantityInt <= 0) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "ERROR", null, "Quantity must be greater than 0");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Quantity must be above zero");
             return;
         }
 

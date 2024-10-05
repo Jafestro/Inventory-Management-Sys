@@ -198,7 +198,7 @@ public class ProductViewController extends LogoutController {
     public void handleCreateProductButtonAction() {
         Stage stage = new Stage();
 
-        UIUtils.loadFXML("/CreateProduct.fxml", stage, "Create Product", 400, 500, null);
+        UIUtils.loadFXML("/CreateProduct.fxml", stage, "Create Product", 500, 600, null);
     }
 
     @FXML
@@ -218,7 +218,7 @@ public class ProductViewController extends LogoutController {
             editProductController.setProduct(selectedProduct);
 
             Stage stage = new Stage();
-            stage.setScene(new Scene(root, 400, 350));
+            stage.setScene(new Scene(root, 400, 450));
             stage.setTitle("Edit Product");
             stage.show();
         } catch (Exception e) {
@@ -229,7 +229,7 @@ public class ProductViewController extends LogoutController {
     public void handleReportsButtonAction() {
         Stage stage = new Stage();
 
-        UIUtils.loadFXML("/Reports.fxml", stage, "Reports", 424, 500, null);
+        UIUtils.loadFXML("/Reports.fxml", stage, "Reports", 524, 600, null);
     }
 
     @FXML

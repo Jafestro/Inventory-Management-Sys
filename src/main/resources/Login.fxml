@@ -18,7 +18,7 @@
         <TextField fx:id="usernameField" promptText="Username" maxWidth="300.0"/>
         <Label text="Password" />
         <PasswordField fx:id="passwordField" promptText="Password" maxWidth="300.0" />
-        <Button fx:id="loginButton" text="Login" onAction="#handleLogin" maxWidth="300.0" />
+        <Button fx:id="loginButton" text="Login" onAction="#handleLogin" prefWidth="130.0" maxWidth="300.0" />
         <Hyperlink styleClass="Hyperlink" fx:id="registerLink" text="Are you not registered yet?" onAction="#handleLoginLink" />
     </VBox>
 </AnchorPane>

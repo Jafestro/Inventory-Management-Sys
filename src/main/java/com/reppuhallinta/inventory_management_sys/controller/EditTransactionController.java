@@ -50,7 +50,7 @@ public class EditTransactionController {
     }
 
     private enum transactionType {
-        ADD, REMOVE
+        ADD, UPDATE
     }
 
     @FXML
@@ -62,7 +62,7 @@ public class EditTransactionController {
         }
 
         transactionTypeComboBox.getItems().add(transactionType.ADD.name());
-        transactionTypeComboBox.getItems().add(transactionType.REMOVE.name());
+        transactionTypeComboBox.getItems().add(transactionType.UPDATE.name());
 
         user = (User) CustomSessionManager.getAttribute("user");
 

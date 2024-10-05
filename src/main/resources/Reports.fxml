@@ -12,79 +12,51 @@
 <?import javafx.scene.text.Text?>
 
 <?import java.net.URL?>
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="424.0" prefWidth="303.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.reppuhallinta.inventory_management_sys.controller.ReportViewController">
-   <stylesheets>
-      <URL value="@styles.css"/>
-   </stylesheets>
-   <children>
-      <GridPane prefHeight="414.0" prefWidth="303.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Button fx:id="GetAllStockProductReportButton" mnemonicParsing="false" onAction="#GetAllStockProductReportButtonAction" text="Export" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-            </Button>
-            <Button fx:id="transByIdButton"  mnemonicParsing="false" onAction="#GetTransActionsByProductId" text="Export" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-            </Button>
-            <TextField fx:id="transByIdField" maxWidth="100.0" promptText="Enter product id..." GridPane.halignment="CENTER" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-            </TextField>
-            <Button fx:id="TransByUserButton" onAction="#GetTransActionsByUserId" mnemonicParsing="false" text="Export" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-            </Button>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="All products in stock" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Transactions by product id" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BASELINE">
-               <GridPane.margin>
-                  <Insets top="10.0" />
-               </GridPane.margin>
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Transactions by user id" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BASELINE">
-               <GridPane.margin>
-                  <Insets top="10.0" />
-               </GridPane.margin>
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <TextField fx:id="transByUserField" maxWidth="100.0" promptText="Enter user id" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-            <DatePicker fx:id="TransByDateDate" maxWidth="100.0" promptText="Select date" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-            </DatePicker>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Transactions by date" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
-               <GridPane.margin>
-                  <Insets top="10.0" />
-               </GridPane.margin>
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-            <Button fx:id="TransByDateButton" onAction="#GetTransActionsByDate" mnemonicParsing="false" text="Export" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />
-         </children>
-      </GridPane>
-   </children>
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.reppuhallinta.inventory_management_sys.controller.ReportViewController"
+      alignment="CENTER" spacing="20">
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
+
+    <!-- All Products in Stock -->
+    <VBox alignment="CENTER" spacing="10">
+        <Text text="All products in stock" styleClass="section-title"/>
+        <Button fx:id="GetAllStockProductReportButton"
+                onAction="#GetAllStockProductReportButtonAction"
+                text="Export" styleClass="button"/>
+    </VBox>
+
+    <!-- Transactions by Product ID -->
+    <VBox alignment="CENTER" spacing="10">
+        <Text text="Transactions by product ID" styleClass="section-title"/>
+        <TextField fx:id="transByIdField"
+                   promptText="Enter product ID..."
+                   maxWidth="200" styleClass="text-field"/>
+        <Button fx:id="transByIdButton"
+                onAction="#GetTransActionsByProductId"
+                text="Export" styleClass="button"/>
+    </VBox>
+
+    <!-- Transactions by User ID -->
+    <VBox alignment="CENTER" spacing="10">
+        <Text text="Transactions by user ID" styleClass="section-title"/>
+        <TextField fx:id="transByUserField"
+                   promptText="Enter user ID..."
+                   maxWidth="200" styleClass="text-field"/>
+        <Button fx:id="TransByUserButton"
+                onAction="#GetTransActionsByUserId"
+                text="Export" styleClass="button"/>
+    </VBox>
+
+    <!-- Transactions by Date -->
+    <VBox alignment="CENTER" spacing="10">
+        <Text text="Transactions by date" styleClass="section-title"/>
+        <DatePicker fx:id="TransByDateDate"
+                    promptText="Select date"
+                    maxWidth="200" styleClass="date-picker"/>
+        <Button fx:id="TransByDateButton"
+                onAction="#GetTransActionsByDate"
+                text="Export" styleClass="button"/>
+    </VBox>
 </VBox>

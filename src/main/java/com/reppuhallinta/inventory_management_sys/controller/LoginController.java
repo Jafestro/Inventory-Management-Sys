@@ -78,6 +78,6 @@ public class LoginController {
     @FXML
     public void handleLoginLink() {
         Stage stage = (Stage) registerLink.getScene().getWindow();
-        UIUtils.loadFXML("/Register.fxml", stage, "Register", 600, 400, null);
+        UIUtils.loadFXML("/Register.fxml", stage, "Register", 700, 500, null);
     }
 }

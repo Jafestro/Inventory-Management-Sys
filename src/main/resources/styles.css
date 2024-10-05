@@ -1,31 +1,105 @@
 .button {
-    -fx-background-color: #00A991;
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-padding: 10px;
+  -fx-background-color: #00a991;
+  -fx-text-fill: white;
+  -fx-font-size: 14px;
+  -fx-padding: 10px;
 }
 
 .button:hover {
-    -fx-background-color: #009580;
+  -fx-background-color: #009580;
 }
 
 .AnchorPane {
-    -fx-background-color: #F5F7F9;
+  -fx-background-color: #f5f7f9;
+}
+
+.text-field {
+  -fx-background-color: white;
+  -fx-border-color: #d1d5db;
+  -fx-border-width: 1px;
+  -fx-border-radius: 5px;
+  -fx-padding: 8px;
+  -fx-font-size: 14px;
+  -fx-text-fill: #333;
+}
+
+.text-field:focused {
+  -fx-border-color: #007f6d;
+}
+
+.text-field:prompt-text-visible {
+  -fx-text-fill: #b0b8c1;
 }
 
 .Hyperlink {
-    -fx-text-fill: #007F6D;
+  -fx-text-fill: #007f6d;
 }
 
 .VBox {
-    -fx-background-color: #F5F7F9;
+  -fx-background-color: #f5f7f9;
 }
 
 .TableView {
-    -fx-background-color: #E8EDF1;
+  -fx-background-color: #e8edf1;
 }
 
 .table-row-cell:selected {
-    -fx-background-color: #00A991;
-    -fx-text-fill: white;
+  -fx-background-color: #00a991;
+  -fx-text-fill: white;
+}
+
+.combo-box {
+  -fx-background-color: white;
+  -fx-border-color: #d1d5db;
+  -fx-border-width: 1px;
+  -fx-border-radius: 5px;
+  -fx-padding: 8px;
+  -fx-font-size: 14px;
+  -fx-text-fill: #333;
+}
+
+.combo-box:focused {
+  -fx-border-color: #007f6d;
+}
+
+.combo-box .list-cell {
+  -fx-background-color: white;
+  -fx-text-fill: #333; /* Ensure text is visible when not selected */
+}
+
+.combo-box .list-cell {
+  -fx-background-color: white;
+  -fx-text-fill: #333; /* Ensure text is visible when not selected */
+}
+
+.combo-box .list-cell:hover {
+  -fx-background-color: #e6f7f5; /* Light teal for hover */
+  -fx-text-fill: #007f6d; /* Change text color on hover */
+}
+
+.combo-box .list-cell:filled {
+  -fx-background-color: white;
+}
+
+.combo-box:hover {
+  -fx-border-color: #007f6d;
+}
+
+.combo-box .arrow {
+  -fx-background-color: transparent;
+}
+
+.combo-box .arrow-button {
+  -fx-background-color: transparent;
+}
+
+.combo-box-popup .list-view {
+  -fx-background-color: white;
+  -fx-border-color: #d1d5db;
+}
+
+.combo-box .combo-box-base {
+  -fx-background-color: white;
+  -fx-border-radius: 5px;
+  -fx-padding: 8px;
 }

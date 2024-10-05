@@ -34,10 +34,10 @@ public class Products {
     private int categoryId;
 
     @Column(name = "SupplierName")
-    private String supplierName; // New field
+    private String supplierName;
 
     @Column(name = "CategoryName")
-    private String categoryName; // New field
+    private String categoryName;
 
 
     public Products(String productName, BigDecimal price, int quantity, int supplierID, int categoryId) {

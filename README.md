@@ -1,3 +1,9 @@
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/bb2f3fc5-e002-49c5-8acc-48829643e81c" alt="V (4)" style="max-width: 100%; height: auto;" />
+</p>
+
+# <p align="center">Vectra Vault Inc.</p>
+
 # Inventory-Management-Sys
 School project
 

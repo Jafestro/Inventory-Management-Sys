@@ -15,9 +15,11 @@
     </stylesheets>
     <VBox alignment="CENTER" spacing="10.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <Label text="%label.username" />
-        <TextField fx:id="usernameField" promptText="Username" maxWidth="300.0"/>
+        <TextField fx:id="usernameField" promptText="%prompt.username" maxWidth="300.0"/>
         <Label text="%label.password" />
-        <PasswordField fx:id="passwordField" promptText="Password" maxWidth="300.0" />
+        <PasswordField fx:id="passwordField" promptText="%prompt.password" maxWidth="300.0" />
         <Button fx:id="loginButton" text="%button.login" onAction="#handleLogin" prefWidth="130.0" maxWidth="300.0" />
+        <Hyperlink styleClass="Hyperlink" fx:id="registerLink" text="%register.link" onAction="#handleLoginLink" />
+
     </VBox>
 </AnchorPane>

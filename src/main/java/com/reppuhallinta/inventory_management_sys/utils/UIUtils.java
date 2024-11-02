@@ -19,7 +19,7 @@ public class UIUtils {
     @Setter
     private static ApplicationContext springContext;
 
-    private static String localeString = "EN";
+    private static String localeString = "FI";
 
     public static void setLocale(String locale) {
         localeString = locale;
@@ -35,7 +35,7 @@ public class UIUtils {
                     UIUtils.class.getResource(fxmlPath)
             );
 
-            fxmlLoader.setResources(ResourceBundle.getBundle("bundle_EN", new Locale(localeString)));
+            fxmlLoader.setResources(ResourceBundle.getBundle("bundle_" + localeString, new Locale(localeString)));
 
             fxmlLoader.setControllerFactory(springContext::getBean);
 

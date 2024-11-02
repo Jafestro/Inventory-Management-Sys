@@ -21,25 +21,25 @@
             <VBox.margin>
                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </VBox.margin></TextField>
-            <Button fx:id="transactionButton" maxWidth="200.0" minWidth="200.0" onAction="#handleTransactionButtonAction" text="Transactions">
+            <Button fx:id="transactionButton" maxWidth="200.0" minWidth="200.0" onAction="#handleTransactionButtonAction" text="%button.transactions">
             <VBox.margin>
                <Insets />
             </VBox.margin></Button>
-            <Button fx:id="createProductButton" maxWidth="200.0" minWidth="200.0" onAction="#handleCreateProductButtonAction" text="Create Product">
+            <Button fx:id="createProductButton" maxWidth="200.0" minWidth="200.0" onAction="#handleCreateProductButtonAction" text="%button.createProduct">
             <VBox.margin>
                <Insets />
             </VBox.margin></Button>
-            <Button fx:id="editProductButton" maxWidth="200.0" minWidth="200.0" onAction="#handleEditProduct" text="Edit Product">
+            <Button fx:id="editProductButton" maxWidth="200.0" minWidth="200.0" onAction="#handleEditProduct" text="%button.editProduct">
             <VBox.margin>
                <Insets />
             </VBox.margin></Button>
-            <Button fx:id="deleteProductButton" maxWidth="200.0" minWidth="200.0" onAction="#handleDeleteProductButtonAction" text="Delete Product">
+            <Button fx:id="deleteProductButton" maxWidth="200.0" minWidth="200.0" onAction="#handleDeleteProductButtonAction" text="%button.deleteProduct">
             <VBox.margin>
                <Insets />
             </VBox.margin></Button>
-         <Button fx:id="reportsButton" minWidth="200.0" mnemonicParsing="false" onAction="#handleReportsButtonAction" text="Reports" />
-         <Button fx:id="refreshButton" layoutX="12.0" layoutY="168.0" maxWidth="200.0" minWidth="200.0" onAction="#handleRefreshButtonAction" text="Refresh" />
-         <Button fx:id="logOutButton" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#handleLogOutButtonAction" text="Logout">
+         <Button fx:id="reportsButton" minWidth="200.0" mnemonicParsing="false" onAction="#handleReportsButtonAction" text="%button.reports" />
+         <Button fx:id="refreshButton" layoutX="12.0" layoutY="168.0" maxWidth="200.0" minWidth="200.0" onAction="#handleRefreshButtonAction" text="%button.refresh" />
+         <Button fx:id="logOutButton" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#handleLogOutButtonAction" text="%button.logout">
             <VBox.margin>
                <Insets />
             </VBox.margin>
@@ -53,11 +53,11 @@
             <TableView styleClass="TableView" fx:id="productTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <columns>
                     <TableColumn fx:id="idColumn" prefWidth="113.0" text="ID" />
-                    <TableColumn fx:id="nameColumn" prefWidth="326.0" text="Name" />
-                    <TableColumn fx:id="quantityColumn" minWidth="0.0" text="Quantity" />
-                    <TableColumn fx:id="priceColumn" prefWidth="347.0" text="Price" />
-                    <TableColumn fx:id="supplierIDColumn" text="Supplier" />
-                    <TableColumn fx:id="categoryIDColumn" text="Category" />
+                    <TableColumn fx:id="nameColumn" prefWidth="326.0" text="%textcolumn.productName" />
+                    <TableColumn fx:id="quantityColumn" minWidth="0.0" text="%textcolumn.productQuantity" />
+                    <TableColumn fx:id="priceColumn" prefWidth="347.0" text="%textcolumn.productPrice" />
+                    <TableColumn fx:id="supplierIDColumn" text="%textcolumn.productSupplier" />
+                    <TableColumn fx:id="categoryIDColumn" text="%textcolumn.productCategory" />
                 </columns>
             <padding>
                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />

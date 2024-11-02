@@ -17,30 +17,30 @@
         <URL value="@styles.css" />
     </stylesheets>
     <GridPane alignment="CENTER" hgap="10" prefHeight="413.0" prefWidth="600.0" vgap="10">
-        <Label text="Product Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <TextField fx:id="productNameField" promptText="iPhone 16 Pro Max" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label text="%label.productName" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="productNameField" promptText="%prompt.productName" GridPane.columnIndex="0" GridPane.rowIndex="1" />
 
-        <Label text="Product Price" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <TextField fx:id="productPriceField" promptText="1399.99" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <Label text="%label.productPrice" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="productPriceField" promptText="%prompt.productPrice" GridPane.columnIndex="0" GridPane.rowIndex="3" />
 
-        <Label text="Product Quantity" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <TextField fx:id="quantityField" promptText="250" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <Label text="%label.productQuantity" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField fx:id="quantityField" promptText="%prompt.productQuantity" GridPane.columnIndex="0" GridPane.rowIndex="5" />
 
-        <Label text="Select Product Category" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <Label text="%label.selectProductCategory" GridPane.columnIndex="0" GridPane.rowIndex="6" />
         <VBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="7">
             <ComboBox fx:id="categoryComboBox" maxWidth="250.0" />
             <HBox spacing="10">
-                <TextField fx:id="newCategoryTextField" maxWidth="180.0" promptText="New Category Name" />
-                <Button fx:id="addNewCategoryButton" mnemonicParsing="false" onAction="#handleAddNewCategory" text="Add new" />
+                <TextField fx:id="newCategoryTextField" maxWidth="180.0" promptText="%text.newCategoryName" />
+                <Button fx:id="addNewCategoryButton" mnemonicParsing="false" onAction="#handleAddNewCategory" text="%button.addNew" />
             </HBox>
         </VBox>
 
-        <Label text="Select Product Supplier" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+        <Label text="%label.selectProductSupplier" GridPane.columnIndex="0" GridPane.rowIndex="8" />
         <VBox spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="9">
             <ComboBox fx:id="supplierComboBox" maxWidth="250.0" />
             <HBox spacing="10">
-                <TextField fx:id="newSupplierTextField" maxWidth="180.0" promptText="New Supplier Name" />
-                <Button fx:id="AddNewSupplierButton" mnemonicParsing="false" onAction="#handleAddNewSupplier" text="Add new" />
+                <TextField fx:id="newSupplierTextField" maxWidth="180.0" promptText="%text.newSupplierName" />
+                <Button fx:id="AddNewSupplierButton" mnemonicParsing="false" onAction="#handleAddNewSupplier" text="%button.addNew" />
             </HBox>
         </VBox>
 
@@ -65,7 +65,7 @@
         </rowConstraints>
     </GridPane>
 
-    <Button fx:id="createButton" alignment="CENTER" onAction="#handleCreateProduct" prefHeight="40.0" prefWidth="130.0" text="Create Product">
+    <Button fx:id="createButton" alignment="CENTER" onAction="#handleCreateProduct" prefHeight="40.0" prefWidth="130.0" text="%button.createProduct">
         <VBox.margin>
             <Insets top="15.0" />
         </VBox.margin>

@@ -2,7 +2,9 @@ package com.reppuhallinta.inventory_management_sys.controller;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -188,8 +190,9 @@ public class TransactionViewController extends LogoutController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/EditTransaction.fxml"));
             fxmlLoader.setControllerFactory(UIUtils.getSpringContext()::getBean);
+            String locale = UIUtils.getLocale();
+            fxmlLoader.setResources(ResourceBundle.getBundle("bundle_" + locale, new Locale(locale)));
             Parent root = fxmlLoader.load();
-
             EditTransactionController editTransactionController = fxmlLoader.getController();
             editTransactionController.setTransaction(selectedTransaction);
 

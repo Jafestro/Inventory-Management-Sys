@@ -8,6 +8,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+
+import org.apache.tomcat.util.file.ConfigurationSource.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -17,6 +19,8 @@ import javafx.fxml.FXML;
 import session.CustomSessionManager;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 @Controller
 public class EditTransactionController {
@@ -61,8 +65,17 @@ public class EditTransactionController {
             usernameComboBox.getItems().add(user.getUsername());
         }
 
-        transactionTypeComboBox.getItems().add(transactionType.ADD.name());
-        transactionTypeComboBox.getItems().add(transactionType.UPDATE.name());
+        String localeString = UIUtils.getLocale();
+
+        ResourceBundle bundle = ResourceBundle.getBundle("bundle_" + localeString, new Locale(localeString));
+
+        transactionTypeComboBox.getItems().add(bundle.getString("transaction.type.add"));
+        transactionTypeComboBox.getItems().add(bundle.getString("transaction.type.update"));
+
+        
+
+        //transactionTypeComboBox.getItems().add(transactionType.ADD.name());
+        //transactionTypeComboBox.getItems().add(transactionType.UPDATE.name());
 
         user = (User) CustomSessionManager.getAttribute("user");
 

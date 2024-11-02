@@ -2,6 +2,8 @@ package com.reppuhallinta.inventory_management_sys.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -212,6 +214,8 @@ public class ProductViewController extends LogoutController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/EditProduct.fxml"));
             fxmlLoader.setControllerFactory(UIUtils.getSpringContext()::getBean);
+            String locale = UIUtils.getLocale();
+            fxmlLoader.setResources(ResourceBundle.getBundle("bundle_" + locale, new Locale(locale)));
             Parent root = fxmlLoader.load();
 
             EditProductController editProductController = fxmlLoader.getController();

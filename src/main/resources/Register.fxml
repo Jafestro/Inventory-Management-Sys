@@ -15,17 +15,17 @@
         <URL value="@styles.css"/>
     </stylesheets>
     <VBox alignment="CENTER" spacing="10.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-        <Label text="First name" />
-        <TextField fx:id="firstnameField" promptText="First name" maxWidth="300.0" />
-        <Label text="Last name" />
-        <TextField fx:id="lastnameField" promptText="Last name" maxWidth="300.0" />
-        <Label text="Username" />
-        <TextField fx:id="usernameField" promptText="Username" maxWidth="300.0"/>
-        <Label text="Password" />
-        <PasswordField fx:id="passwordField" promptText="Password" maxWidth="300.0" />
-        <Label text="Confirm password" />
-        <PasswordField fx:id="confirmPasswordField" promptText="Confirm password" maxWidth="300.0" />
-        <Button fx:id="registerButton" text="Register" onAction="#handleRegister" prefWidth="130.0" maxWidth="300.0" />
-        <Hyperlink styleClass="Hyperlink" fx:id="loginLink" text="Are you a user already?" onAction="#handleLoginLink" />
+        <Label text="%label.firstName" />
+        <TextField fx:id="firstnameField" promptText="%prompt.firstName" maxWidth="300.0" />
+        <Label text="%label.lastName" />
+        <TextField fx:id="lastnameField" promptText="%prompt.lastName" maxWidth="300.0" />
+        <Label text="%label.username" />
+        <TextField fx:id="usernameField" promptText="%prompt.username" maxWidth="300.0"/>
+        <Label text="%label.password" />
+        <PasswordField fx:id="passwordField" promptText="%prompt.password" maxWidth="300.0" />
+        <Label text="%label.confirmPassword" />
+        <PasswordField fx:id="confirmPasswordField" promptText="%prompt.confirmPassword" maxWidth="300.0" />
+        <Button fx:id="registerButton" text="%button.register" onAction="#handleRegister" prefWidth="130.0" maxWidth="300.0" />
+        <Hyperlink styleClass="Hyperlink" fx:id="loginLink" text="%login.link" onAction="#handleLoginLink" />
     </VBox>
 </AnchorPane>

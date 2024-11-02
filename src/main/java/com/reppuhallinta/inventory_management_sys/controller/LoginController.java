@@ -10,6 +10,9 @@ import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -30,13 +33,6 @@ public class LoginController {
 
     @FXML
     private Hyperlink registerLink;
-
-
-
-    public void initialize() {
-        usernameField.setPromptText("Enter your username");
-        passwordField.setPromptText("Enter your password");
-    }
 
     @FXML
     public void handleLogin() {

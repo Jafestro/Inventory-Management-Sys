@@ -49,8 +49,33 @@ public class UIUtils {
             System.out.println("Scene " + scene);
             System.out.println("Stage " + stage);
 
+            ResourceBundle bundle = ResourceBundle.getBundle("bundle_" + localeString, new Locale(localeString));
+
+            switch(title) {
+                case "Login":
+                    stage.setTitle(bundle.getString("title.login"));
+                    break;
+                case "Register":
+                    stage.setTitle(bundle.getString("title.register"));
+                    break;
+                case "Products":
+                    stage.setTitle(bundle.getString("title.products"));
+                    break;
+                case "Create Product":
+                    stage.setTitle(bundle.getString("title.createProduct"));
+                    break;
+                case "Edit Product":
+                    stage.setTitle(bundle.getString("title.editProduct"));
+                    break;
+                case "Transactions":
+                    stage.setTitle(bundle.getString("title.transactions"));
+                    break;
+                case "Reports":
+                    stage.setTitle(bundle.getString("title.reports"));
+                    break;
+            }
+
             stage.setScene(scene);
-            stage.setTitle(title);
             stage.show();
         } catch (IOException e) {
             System.out.println("Error loading FXML " + fxmlPath + ": " + e.getMessage());

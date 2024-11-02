@@ -4,14 +4,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 <?import java.net.URL?>
+
 <VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.reppuhallinta.inventory_management_sys.controller.ReportViewController"
       alignment="CENTER" spacing="20">
@@ -21,42 +17,42 @@
 
     <!-- All Products in Stock -->
     <VBox alignment="CENTER" spacing="10">
-        <Text text="All products in stock" styleClass="section-title"/>
+        <Text text="%text.allProductsInStock" styleClass="section-title"/>
         <Button fx:id="GetAllStockProductReportButton"
                 onAction="#GetAllStockProductReportButtonAction"
-                text="Export" styleClass="button"/>
+                text="%button.export" styleClass="button"/>
     </VBox>
 
     <!-- Transactions by Product ID -->
     <VBox alignment="CENTER" spacing="10">
-        <Text text="Transactions by product ID" styleClass="section-title"/>
+        <Text text="%text.transactionsByProductId" styleClass="section-title"/>
         <TextField fx:id="transByIdField"
-                   promptText="Enter product ID..."
+                   promptText="%prompt.productQuantity"
                    maxWidth="200" styleClass="text-field"/>
         <Button fx:id="transByIdButton"
                 onAction="#GetTransActionsByProductId"
-                text="Export" styleClass="button"/>
+                text="%button.export" styleClass="button"/>
     </VBox>
 
     <!-- Transactions by User ID -->
     <VBox alignment="CENTER" spacing="10">
-        <Text text="Transactions by user ID" styleClass="section-title"/>
+        <Text text="%text.transactionsByUserId" styleClass="section-title"/>
         <TextField fx:id="transByUserField"
-                   promptText="Enter user ID..."
+                   promptText="%prompt.username"
                    maxWidth="200" styleClass="text-field"/>
         <Button fx:id="TransByUserButton"
                 onAction="#GetTransActionsByUserId"
-                text="Export" styleClass="button"/>
+                text="%button.export" styleClass="button"/>
     </VBox>
 
     <!-- Transactions by Date -->
     <VBox alignment="CENTER" spacing="10">
-        <Text text="Transactions by date" styleClass="section-title"/>
+        <Text text="%text.transactionsByDate" styleClass="section-title"/>
         <DatePicker fx:id="TransByDateDate"
-                    promptText="Select date"
+                    promptText="%text.transactionsByDate"
                     maxWidth="200" styleClass="date-picker"/>
         <Button fx:id="TransByDateButton"
                 onAction="#GetTransActionsByDate"
-                text="Export" styleClass="button"/>
+                text="%button.export" styleClass="button"/>
     </VBox>
 </VBox>

@@ -10,18 +10,33 @@ import lombok.Setter;
 import org.springframework.context.ApplicationContext;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class UIUtils {
     
     @Setter
     private static ApplicationContext springContext;
 
+    private static String localeString = "EN";
+
+    public static void setLocale(String locale) {
+        localeString = locale;
+    }
+
+    public static String getLocale() {
+        return localeString;
+    }
+
     public static void loadFXML(String fxmlPath, Stage stage, String title, double v, double v1, Object controller) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(
                     UIUtils.class.getResource(fxmlPath)
             );
+
+            fxmlLoader.setResources(ResourceBundle.getBundle("bundle_EN", new Locale(localeString)));
+
             fxmlLoader.setControllerFactory(springContext::getBean);
 
             if (controller != null) {

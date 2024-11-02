@@ -19,7 +19,7 @@ public class InventoryManagementSysApplication extends Application {
         UIUtils.setSpringContext(springContext);
     }
 
-    @Override
+@Override
     public void start(Stage primaryStage) {
         UIUtils.loadFXML("/Login.fxml", primaryStage, "Login", 400, 350, null);
     }

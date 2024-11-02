@@ -163,7 +163,7 @@ void testTransaction() {
     newTransaction.setQuantity(10);
     newTransaction.setTransactionDate(new Date());
     newTransaction.setTransactionType("SALE");
-    newTransaction.setUserId(3); // Set appropriate user ID
+    newTransaction.setUserId(133); // Set appropriate user ID
 
     Transaction savedTransaction = transactionService.createTransaction(newTransaction);
     //log the saved transaction

@@ -1,25 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Hyperlink?>
-<?import java.net.URL?>
-<AnchorPane styleClass="AnchorPane" xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.reppuhallinta.inventory_management_sys.controller.LoginController">
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<AnchorPane prefWidth="174.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.reppuhallinta.inventory_management_sys.controller.LoginController">
     <stylesheets>
-        <URL value="@styles.css"/>
+        <URL value="@styles.css" />
     </stylesheets>
-    <VBox alignment="CENTER" spacing="10.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+    <VBox alignment="CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Label text="%label.username" />
-        <TextField fx:id="usernameField" promptText="%prompt.username" maxWidth="300.0"/>
+        <TextField fx:id="usernameField" maxWidth="300.0" promptText="%prompt.username" />
         <Label text="%label.password" />
-        <PasswordField fx:id="passwordField" promptText="%prompt.password" maxWidth="300.0" />
-        <Button fx:id="loginButton" text="%button.login" onAction="#handleLogin" prefWidth="130.0" maxWidth="300.0" />
-        <Hyperlink styleClass="Hyperlink" fx:id="registerLink" text="%register.link" onAction="#handleLoginLink" />
+        <PasswordField fx:id="passwordField" maxWidth="300.0" promptText="%prompt.password" />
+        <Button fx:id="loginButton" maxWidth="300.0" onAction="#handleLogin" prefWidth="130.0" text="%button.login" />
+        <Hyperlink fx:id="registerLink" onAction="#handleLoginLink" styleClass="Hyperlink" text="%register.link" />
+      <ChoiceBox fx:id="languageChoiceBox" prefWidth="150.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </ChoiceBox>
 
     </VBox>
 </AnchorPane>

@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -33,6 +34,50 @@ public class LoginController {
 
     @FXML
     private Hyperlink registerLink;
+
+    @FXML
+    private ChoiceBox languageChoiceBox;
+
+
+    @FXML
+    public void initialize (){
+        languageChoiceBox.getItems().addAll("English", "Finnish", "Japanese", "Azerbaijani");
+        switch (UIUtils.getLocale()) {
+            case "EN":
+                languageChoiceBox.setValue("English");
+                break;
+            case "FI":
+                languageChoiceBox.setValue("Finnish");
+                break;
+            case "JA":
+                languageChoiceBox.setValue("Japanese");
+                break;
+            case "AZ":
+                languageChoiceBox.setValue("Azerbaijani");
+                break;
+        }
+
+        languageChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals("English")) {
+                UIUtils.setLocale("EN");
+            } else if (newValue.equals("Finnish")) {
+                UIUtils.setLocale("FI");
+            } else if (newValue.equals("Japanese")) {
+                UIUtils.setLocale("JP");
+            } else if (newValue.equals("Azerbaijani")) {
+                UIUtils.setLocale("AZ");
+            } else {
+                UIUtils.setLocale("EN");
+            }
+            reloadLoginForm();
+        });
+    }
+
+
+    private void reloadLoginForm() {
+        Stage stage = (Stage) languageChoiceBox.getScene().getWindow();
+        UIUtils.loadFXML("/Login.fxml", stage, "Login", 400, 350, null);
+    }
 
     @FXML
     public void handleLogin() {

@@ -19,7 +19,7 @@ public class UIUtils {
     @Setter
     private static ApplicationContext springContext;
 
-    private static String localeString = "FI";
+    private static String localeString = "EN";
 
     public static void setLocale(String locale) {
         localeString = locale;

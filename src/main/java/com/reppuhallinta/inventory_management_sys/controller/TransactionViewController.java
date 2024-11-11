@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import javafx.scene.control.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -25,13 +26,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -79,6 +73,9 @@ public class TransactionViewController extends LogoutController {
     private ProgressBar autoRefreshProgressBar;
 
     @FXML
+    private ChoiceBox languageChoiceBox;
+
+    @FXML
     public void initialize() {
 
         String sessionId = CustomSessionManager.getSessionId();
@@ -120,6 +117,8 @@ public class TransactionViewController extends LogoutController {
         );
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+
+        UIUtils.setLanguageChoiceBox(languageChoiceBox, "Transactions", "/Transactions.fxml", 1050, 600);
     }
 
     private <T> void addSortEventHandler(TableColumn<Transaction, T> column) {

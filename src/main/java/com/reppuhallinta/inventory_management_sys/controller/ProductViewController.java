@@ -1,6 +1,7 @@
 package com.reppuhallinta.inventory_management_sys.controller;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -86,6 +87,11 @@ public class ProductViewController extends LogoutController {
     @FXML
     private ProgressBar autoRefreshProgressBar;
 
+    @FXML
+    private ChoiceBox<String> languageChoiceBox;
+
+    private String language;
+
 
     @FXML
     public void initialize() {
@@ -134,6 +140,8 @@ public class ProductViewController extends LogoutController {
         timeline.play();
 
         scheduler.scheduleAtFixedRate(this::checkStockLevels, 0, 1, TimeUnit.MINUTES);
+
+        UIUtils.setLanguageChoiceBox(languageChoiceBox, "Products", "/Products.fxml", 1050, 600);
     }
   
     private <T> void addSortEventHandler(TableColumn<Products, T> column) {

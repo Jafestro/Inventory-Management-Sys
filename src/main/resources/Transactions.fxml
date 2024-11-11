@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import java.net.URL?>
 
+<?import javafx.scene.control.ChoiceBox?>
 <VBox styleClass="VBox" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.reppuhallinta.inventory_management_sys.controller.TransactionViewController">
     <stylesheets>
         <URL value="@styles.css"/>
@@ -33,6 +34,14 @@
             <HBox.margin>
                 <Insets right="10.0" />
             </HBox.margin>
+            <ChoiceBox fx:id="languageChoiceBox" maxWidth="200.0" minWidth="200.0" prefWidth="150.0">
+                <opaqueInsets>
+                    <Insets />
+                </opaqueInsets>
+                <VBox.margin>
+                    <Insets bottom="10.0" />
+                </VBox.margin>
+            </ChoiceBox>
         </VBox>
         <AnchorPane HBox.hgrow="ALWAYS">
             <TableView styleClass="TableView" fx:id="transactionTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

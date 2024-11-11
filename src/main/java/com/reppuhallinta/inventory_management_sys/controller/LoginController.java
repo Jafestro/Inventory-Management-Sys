@@ -40,58 +40,12 @@ public class LoginController {
     @FXML
     private ChoiceBox languageChoiceBox;
 
-    private static String language;
+    private final String titleToSet = "Login";
 
 
     @FXML
     public void initialize (){
-        language = UIUtils.getLocale();
-        List <String> languages = List.of();
-        if (language.equals("FI")) {
-            languages = Arrays.asList("Englanti", "Suomi", "Japani", "Azerbaijan");
-        } else if (language.equals("EN")){
-            languages = Arrays.asList("English", "Finnish", "Japanese", "Azerbaijani");
-        } else if (language.equals("AZ")) {
-            languages = Arrays.asList("İngilis dili","Fin dili", "Yapon dili", "Azərbaycan dili");
-        } else if (language.equals("JP")) {
-            languages = Arrays.asList("英語", "フィンランド語", "日本語", "アゼルバイジャン語");
-        }
-        languageChoiceBox.getItems().addAll(languages);
-        switch (UIUtils.getLocale()) {
-            case "EN":
-                languageChoiceBox.setValue("English");
-                break;
-            case "FI":
-                languageChoiceBox.setValue("Suomi");
-                break;
-            case "JP":
-                languageChoiceBox.setValue("日本語");
-                break;
-            case "AZ":
-                languageChoiceBox.setValue("Azərbaycan dili");
-                break;
-        }
-
-        languageChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.equals("English") || newValue.equals("Englanti") || newValue.equals("英語") || newValue.equals("İngilis dili"))  {
-                UIUtils.setLocale("EN");
-            } else if (newValue.equals("Finnish") || newValue.equals("Suomi") || newValue.equals("フィンランド語") || newValue.equals("Fin dili")) {
-                UIUtils.setLocale("FI");
-            } else if (newValue.equals("Japanese") || newValue.equals("Japani") || newValue.equals("日本語") || newValue.equals("Yapon dili")) {
-                UIUtils.setLocale("JP");
-            } else if (newValue.equals("Azerbaijani") || newValue.equals("Azerbaijan") || newValue.equals("アゼルバイジャン語") || newValue.equals("Azərbaycan dili")) {
-                UIUtils.setLocale("AZ");
-            } else {
-                UIUtils.setLocale("EN");
-            }
-            reloadLoginForm();
-        });
-    }
-
-
-    private void reloadLoginForm() {
-        Stage stage = (Stage) languageChoiceBox.getScene().getWindow();
-        UIUtils.loadFXML("/Login.fxml", stage, "Login", 400, 350, null);
+        UIUtils.setLanguageChoiceBox(languageChoiceBox, titleToSet, "/Login.fxml", 400, 350);
     }
 
     @FXML

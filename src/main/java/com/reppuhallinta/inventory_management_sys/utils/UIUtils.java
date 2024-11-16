@@ -1,5 +1,13 @@
 package com.reppuhallinta.inventory_management_sys.utils;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
+import org.springframework.context.ApplicationContext;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -8,13 +16,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 import lombok.Setter;
-import org.springframework.context.ApplicationContext;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.ResourceBundle;
 
 public class UIUtils {
     
@@ -25,7 +26,9 @@ public class UIUtils {
 
     public static void setLocale(String locale) {
         localeString = locale;
+        LanguageContext.setLanguage(locale); // Update the ThreadLocal context
     }
+    
 
     public static String getLocale() {
         return localeString;

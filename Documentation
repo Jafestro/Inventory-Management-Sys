@@ -6,13 +6,11 @@ Clone the Repository
 Database Setup
 Run the Application
 Technologies Used
-Diagrams
 Use Case Diagram
 Activity Diagram
-Best Practices
 Conclusion
 Introduction
-The Inventory Management System is a powerful tool for managing product inventories, tracking transactions, and automating reorders. Designed for efficiency and scalability, the system supports multiple users with varying levels of permissions.
+The Inventory Management System is a school project designed to streamline inventory management processes. It allows users to efficiently manage item catalogs, track inventory changes, and automate reordering. The system provides features to accommodate both administrators and regular users, making it versatile for various needs.
 
 Main Features
 Product Management:
@@ -20,17 +18,16 @@ Product Management:
 Add, delete, and edit products in the inventory.
 Transaction Tracking:
 
-Monitor transactions by product.
-View changes made and who made them.
+Monitor transactions by product and see who made changes.
 Automated Reordering:
 
-Option to automate reorders from suppliers.
+Enable automated reordering from suppliers.
 Reporting:
 
-Export stock change reports to your computer.
+Export stock change reports directly to your computer.
 User Permissions:
 
-Admins have enhanced permissions compared to regular users.
+Distinguish between admins (with enhanced permissions) and regular users.
 Getting Started
 Clone the Repository
 To begin, clone the repository using the following command:
@@ -40,14 +37,16 @@ Kopioi koodi
 git clone https://github.com/Jafestro/Inventory-Management-Sys.git
 Database Setup
 Create a database:
+
 sql
 Kopioi koodi
 CREATE DATABASE {yourdatabasename};
 USE {yourdatabasename};
-Apply the provided SQL script to add necessary tables and columns.
+Add the required tables: Use THIS SQL Script to add the necessary tables and columns.
+
 Set Up Database Connection
-Locate the application.properties file in the project.
-Fill in your database credentials:
+Locate the application.properties file in the project directory.
+Enter the correct database information:
 Database name
 Username
 Password
@@ -65,6 +64,8 @@ bash
 Kopioi koodi
 mvn clean javafx:run
 Technologies Used
+The Inventory Management System was built using the following technologies:
+
 Java: Core programming language.
 Spring Boot: Framework for backend development.
 Maven: Build automation tool.
@@ -73,9 +74,90 @@ MariaDB: Database for storing inventory data.
 JUnit: Framework for testing.
 Jacoco: Code coverage tool.
 Jenkins: Continuous integration and delivery platform.
-Diagrams
 Use Case Diagram
-(Add the image or a link to the Use Case Diagram here.)
+
 
 Activity Diagram
-(Add the image or a link to the Activity Diagram here.)
+
+
+Conclusion
+The Inventory Management System is a robust and efficient tool for managing inventory operations.
+Its features are designed to cater to various needs, from product management to reporting and automation.
+By following the setup instructions and utilizing the provided diagrams, users can easily deploy and operate the system.
+
+THIS IS AN EXAMPLE FOR ME WHEN I START DOING DOCUMENTATION : 
+
+1. Detailed Introduction
+Expand on the introduction by describing:
+
+The problem the software solves.
+Who the target users are (e.g., businesses, individuals).
+What makes this software unique or effective.
+Example:
+
+The Inventory Management System (IMS) is designed to help businesses manage their inventory efficiently. It automates the process of tracking products, generating reports, and managing user permissions. The system is especially useful for small to medium-sized enterprises looking to streamline their operations without complex software.
+
+2. System Requirements
+Include the hardware and software requirements needed to run the system.
+
+Example:
+
+Operating System: Windows 10 or later, macOS, Linux
+Java Version: Java 11+
+Database: MariaDB 10.5 or later
+RAM: Minimum 2 GB
+Storage: Minimum 500 MB free space
+3. Features in Detail
+Expand each feature with examples or explanations of how they work.
+
+Example:
+
+Automated Reordering:
+When inventory levels drop below a predefined threshold, the system can automatically send a reorder request to the supplier. This feature can be toggled on or off per product.
+User Permissions:
+Admins can add or delete users, edit inventory settings, and access advanced reporting features. Regular users can only view inventory and add transactions.
+4. Usage Instructions
+Include examples or scenarios where the software might be used:
+
+How to add a product.
+How to generate a report.
+How to switch user roles.
+Example:
+
+To add a new product, navigate to the "Products" tab, click "Add Product," and fill in the required fields (e.g., name, quantity, supplier). Once saved, the product will appear in the inventory list.
+
+5. Testing and Debugging Information
+Provide instructions on:
+
+How to test the software.
+What to do if errors occur (e.g., common issues and solutions).
+How to run test cases using JUnit.
+Example:
+
+To test the application, ensure that all dependencies are installed. Run mvn test to execute unit tests. Check the test-reports folder for detailed results.
+
+6. Additional Diagrams
+Include more diagrams for better understanding:
+
+Class Diagram: Shows relationships between classes in the code.
+Sequence Diagram: Demonstrates the flow of actions (e.g., adding a product).
+7. Contribution Guidelines
+If this project is open to contributions, add:
+
+How others can contribute (e.g., submitting issues, pull requests).
+Coding standards and style guides.
+Example:
+
+Contributions are welcome! Please fork the repository, make changes, and submit a pull request. Ensure your code follows our style guide (see CONTRIBUTING.md).
+
+8. FAQs
+Include answers to frequently asked questions:
+
+What if I forget my admin password?
+Can I use this system for multiple warehouses?
+9. Future Enhancements
+Mention planned updates or features:
+
+Integration with cloud storage.
+Mobile app support.
+Advanced analytics.

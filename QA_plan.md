@@ -89,7 +89,7 @@ Non-functional testing ensures that the application performs well under various 
 | **Task**               | **Description**                                                                                   | **Responsibility**   | **Due Date**  | **Status**  |
 |------------------------|---------------------------------------------------------------------------------------------------|----------------------|---------------|-------------|
 | Performance Testing     | Evaluate the speed, responsiveness, and stability of the application under load.                  | Ville Timonen           | 29/11/2024  | Pending     |
-| Load Testing            | Simulate multiple users accessing the system simultaneously to test its behavior under stress.    | Jafar Jafarov, Jonne Koivisto, Jasper Kaira              | 18/11/2024  | Pending     |
+| Load Testing            | Simulate multiple users accessing the system simultaneously to test its behavior under stress.    | Jafar Jafarov, Jonne Koivisto, Jasper Kaira              | 29/11/2024  | Pending     |
 | Security Testing        | Identify and mitigate potential vulnerabilities in the software.                                  | Jasper Kaira  | 29/11/2024  | Pending     |
 | Compatibility Testing   | Test the software on different browsers, devices, and operating systems to ensure compatibility.   | Jonne Koivisto, Patrik Hyytiäinen, Jafar Jafarov              | 18/11/2024  | Done    |
 | Usability Testing       | Evaluate the ease of use and overall user experience of the application.                          | Ville Timonen     | 29/11/2024  | Pending     |

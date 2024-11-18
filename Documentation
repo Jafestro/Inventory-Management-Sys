@@ -1,0 +1,81 @@
+Table of Contents
+Introduction
+Main Features
+Getting Started
+Clone the Repository
+Database Setup
+Run the Application
+Technologies Used
+Diagrams
+Use Case Diagram
+Activity Diagram
+Best Practices
+Conclusion
+Introduction
+The Inventory Management System is a powerful tool for managing product inventories, tracking transactions, and automating reorders. Designed for efficiency and scalability, the system supports multiple users with varying levels of permissions.
+
+Main Features
+Product Management:
+
+Add, delete, and edit products in the inventory.
+Transaction Tracking:
+
+Monitor transactions by product.
+View changes made and who made them.
+Automated Reordering:
+
+Option to automate reorders from suppliers.
+Reporting:
+
+Export stock change reports to your computer.
+User Permissions:
+
+Admins have enhanced permissions compared to regular users.
+Getting Started
+Clone the Repository
+To begin, clone the repository using the following command:
+
+bash
+Kopioi koodi
+git clone https://github.com/Jafestro/Inventory-Management-Sys.git
+Database Setup
+Create a database:
+sql
+Kopioi koodi
+CREATE DATABASE {yourdatabasename};
+USE {yourdatabasename};
+Apply the provided SQL script to add necessary tables and columns.
+Set Up Database Connection
+Locate the application.properties file in the project.
+Fill in your database credentials:
+Database name
+Username
+Password
+Run the Application
+To start the application, execute the following commands:
+
+Build the project:
+
+bash
+Kopioi koodi
+mvn clean install
+Run the application:
+
+bash
+Kopioi koodi
+mvn clean javafx:run
+Technologies Used
+Java: Core programming language.
+Spring Boot: Framework for backend development.
+Maven: Build automation tool.
+JavaFX: For building the graphical user interface.
+MariaDB: Database for storing inventory data.
+JUnit: Framework for testing.
+Jacoco: Code coverage tool.
+Jenkins: Continuous integration and delivery platform.
+Diagrams
+Use Case Diagram
+(Add the image or a link to the Use Case Diagram here.)
+
+Activity Diagram
+(Add the image or a link to the Activity Diagram here.)

@@ -8,6 +8,7 @@
 <?import javafx.scene.text.Text?>
 <?import java.net.URL?>
 
+<?import javafx.scene.control.ChoiceBox?>
 <VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.reppuhallinta.inventory_management_sys.controller.ReportViewController"
       alignment="CENTER" spacing="20">
@@ -37,9 +38,11 @@
     <!-- Transactions by User ID -->
     <VBox alignment="CENTER" spacing="10">
         <Text text="%text.transactionsByUserId" styleClass="section-title"/>
-        <TextField fx:id="transByUserField"
-                   promptText="%prompt.username"
-                   maxWidth="200" styleClass="text-field"/>
+<!--        <TextField fx:id="transByUserField"-->
+<!--                   promptText="%prompt.username"-->
+<!--                   maxWidth="200" styleClass="text-field"/>-->
+            <ChoiceBox fx:id="transByUserChoiceBox" />
+
         <Button fx:id="TransByUserButton"
                 onAction="#GetTransActionsByUserId"
                 text="%button.export" styleClass="button"/>

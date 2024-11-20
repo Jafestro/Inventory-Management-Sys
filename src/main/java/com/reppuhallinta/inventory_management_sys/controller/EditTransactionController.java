@@ -72,17 +72,11 @@ public class EditTransactionController {
         transactionTypeComboBox.getItems().add(bundle.getString("transaction.type.add"));
         transactionTypeComboBox.getItems().add(bundle.getString("transaction.type.update"));
 
-        
-
         //transactionTypeComboBox.getItems().add(transactionType.ADD.name());
         //transactionTypeComboBox.getItems().add(transactionType.UPDATE.name());
 
         user = (User) CustomSessionManager.getAttribute("user");
 
-        if (user == null) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "ERROR", null, "No user logged in");
-            return;
-        }
     }
 
     @FXML
@@ -92,7 +86,7 @@ public class EditTransactionController {
         String username = usernameComboBox.getValue();
         
         if (quantity.isEmpty() || transactionType == null || username == null) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "ERROR", null, "Please fill in all fields");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.fillAllFields");
             return;
         }
 
@@ -101,19 +95,18 @@ public class EditTransactionController {
         try {
             quantityInt = Integer.parseInt(quantity);
         } catch (NumberFormatException e) {
-            UIUtils.showAlert(Alert.AlertType.ERROR,"Error", null, "Quantity must be a valid number");
+            UIUtils.showAlert(Alert.AlertType.ERROR,"alert.error", null, "error.quantityValidNumber");
             return;
         }
 
         if (quantityInt <= 0) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Quantity must be above zero");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.invalidQuantity");
             return;
         }
 
         User newUser = userService.findUserByUsername(username);
 
         if (newUser == null) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "ERROR", null, "User does not exist");
             return;
         }
 
@@ -126,7 +119,7 @@ public class EditTransactionController {
 
         System.out.println("Transaction updated successfully: " + transaction);
 
-        UIUtils.showAlert(Alert.AlertType.INFORMATION, "INFORMATION", null, "Transaction updated successfully");
+        UIUtils.showAlert(Alert.AlertType.INFORMATION, "alert.success", null, "success.transactionUpdated");
 
         UIUtils.closeWindow(editButton);
     }

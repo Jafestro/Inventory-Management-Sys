@@ -182,7 +182,7 @@ public class TransactionViewController extends LogoutController {
     private void handleEditTransaction() {
         Transaction selectedTransaction = transactionTable.getSelectionModel().getSelectedItem();
         if (selectedTransaction == null) {
-            UIUtils.showAlert(Alert.AlertType.WARNING, "Warning", null, "Please select a transaction to edit");
+            UIUtils.showAlert(Alert.AlertType.WARNING, "alert.warning", null, "warning.selectTransactionEdit");
             return;
         }
 

@@ -87,10 +87,6 @@ public class EditProductController {
         System.out.println("Session ID in ProductViewController: " + sessionId);
 
         user = (User) CustomSessionManager.getAttribute("user");
-
-        if (user == null) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "User Error", null, "Please log in!");
-        }
     }
 
     private void prefillFields() {
@@ -128,10 +124,11 @@ public class EditProductController {
         try {
             price = new BigDecimal(productPrice);
             if (price.compareTo(BigDecimal.ZERO) <= 0) {
-                UIUtils.showAlert(Alert.AlertType.ERROR, "Validation Error", null, "Product price must be positive.");
+                UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.productPriceMustBePositive");
+                return;
             }
         } catch (NumberFormatException e) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "Validation Error", null, "Product price must be a number.");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.productPriceMustBeNumeric");
             return;
         }
 
@@ -140,10 +137,11 @@ public class EditProductController {
         try {
             quantityInt = Integer.parseInt(quantity);
             if (quantityInt < 0) {
-                UIUtils.showAlert(Alert.AlertType.ERROR, "Validation Error", null, "Product quantity must be non-negative.");
+                UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.productQuantityCannotBeNegative");
+                return;
             }
         } catch (NumberFormatException e) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "Validation Error", null, "Product quantity must be a number.");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.productQuantityMustBeNumeric");
             return;
         }
 
@@ -170,8 +168,6 @@ public class EditProductController {
             UIUtils.showConfirmationDialog("Product Edit Successful", null, "Product has been edited!");
             Stage currentStage = (Stage) editButton.getScene().getWindow();
             currentStage.close();
-        } else {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "User Error", null, "Please log in!");
         }
     }
 

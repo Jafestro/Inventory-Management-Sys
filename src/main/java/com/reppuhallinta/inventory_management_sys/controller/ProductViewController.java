@@ -215,7 +215,7 @@ public class ProductViewController extends LogoutController {
     private void handleEditProduct() {
         Products selectedProduct = productTable.getSelectionModel().getSelectedItem();
         if (selectedProduct == null) {
-            UIUtils.showAlert(AlertType.WARNING, "Warning", null, "Please select a product to edit");
+            UIUtils.showAlert(AlertType.WARNING, "alert.warning", null, "warning.selectProducttoEdit");
             return;
         }
 

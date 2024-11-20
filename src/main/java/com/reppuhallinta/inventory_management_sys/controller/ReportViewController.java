@@ -2,12 +2,12 @@ package com.reppuhallinta.inventory_management_sys.controller;
 
 import com.reppuhallinta.inventory_management_sys.model.Products;
 import com.reppuhallinta.inventory_management_sys.model.Transaction;
+import com.reppuhallinta.inventory_management_sys.model.User;
 import com.reppuhallinta.inventory_management_sys.service.ProductService;
 import com.reppuhallinta.inventory_management_sys.service.TransactionService;
+import com.reppuhallinta.inventory_management_sys.service.UserService;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,16 +35,34 @@ public class ReportViewController {
     @FXML private TextField transByUserField;
     @FXML private DatePicker TransByDateDate;
     @FXML private Button TransByDateButton;
+    @FXML private ChoiceBox<String> transByUserChoiceBox;
+
     @Autowired
     private ProductService productService;
 
     @Autowired
     private TransactionService transactionService;
 
+    @Autowired
+    private UserService userService;
+
+    @FXML private List<User> users;
+
     LocalDateTime notFormattedTime = LocalDateTime.now();
     DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     LocalDate date = LocalDate.now();
     String time = notFormattedTime.format(myFormatObj);
+
+
+    @FXML
+    private void initialize() {
+        users = userService.getAllUsers();
+
+        for (User user : users) {
+            transByUserChoiceBox.getItems().add(user.getUsername());
+        }
+
+    }
 
     @FXML
     private void GetAllStockProductReportButtonAction() {
@@ -105,7 +123,20 @@ public class ReportViewController {
 
     @FXML
     private void GetTransActionsByUserId() {
-        int id = Integer.parseInt(transByUserField.getText());
+
+        String selectedUsername = transByUserChoiceBox.getSelectionModel().getSelectedItem();
+
+        User selectedUser = users.stream()
+                .filter(user -> user.getUsername().equals(selectedUsername))
+                .findFirst()
+                .orElse(null);
+
+        if (selectedUser == null) {
+            return;
+        }
+
+        int id = selectedUser.getId();
+
         List<Transaction> transactions = transactionService.getTransactionsByUserId(id);
         StringBuilder report = new StringBuilder("Transactions by user id " + id + " " + time + "\n\n");
         report.append(String.format("%-10s %-10s %-10s %-20s %-10s %-10s\n", "ID", "Product", "Quantity", "Date", "Type", "User"));

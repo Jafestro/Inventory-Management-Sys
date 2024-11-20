@@ -112,10 +112,11 @@ public class CreateProductController {
         try {
             productPriceBigDecimal = new BigDecimal(productPrice);
             if (productPriceBigDecimal.compareTo(BigDecimal.ZERO) < 0) {
-                UIUtils.showAlert(Alert.AlertType.ERROR, "Validation Error", null, "Product price must be positive.");
+                UIUtils.showAlert(Alert.AlertType.ERROR, "alert.validationError", null, "error.productPriceMustBePositive");
+                return;
             }
         } catch (Exception e) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "Validation Error", null, "Invalid product price.");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.validationError", null, "error.invalidProductPrice");
             return;
         }
 
@@ -124,10 +125,11 @@ public class CreateProductController {
         try {
             quantityInt = Integer.parseInt(quantity);
             if (quantityInt < 0) {
-                UIUtils.showAlert(Alert.AlertType.ERROR, "Validation Error", null, "Quantity cannot be negative.");
+                UIUtils.showAlert(Alert.AlertType.ERROR, "alert.validationError", null, "error.productQuantityCannotBeNegative");
+                return;
             }
         } catch (Exception e) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "Validation Error", null, "Invalid quantity.");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.validationError", null, "error.invalidQuantity");
             return;
         }
 
@@ -135,7 +137,7 @@ public class CreateProductController {
 
 
         if (productName.isEmpty() || productPrice.isEmpty() || quantity.isEmpty() || categoryComboBox.getValue() == null || supplierComboBox.getValue() == null ) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please enter all the fields correctly.");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.enterAllFieldsCorrectly");
             return;
         }
 
@@ -152,13 +154,12 @@ public class CreateProductController {
 
                 success();
             } else {
-                UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please log in to create a product.");
                 return;
             }
             
 
         } catch (Exception e) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please enter all the fields correctly.");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.enterAllFieldsCorrectly");
         }
     }
 
@@ -172,7 +173,7 @@ public class CreateProductController {
     }
 
     private void success() {
-        UIUtils.showAlert(AlertType.INFORMATION, "Success", null, "Product created!");
+        UIUtils.showAlert(AlertType.INFORMATION, "alert.success", null, "success.productCreated");
 
         Stage currentStage = (Stage) createButton.getScene().getWindow();
         currentStage.close();
@@ -184,7 +185,7 @@ public class CreateProductController {
     	String newCategory = newCategoryTextField.getText();
 
     	if (newCategory.isEmpty()) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please enter a category name.");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.enterCategoryName");
             return;
         }
 
@@ -202,7 +203,7 @@ public class CreateProductController {
         }
 
     	newCategoryTextField.clear();
-        UIUtils.showAlert(AlertType.INFORMATION, "Success", null, "Category added!");
+        UIUtils.showAlert(AlertType.INFORMATION, "alert.success", null, "success.categoryAdded");
     }
 
     @FXML
@@ -210,7 +211,7 @@ public class CreateProductController {
     	String newSupplier = newSupplierTextField.getText();
 
     	if (newSupplier.isEmpty()) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please enter a supplier name.");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.enterSupplierName");
             return;
         }
 
@@ -228,6 +229,6 @@ public class CreateProductController {
         }
 
     	newSupplierTextField.clear();
-        UIUtils.showAlert(AlertType.INFORMATION, "Success", null, "Supplier added!");
+        UIUtils.showAlert(AlertType.INFORMATION, "alert.success", null, "success.supplierAdded");
     }
 }

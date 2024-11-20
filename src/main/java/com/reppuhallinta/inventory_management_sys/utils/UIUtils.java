@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import lombok.Setter;
 
 public class UIUtils {
-    
+
     @Setter
     private static ApplicationContext springContext;
 
@@ -28,7 +28,6 @@ public class UIUtils {
         localeString = locale;
         LanguageContext.setLanguage(locale); // Update the ThreadLocal context
     }
-    
 
     public static String getLocale() {
         return localeString;
@@ -38,15 +37,17 @@ public class UIUtils {
 
     private static List<String> langaugesFinnish = List.of("Englanti", "Suomi", "Japani", "Azerbaijan");
 
-    private static List<String> languagesAzerbaijan = List.of("İngilis dili","Fin dili", "Yapon dili", "Azərbaycan dili");
+    private static List<String> languagesAzerbaijan = List.of("İngilis dili", "Fin dili", "Yapon dili",
+            "Azərbaycan dili");
 
     private static List<String> languagesJapanese = List.of("英語", "フィンランド語", "日本語", "アゼルバイジャン語");
 
     private static String language;
 
-    public static void setLanguageChoiceBox(ChoiceBox languageChoiceBox, String titleToSet, String fxmlPath, double currentWidth, double currentHeight) {
+    public static void setLanguageChoiceBox(ChoiceBox languageChoiceBox, String titleToSet, String fxmlPath,
+            double currentWidth, double currentHeight) {
         language = UIUtils.getLocale();
-        List <String> languages = switch (language) {
+        List<String> languages = switch (language) {
             case "FI" -> langaugesFinnish;
             case "EN" -> languagesEnglish;
             case "AZ" -> languagesAzerbaijan;
@@ -69,13 +70,17 @@ public class UIUtils {
                 break;
         }
         languageChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.equals("English") || newValue.equals("Englanti") || newValue.equals("英語") || newValue.equals("İngilis dili"))  {
+            if (newValue.equals("English") || newValue.equals("Englanti") || newValue.equals("英語")
+                    || newValue.equals("İngilis dili")) {
                 UIUtils.setLocale("EN");
-            } else if (newValue.equals("Finnish") || newValue.equals("Suomi") || newValue.equals("フィンランド語") || newValue.equals("Fin dili")) {
+            } else if (newValue.equals("Finnish") || newValue.equals("Suomi") || newValue.equals("フィンランド語")
+                    || newValue.equals("Fin dili")) {
                 UIUtils.setLocale("FI");
-            } else if (newValue.equals("Japanese") || newValue.equals("Japani") || newValue.equals("日本語") || newValue.equals("Yapon dili")) {
+            } else if (newValue.equals("Japanese") || newValue.equals("Japani") || newValue.equals("日本語")
+                    || newValue.equals("Yapon dili")) {
                 UIUtils.setLocale("JP");
-            } else if (newValue.equals("Azerbaijani") || newValue.equals("Azerbaijan") || newValue.equals("アゼルバイジャン語") || newValue.equals("Azərbaycan dili")) {
+            } else if (newValue.equals("Azerbaijani") || newValue.equals("Azerbaijan") || newValue.equals("アゼルバイジャン語")
+                    || newValue.equals("Azərbaycan dili")) {
                 UIUtils.setLocale("AZ");
             } else {
                 UIUtils.setLocale("EN");
@@ -90,8 +95,7 @@ public class UIUtils {
     public static void loadFXML(String fxmlPath, Stage stage, String title, double v, double v1, Object controller) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(
-                    UIUtils.class.getResource(fxmlPath)
-            );
+                    UIUtils.class.getResource(fxmlPath));
 
             fxmlLoader.setResources(ResourceBundle.getBundle("bundle_" + localeString, new Locale(localeString)));
 
@@ -109,7 +113,7 @@ public class UIUtils {
 
             ResourceBundle bundle = ResourceBundle.getBundle("bundle_" + localeString, new Locale(localeString));
 
-            switch(title) {
+            switch (title) {
                 case "Login":
                     stage.setTitle(bundle.getString("title.login"));
                     break;
@@ -141,10 +145,20 @@ public class UIUtils {
     }
 
     public static void showAlert(Alert.AlertType alertType, String title, String headerText, String contentText) {
+        // Alert alert = new Alert(alertType);
+        // alert.setTitle(title);
+        // alert.setHeaderText(headerText);
+        // alert.setContentText(contentText);
+        // alert.showAndWait();
+        ResourceBundle bundle = ResourceBundle.getBundle("bundle", new Locale(localeString));
+        System.out.println("Bundle: " + bundle);
+        System.out.println("Title: " + title);
+        System.out.println("Header: " + headerText);
+        System.out.println("Content: " + contentText);
         Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(headerText);
-        alert.setContentText(contentText);
+        alert.setTitle(bundle.getString(title));
+        alert.setHeaderText(headerText != null ? bundle.getString(headerText) : null);
+        alert.setContentText(bundle.getString(contentText));
         alert.showAndWait();
     }
 

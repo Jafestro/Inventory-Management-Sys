@@ -53,7 +53,7 @@ public class RegisterController {
             User userCheck = userService.findUserByUsername(username);
 
             if (userCheck != null) {
-                UIUtils.showAlert(Alert.AlertType.ERROR, "Error",  null, "Username already exists!");
+                UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error",  null, "error.usernameExists");
                 return;
             }
 
@@ -62,22 +62,22 @@ public class RegisterController {
             userService.createUser(user);
 
             Stage stage = (Stage) registerButton.getScene().getWindow();
-            UIUtils.showAlert(Alert.AlertType.INFORMATION, "Success",  null, "User registered successfully");
+            UIUtils.showAlert(Alert.AlertType.INFORMATION, "alert.success",  null, "success.userRegistered");
             UIUtils.loadFXML("/Login.fxml", new Stage(), "Login", 400, 350, null);
             stage.close();
         } catch (Exception e) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "Error",  null, "An error occurred while registering user");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error",  null, "error.generic");
         }
     }
 
     private boolean validateFields(String username, String firstName, String lastName, String password, String confirmPassword) {
         if (username.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "Error",  null, "Please fill all the fields");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error",  null, "error.fillAllFields");
             return false;
         }
 
         if (!password.equals(confirmPassword)) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "Error",  null, "Passwords do not match");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error",  null, "error.passwordsDoNotMatch");
             return false;
         }
 

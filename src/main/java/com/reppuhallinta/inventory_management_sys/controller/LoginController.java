@@ -56,15 +56,13 @@ public class LoginController {
         String password = passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "Error", null, "Please enter username and password!");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.enterUsernameAndPassword");
             return;
         }
 
         User user = userService.authenticate(username, password);
 
         if (user != null) {
-            // UIUtils.showAlert(Alert.AlertType.INFORMATION, "Success", null, "You are logged in!");
-
             try {
                 CustomSessionManager.regenerateSessionId();
 
@@ -73,15 +71,14 @@ public class LoginController {
                 String sessionId = CustomSessionManager.getSessionId();
                 System.out.println("Session ID: " + sessionId);
             } catch (Exception e) {
-                System.out.println("Something with session id went wrong, here is stacktrace" + e.getMessage());
-                UIUtils.showAlert(Alert.AlertType.ERROR, "Session Error", null, "Failed to set session attributes.");
+                UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.generic");
                 return;
             }
 
             Stage stage = (Stage) owner;
             UIUtils.loadFXML("/Products.fxml", stage, "Products", 1370, 600, null);
         } else {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "Login fail", null, "Invalid username or password");
+            UIUtils.showAlert(Alert.AlertType.ERROR, "title.error", null, "error.invalidUsernameAndPassword");
         }
     }
 

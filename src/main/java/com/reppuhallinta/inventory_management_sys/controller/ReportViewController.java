@@ -138,7 +138,7 @@ public class ReportViewController {
         int id = selectedUser.getId();
 
         List<Transaction> transactions = transactionService.getTransactionsByUserId(id);
-        StringBuilder report = new StringBuilder("Transactions by user id " + id + " " + time + "\n\n");
+        StringBuilder report = new StringBuilder("Transactions by user " + selectedUsername + " " + time + "\n\n");
         report.append(String.format("%-10s %-10s %-10s %-20s %-10s %-10s\n", "ID", "Product", "Quantity", "Date", "Type", "User"));
         report.append("--------------------------------------------------------------------------\n");
         for (Transaction transaction : transactions) {

@@ -249,12 +249,7 @@ public class ProductViewController extends LogoutController {
         Products selectedProduct = productTable.getSelectionModel().getSelectedItem();
 
         if (selectedProduct == null) {
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.setTitle("Warning");
-            alert.setHeaderText(null);
-            alert.setContentText("Please select a product to delete.");
-            alert.showAndWait();
-
+            UIUtils.showAlert(AlertType.WARNING, "alert.warning", null, "warning.selectProductToDelete");
             return;
         }
 

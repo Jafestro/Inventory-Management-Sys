@@ -91,6 +91,11 @@ public class CreateProductController {
         int categoryId = 0;
         int supplierId = 0;
 
+        if (productName.isEmpty() || productPrice.isEmpty() || quantity.isEmpty() || categoryComboBox.getValue() == null || supplierComboBox.getValue() == null ) {
+            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.enterAllFieldsCorrectly");
+            return;
+        }
+
 
         String categoryName = categoryComboBox.getValue().toString();
         String supplierName = supplierComboBox.getValue().toString();

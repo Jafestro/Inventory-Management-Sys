@@ -2,7 +2,6 @@ package com.reppuhallinta.inventory_management_sys.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.reppuhallinta.inventory_management_sys.model.Category;
@@ -11,10 +10,13 @@ import com.reppuhallinta.inventory_management_sys.repository.CategoryRepository;
 @Service
 public class CategoryService {
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
-    
+    public CategoryService(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
+
+
     public Category createCategory(Category category) {
         return categoryRepository.save(category);
     }

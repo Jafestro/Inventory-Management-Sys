@@ -10,20 +10,14 @@ import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import static com.reppuhallinta.inventory_management_sys.utils.UIUtils.ERRORTITLE;
 
 @Controller
 public class LoginController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @FXML
     private TextField usernameField;
@@ -38,14 +32,18 @@ public class LoginController {
     private Hyperlink registerLink;
 
     @FXML
-    private ChoiceBox languageChoiceBox;
+    private ChoiceBox<String> languageChoiceBox;
 
-    private final String titleToSet = "Login";
+    private static final String TITLETOSET = "Login";
+
+    public LoginController(UserService userService) {
+        this.userService = userService;
+    }
 
 
     @FXML
     public void initialize (){
-        UIUtils.setLanguageChoiceBox(languageChoiceBox, titleToSet, "/Login.fxml", 400, 350);
+        UIUtils.setLanguageChoiceBox(languageChoiceBox, TITLETOSET, "/Login.fxml", 400, 350);
     }
 
     @FXML
@@ -56,7 +54,7 @@ public class LoginController {
         String password = passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.enterUsernameAndPassword");
+            UIUtils.showAlert(Alert.AlertType.ERROR, ERRORTITLE, null, "error.enterUsernameAndPassword");
             return;
         }
 
@@ -68,17 +66,15 @@ public class LoginController {
 
                 CustomSessionManager.setAttribute("user", user);
 
-                String sessionId = CustomSessionManager.getSessionId();
-                System.out.println("Session ID: " + sessionId);
             } catch (Exception e) {
-                UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.generic");
+                UIUtils.showAlert(Alert.AlertType.ERROR, ERRORTITLE, null, "error.generic");
                 return;
             }
 
             Stage stage = (Stage) owner;
             UIUtils.loadFXML("/Products.fxml", stage, "Products", 1370, 600, null);
         } else {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "title.error", null, "error.invalidUsernameAndPassword");
+            UIUtils.showAlert(Alert.AlertType.ERROR, ERRORTITLE, null, "error.invalidUsernameAndPassword");
         }
     }
 

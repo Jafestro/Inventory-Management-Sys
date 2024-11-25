@@ -15,23 +15,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import session.CustomSessionManager;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+import static com.reppuhallinta.inventory_management_sys.utils.UIUtils.ERRORTITLE;
+
 @Controller
 public class EditProductController {
-    @Autowired
-    private ProductService productService;
 
-    @Autowired
-    private CategoryService categoryService;
+    private final ProductService productService;
 
-    @Autowired
-    private SupplierService supplierService;
+    private final CategoryService categoryService;
+
+    private final SupplierService supplierService;
 
     @FXML
     public TextField productNameField;
@@ -59,6 +58,12 @@ public class EditProductController {
 
     private List<Suppliers> suppliers;
 
+    public EditProductController(ProductService productService, CategoryService categoryService, SupplierService supplierService) {
+        this.productService = productService;
+        this.categoryService = categoryService;
+        this.supplierService = supplierService;
+    }
+
     public void setProduct(Products product) {
         this.product = product;
         if (categories != null && suppliers != null) {
@@ -82,9 +87,6 @@ public class EditProductController {
         if (product != null) {
             prefillFields();
         }
-
-        String sessionId = CustomSessionManager.getSessionId();
-        System.out.println("Session ID in ProductViewController: " + sessionId);
 
         user = (User) CustomSessionManager.getAttribute("user");
     }
@@ -124,11 +126,11 @@ public class EditProductController {
         try {
             price = new BigDecimal(productPrice);
             if (price.compareTo(BigDecimal.ZERO) <= 0) {
-                UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.productPriceMustBePositive");
+                UIUtils.showAlert(Alert.AlertType.ERROR, ERRORTITLE, null, "error.productPriceMustBePositive");
                 return;
             }
         } catch (NumberFormatException e) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.productPriceMustBeNumeric");
+            UIUtils.showAlert(Alert.AlertType.ERROR, ERRORTITLE, null, "error.productPriceMustBeNumeric");
             return;
         }
 
@@ -137,11 +139,11 @@ public class EditProductController {
         try {
             quantityInt = Integer.parseInt(quantity);
             if (quantityInt < 0) {
-                UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.productQuantityCannotBeNegative");
+                UIUtils.showAlert(Alert.AlertType.ERROR, ERRORTITLE, null, "error.productQuantityCannotBeNegative");
                 return;
             }
         } catch (NumberFormatException e) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.productQuantityMustBeNumeric");
+            UIUtils.showAlert(Alert.AlertType.ERROR, ERRORTITLE, null, "error.productQuantityMustBeNumeric");
             return;
         }
 

@@ -2,7 +2,6 @@ package com.reppuhallinta.inventory_management_sys.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,8 +19,11 @@ import com.reppuhallinta.inventory_management_sys.service.SupplierService;
 @RequestMapping("/api/suppliers")
 public class SupplierController {
     
-    @Autowired
-    private SupplierService supplierService;
+    private final SupplierService supplierService;
+
+    public SupplierController(SupplierService supplierService) {
+        this.supplierService = supplierService;
+    }
 
     @PostMapping
     public ResponseEntity<Suppliers> createSupplier(@RequestBody Suppliers supplier) {

@@ -8,7 +8,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.reppuhallinta.inventory_management_sys.service.ProductService;
@@ -21,18 +20,16 @@ import session.CustomSessionManager;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static com.reppuhallinta.inventory_management_sys.utils.UIUtils.*;
+
 @Controller
 public class CreateProductController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
 
+    private final CategoryService categoryService;
 
-    @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
-    private SupplierService supplierService;
+    private final SupplierService supplierService;
 
     @FXML
     private TextField productNameField;
@@ -60,13 +57,19 @@ public class CreateProductController {
     private Button addNewCategoryButton;
 
     @FXML
-    private Button AddNewSupplierButton;
+    private Button addNewSupplierButton;
 
     @FXML
     private TextField newSupplierTextField;
 
     @FXML
     private TextField newCategoryTextField;
+
+    public CreateProductController(ProductService productService, CategoryService categoryService, SupplierService supplierService) {
+        this.productService = productService;
+        this.categoryService = categoryService;
+        this.supplierService = supplierService;
+    }
 
     @FXML
     public void initialize() {
@@ -85,86 +88,106 @@ public class CreateProductController {
 
     @FXML
     private void handleCreateProduct() {
-        String productName = this.productNameField.getText();
-        String productPrice = this.productPriceField.getText();
-        String quantity = this.quantityField.getText();
-        int categoryId = 0;
-        int supplierId = 0;
-
-        if (productName.isEmpty() || productPrice.isEmpty() || quantity.isEmpty() || categoryComboBox.getValue() == null || supplierComboBox.getValue() == null ) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.enterAllFieldsCorrectly");
+        if (!validateInputFields()) {
             return;
         }
 
+        int categoryId = getCategoryId();
+        int supplierId = getSupplierId();
 
-        String categoryName = categoryComboBox.getValue().toString();
-        String supplierName = supplierComboBox.getValue().toString();
-
-        for (Category category : categories) {
-            if (category.getCategoryName().equals(categoryName)) {
-                categoryId = category.getId();
-            }
-        }
-
-        for (Suppliers supplier : suppliers) {
-            if (supplier.getSupplierName().equals(supplierName)) {
-                supplierId = supplier.getSupplierID();
-            }
-        }
-
-        BigDecimal productPriceBigDecimal;
-        
-        try {
-            productPriceBigDecimal = new BigDecimal(productPrice);
-            if (productPriceBigDecimal.compareTo(BigDecimal.ZERO) < 0) {
-                UIUtils.showAlert(Alert.AlertType.ERROR, "alert.validationError", null, "error.productPriceMustBePositive");
-                return;
-            }
-        } catch (Exception e) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.validationError", null, "error.invalidProductPrice");
+        BigDecimal productPriceBigDecimal = parseProductPrice();
+        if (productPriceBigDecimal == null) {
             return;
         }
 
-        int quantityInt;
-
-        try {
-            quantityInt = Integer.parseInt(quantity);
-            if (quantityInt < 0) {
-                UIUtils.showAlert(Alert.AlertType.ERROR, "alert.validationError", null, "error.productQuantityCannotBeNegative");
-                return;
-            }
-        } catch (Exception e) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.validationError", null, "error.invalidQuantity");
+        Integer quantityInt = parseQuantity();
+        if (quantityInt == null) {
             return;
         }
 
         User user = (User) CustomSessionManager.getAttribute("user");
-
-
-        if (productName.isEmpty() || productPrice.isEmpty() || quantity.isEmpty() || categoryComboBox.getValue() == null || supplierComboBox.getValue() == null ) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.enterAllFieldsCorrectly");
+        if (user == null) {
             return;
         }
 
+        createProduct(productPriceBigDecimal, quantityInt, categoryId, supplierId, user.getId());
+    }
+
+    private boolean validateInputFields() {
+        String productName = this.productNameField.getText();
+        String productPrice = this.productPriceField.getText();
+        String quantity = this.quantityField.getText();
+
+        if (productName.isEmpty() || productPrice.isEmpty() || quantity.isEmpty() || categoryComboBox.getValue() == null || supplierComboBox.getValue() == null) {
+            UIUtils.showAlert(Alert.AlertType.ERROR, ERRORTITLE, null, "error.enterAllFieldsCorrectly");
+            return false;
+        }
+        return true;
+    }
+
+    private int getCategoryId() {
+        String categoryName = categoryComboBox.getValue();
+        for (Category category : categories) {
+            if (category.getCategoryName().equals(categoryName)) {
+                return category.getId();
+            }
+        }
+        return 0;
+    }
+
+    private int getSupplierId() {
+        String supplierName = supplierComboBox.getValue();
+        for (Suppliers supplier : suppliers) {
+            if (supplier.getSupplierName().equals(supplierName)) {
+                return supplier.getSupplierID();
+            }
+        }
+        return 0;
+    }
+
+    private BigDecimal parseProductPrice() {
+        String productPrice = this.productPriceField.getText();
+        try {
+            BigDecimal productPriceBigDecimal = new BigDecimal(productPrice);
+            if (productPriceBigDecimal.compareTo(BigDecimal.ZERO) < 0) {
+                UIUtils.showAlert(Alert.AlertType.ERROR, VALIDATETITLE, null, "error.productPriceMustBePositive");
+                return null;
+            }
+            return productPriceBigDecimal;
+        } catch (Exception e) {
+            UIUtils.showAlert(Alert.AlertType.ERROR, VALIDATETITLE, null, "error.invalidProductPrice");
+            return null;
+        }
+    }
+
+    private Integer parseQuantity() {
+        String quantity = this.quantityField.getText();
+        try {
+            int quantityInt = Integer.parseInt(quantity);
+            if (quantityInt < 0) {
+                UIUtils.showAlert(Alert.AlertType.ERROR, VALIDATETITLE, null, "error.productQuantityCannotBeNegative");
+                return null;
+            }
+            return quantityInt;
+        } catch (Exception e) {
+            UIUtils.showAlert(Alert.AlertType.ERROR, VALIDATETITLE, null, "error.invalidQuantity");
+            return null;
+        }
+    }
+
+    private void createProduct(BigDecimal productPriceBigDecimal, int quantityInt, int categoryId, int supplierId, int userId) {
         try {
             Products product = new Products();
-            product.setProductName(productName);
+            product.setProductName(this.productNameField.getText());
             product.setPrice(productPriceBigDecimal);
             product.setQuantity(quantityInt);
             product.setCategoryId(categoryId);
             product.setSupplierID(supplierId);
 
-            if (user != null) {
-                productService.createProduct(product, user.getId());
-
-                success();
-            } else {
-                return;
-            }
-            
-
+            productService.createProduct(product, userId);
+            success();
         } catch (Exception e) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.enterAllFieldsCorrectly");
+            UIUtils.showAlert(Alert.AlertType.ERROR, ERRORTITLE, null, "error.enterAllFieldsCorrectly");
         }
     }
 
@@ -178,7 +201,7 @@ public class CreateProductController {
     }
 
     private void success() {
-        UIUtils.showAlert(AlertType.INFORMATION, "alert.success", null, "success.productCreated");
+        UIUtils.showAlert(AlertType.INFORMATION, SUCCESSTITLE, null, "success.productCreated");
 
         Stage currentStage = (Stage) createButton.getScene().getWindow();
         currentStage.close();
@@ -190,7 +213,7 @@ public class CreateProductController {
     	String newCategory = newCategoryTextField.getText();
 
     	if (newCategory.isEmpty()) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.enterCategoryName");
+            UIUtils.showAlert(Alert.AlertType.ERROR, ERRORTITLE, null, "error.enterCategoryName");
             return;
         }
 
@@ -208,7 +231,7 @@ public class CreateProductController {
         }
 
     	newCategoryTextField.clear();
-        UIUtils.showAlert(AlertType.INFORMATION, "alert.success", null, "success.categoryAdded");
+        UIUtils.showAlert(AlertType.INFORMATION, SUCCESSTITLE, null, "success.categoryAdded");
     }
 
     @FXML
@@ -216,7 +239,7 @@ public class CreateProductController {
     	String newSupplier = newSupplierTextField.getText();
 
     	if (newSupplier.isEmpty()) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.enterSupplierName");
+            UIUtils.showAlert(Alert.AlertType.ERROR, ERRORTITLE, null, "error.enterSupplierName");
             return;
         }
 
@@ -234,6 +257,6 @@ public class CreateProductController {
         }
 
     	newSupplierTextField.clear();
-        UIUtils.showAlert(AlertType.INFORMATION, "alert.success", null, "success.supplierAdded");
+        UIUtils.showAlert(AlertType.INFORMATION, SUCCESSTITLE, null, "success.supplierAdded");
     }
 }

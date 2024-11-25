@@ -1,7 +1,6 @@
 package com.reppuhallinta.inventory_management_sys.controller;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -10,6 +9,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -18,7 +18,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.util.Duration;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
 import com.reppuhallinta.inventory_management_sys.model.Products;
@@ -38,8 +39,7 @@ public class ProductViewController extends LogoutController {
 
     private static final int REORDER_THRESHOLD = 3; // Threshold value for reordering
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
 
     @FXML
     private TableView<Products> productTable;
@@ -90,28 +90,24 @@ public class ProductViewController extends LogoutController {
     @FXML
     private ChoiceBox<String> languageChoiceBox;
 
-    private String language;
+    private static final Logger logger = LoggerFactory.getLogger(ProductViewController.class);
 
+    public ProductViewController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @FXML
     public void initialize() {
 
-        String sessionId = CustomSessionManager.getSessionId();
-        System.out.println("Session ID in ProductViewController: " + sessionId);
-
         User user = (User) CustomSessionManager.getAttribute("user");
 
-        if (user != null) {
-            if (!"admin".equals(user.getAccessLevel())) {
-                createProductButton.setDisable(true);
-                editProductButton.setDisable(true);
-                deleteProductButton.setDisable(true);
-            }
+        if (user != null && !"admin".equals(user.getAccessLevel())) {
+            createProductButton.setDisable(true);
+            editProductButton.setDisable(true);
+            deleteProductButton.setDisable(true);
         } 
 
-        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filterProductList(newValue);
-        });
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> filterProductList(newValue));
 
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("productName"));
@@ -136,7 +132,7 @@ public class ProductViewController extends LogoutController {
                 }),
                 new KeyFrame(Duration.seconds(15))
         );
-        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
         scheduler.scheduleAtFixedRate(this::checkStockLevels, 0, 1, TimeUnit.MINUTES);
@@ -188,7 +184,7 @@ public class ProductViewController extends LogoutController {
     private void triggerReorder(Products product) {
         // Implement the reorder logic here
         // For example, create a new order or notify the supplier
-        System.out.println("Reordering product: " + product.getProductName());
+        logger.info("Reordering product: {}", product.getProductName());
         // You can also show an alert to the user
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Reorder Notification");
@@ -222,8 +218,8 @@ public class ProductViewController extends LogoutController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/EditProduct.fxml"));
             fxmlLoader.setControllerFactory(UIUtils.getSpringContext()::getBean);
-            String locale = UIUtils.getLocale();
-            fxmlLoader.setResources(ResourceBundle.getBundle("bundle_" + locale, new Locale(locale)));
+            String localeString = UIUtils.getLocale();
+            fxmlLoader.setResources(ResourceBundle.getBundle("bundle_" + localeString, Locale.forLanguageTag(localeString)));
             Parent root = fxmlLoader.load();
 
             EditProductController editProductController = fxmlLoader.getController();

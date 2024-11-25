@@ -2,7 +2,6 @@ package com.reppuhallinta.inventory_management_sys.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.reppuhallinta.inventory_management_sys.model.Suppliers;
@@ -11,8 +10,11 @@ import com.reppuhallinta.inventory_management_sys.repository.SupplierRepository;
 @Service
 public class SupplierService {
     
-    @Autowired
-    private SupplierRepository supplierRepository;
+    private final SupplierRepository supplierRepository;
+
+    public SupplierService(SupplierRepository supplierRepository) {
+        this.supplierRepository = supplierRepository;
+    }
 
     public Suppliers createSupplier(Suppliers supplier) {
         return supplierRepository.save(supplier);

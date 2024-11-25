@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.io.File;
@@ -28,23 +27,20 @@ import java.time.LocalDateTime;
 @Controller
 public class ReportViewController {
 
-    @FXML private Button GetAllStockProductReportButton;
+    @FXML private Button getAllStockProductReportButton;
     @FXML private Button transByIdButton;
     @FXML private TextField transByIdField;
-    @FXML private Button TransByUserButton;
+    @FXML private Button transByUserButton;
     @FXML private TextField transByUserField;
-    @FXML private DatePicker TransByDateDate;
-    @FXML private Button TransByDateButton;
+    @FXML private DatePicker transByDateDate;
+    @FXML private Button transByDateButton;
     @FXML private ChoiceBox<String> transByUserChoiceBox;
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
 
-    @Autowired
-    private TransactionService transactionService;
+    private final TransactionService transactionService;
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @FXML private List<User> users;
 
@@ -52,6 +48,12 @@ public class ReportViewController {
     DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     LocalDate date = LocalDate.now();
     String time = notFormattedTime.format(myFormatObj);
+
+    public ReportViewController(ProductService productService, TransactionService transactionService, UserService userService) {
+        this.productService = productService;
+        this.transactionService = transactionService;
+        this.userService = userService;
+    }
 
 
     @FXML
@@ -65,13 +67,13 @@ public class ReportViewController {
     }
 
     @FXML
-    private void GetAllStockProductReportButtonAction() {
+    private void getAllStockProductReportButtonAction() {
         List<Products> products = productService.getAllProducts();
         StringBuilder report = new StringBuilder("All stock products " + time + "\n\n");
-        report.append(String.format("%-10s %-20s %-10s %-10s %-10s %-10s\n", "ID", "Name", "Price", "Quantity", "Category", "Supplier"));
+        report.append(String.format("%-10s %-20s %-10s %-10s %-10s %-10s%n", "ID", "Name", "Price", "Quantity", "Category", "Supplier"));
         report.append("--------------------------------------------------------------------------\n");
         for (Products product : products) {
-            report.append(String.format("%-10d %-20s %-10.2f %-10d %-10d %-10d\n",
+            report.append(String.format("%-10d %-20s %-10.2f %-10d %-10d %-10d%n",
                     product.getId(),
                     product.getProductName(),
                     product.getPrice(),
@@ -89,7 +91,7 @@ public class ReportViewController {
         fileChooser.setTitle("Save Report");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files","*.txt"));
         fileChooser.setInitialFileName(filename + ".txt");
-        Stage stage = (Stage) GetAllStockProductReportButton.getScene().getWindow();
+        Stage stage = (Stage) getAllStockProductReportButton.getScene().getWindow();
         File file = fileChooser.showSaveDialog(stage);
         if (file != null) {
             try (FileWriter fileWriter = new FileWriter(file)) {
@@ -101,14 +103,14 @@ public class ReportViewController {
     }
 
     @FXML
-    private void GetTransActionsByProductId() {
+    private void getTransActionsByProductId() {
         int id = Integer.parseInt(transByIdField.getText());
         List<Transaction> transactions = transactionService.getTransactionsByProductId(id);
         StringBuilder report = new StringBuilder("Transactions by product id " + id + " " + time + "\n\n");
-        report.append(String.format("%-10s %-10s %-10s %-20s %-10s %-10s\n", "ID", "Product", "Quantity", "Date", "Type", "User"));
+        report.append(String.format("%-10s %-10s %-10s %-20s %-10s %-10s%n", "ID", "Product", "Quantity", "Date", "Type", "User"));
         report.append("--------------------------------------------------------------------------\n");
         for (Transaction transaction : transactions) {
-            report.append(String.format("%-10d %-10d %-10d %-20s %-10s %-10d\n",
+            report.append(String.format("%-10d %-10d %-10d %-20s %-10s %-10d%n",
                     transaction.getTransactionId(),
                     transaction.getProductId(),
                     transaction.getQuantity(),
@@ -122,7 +124,7 @@ public class ReportViewController {
     }
 
     @FXML
-    private void GetTransActionsByUserId() {
+    private void getTransActionsByUserId() {
 
         String selectedUsername = transByUserChoiceBox.getSelectionModel().getSelectedItem();
 
@@ -139,10 +141,10 @@ public class ReportViewController {
 
         List<Transaction> transactions = transactionService.getTransactionsByUserId(id);
         StringBuilder report = new StringBuilder("Transactions by user " + selectedUsername + " " + time + "\n\n");
-        report.append(String.format("%-10s %-10s %-10s %-20s %-10s %-10s\n", "ID", "Product", "Quantity", "Date", "Type", "User"));
+        report.append(String.format("%-10s %-10s %-10s %-20s %-10s %-10s%n", "ID", "Product", "Quantity", "Date", "Type", "User"));
         report.append("--------------------------------------------------------------------------\n");
         for (Transaction transaction : transactions) {
-            report.append(String.format("%-10d %-10d %-10d %-20s %-10s %-10d\n",
+            report.append(String.format("%-10d %-10d %-10d %-20s %-10s %-10d%n",
                     transaction.getTransactionId(),
                     transaction.getProductId(),
                     transaction.getQuantity(),
@@ -156,16 +158,16 @@ public class ReportViewController {
     }
 
     @FXML
-    private void GetTransActionsByDate() {
-        LocalDate localDate = TransByDateDate.getValue();
+    private void getTransActionsByDate() {
+        LocalDate localDate = transByDateDate.getValue();
         Date startDate = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         Date endDate = Date.from(localDate.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant());
         List<Transaction> transactions = transactionService.getTransactionsByDateRange(startDate, endDate);
         StringBuilder report = new StringBuilder("Transactions by date " + date + " " + time + "\n\n");
-        report.append(String.format("%-10s %-10s %-10s %-20s %-10s %-10s\n", "ID", "Product", "Quantity", "Date", "Type", "User"));
+        report.append(String.format("%-10s %-10s %-10s %-20s %-10s %-10s%n", "ID", "Product", "Quantity", "Date", "Type", "User"));
         report.append("--------------------------------------------------------------------------\n");
         for (Transaction transaction : transactions) {
-            report.append(String.format("%-10d %-10d %-10d %-20s %-10s %-10d\n",
+            report.append(String.format("%-10d %-10d %-10d %-20s %-10s %-10d%n",
                     transaction.getTransactionId(),
                     transaction.getProductId(),
                     transaction.getQuantity(),

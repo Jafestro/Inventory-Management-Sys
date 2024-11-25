@@ -2,7 +2,6 @@ package com.reppuhallinta.inventory_management_sys.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,8 +20,11 @@ import com.reppuhallinta.inventory_management_sys.service.CategoryService;
 @RequestMapping("/api/categories")
 public class CategoryController {
     
-    @Autowired
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
+
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     @PostMapping
     public ResponseEntity<Category> createCategory(@RequestBody Category category) {

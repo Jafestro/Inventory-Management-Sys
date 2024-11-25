@@ -9,15 +9,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import static com.reppuhallinta.inventory_management_sys.utils.UIUtils.ERRORTITLE;
+import static com.reppuhallinta.inventory_management_sys.utils.UIUtils.SUCCESSTITLE;
 
 @Controller
 public class RegisterController {
 
-
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @FXML
     private TextField usernameField;
@@ -37,6 +37,10 @@ public class RegisterController {
     @FXML
     private Button registerButton;
 
+    public RegisterController(UserService userService) {
+        this.userService = userService;
+    }
+
     @FXML
     public void handleRegister() {
         String username = this.usernameField.getText();
@@ -53,7 +57,7 @@ public class RegisterController {
             User userCheck = userService.findUserByUsername(username);
 
             if (userCheck != null) {
-                UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error",  null, "error.usernameExists");
+                UIUtils.showAlert(Alert.AlertType.ERROR, ERRORTITLE,  null, "error.usernameExists");
                 return;
             }
 
@@ -62,22 +66,22 @@ public class RegisterController {
             userService.createUser(user);
 
             Stage stage = (Stage) registerButton.getScene().getWindow();
-            UIUtils.showAlert(Alert.AlertType.INFORMATION, "alert.success",  null, "success.userRegistered");
+            UIUtils.showAlert(Alert.AlertType.INFORMATION, SUCCESSTITLE,  null, "success.userRegistered");
             UIUtils.loadFXML("/Login.fxml", new Stage(), "Login", 400, 350, null);
             stage.close();
         } catch (Exception e) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error",  null, "error.generic");
+            UIUtils.showAlert(Alert.AlertType.ERROR, ERRORTITLE,  null, "error.generic");
         }
     }
 
     private boolean validateFields(String username, String firstName, String lastName, String password, String confirmPassword) {
         if (username.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error",  null, "error.fillAllFields");
+            UIUtils.showAlert(Alert.AlertType.ERROR, ERRORTITLE,  null, "error.fillAllFields");
             return false;
         }
 
         if (!password.equals(confirmPassword)) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error",  null, "error.passwordsDoNotMatch");
+            UIUtils.showAlert(Alert.AlertType.ERROR, ERRORTITLE,  null, "error.passwordsDoNotMatch");
             return false;
         }
 

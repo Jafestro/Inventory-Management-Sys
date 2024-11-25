@@ -67,18 +67,6 @@ The system allows for easy tracking, updating, and management of inventory, ensu
   - Jacoco
   - Jenkins
 
-![image2](https://github.com/user-attachments/assets/9fe66af1-6763-4b66-995f-974c2558c119)
-
-
-
-![image](https://github.com/user-attachments/assets/3c305bc0-eafb-402d-9f24-f49847513607)
-
-## Use Case Diagram
-![image](https://github.com/user-attachments/assets/4cde667a-cfe7-4657-ae3e-1c7302979ebb)
-
-## Activity Diagram (Example)
-![image](https://github.com/user-attachments/assets/9678d025-95cb-45a6-915d-8502d89b6ba7)
-
 ------------------------------------------------
 
 ![Copyright of Vectra Vault Inc](https://github.com/user-attachments/assets/7257e3f5-ee8f-4eab-a495-60a40e0de3c9)

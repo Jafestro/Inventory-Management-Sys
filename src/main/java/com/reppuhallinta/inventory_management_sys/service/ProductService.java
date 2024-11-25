@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import com.reppuhallinta.inventory_management_sys.model.Transaction;
 import com.reppuhallinta.inventory_management_sys.repository.CategoryRepository;
 import com.reppuhallinta.inventory_management_sys.repository.SupplierRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.reppuhallinta.inventory_management_sys.model.Products;
@@ -18,17 +17,20 @@ import com.reppuhallinta.inventory_management_sys.model.Category;
 
 @Service
 public class ProductService {
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
-    @Autowired
-    private TransactionService transactionService;
+    private final TransactionService transactionService;
 
-    @Autowired
-    private SupplierRepository supplierRepository;
+    private final SupplierRepository supplierRepository;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
+
+    public ProductService(ProductRepository productRepository, TransactionService transactionService, SupplierRepository supplierRepository, CategoryRepository categoryRepository) {
+        this.productRepository = productRepository;
+        this.transactionService = transactionService;
+        this.supplierRepository = supplierRepository;
+        this.categoryRepository = categoryRepository;
+    }
 
     public Products createProduct(Products product, int userId) {
 

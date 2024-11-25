@@ -6,6 +6,8 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import javafx.fxml.FXMLLoader;
@@ -19,10 +21,35 @@ import lombok.Setter;
 
 public class UIUtils {
 
+    private static final String ENGLISHSTRING = "English";
+    private static final String FINNISHSTRING = "Finnish";
+    private static final String JAPANESESTRING = "Japanese";
+    private static final String AZERBAIJANSTRING = "Azerbaijani";
+
+    private static final String ENGLISHFI = "Englanti";
+    private static final String FINNISHFI = "Suomi";
+    private static final String JAPANESEFI = "Japani";
+    private static final String AZERBAIJANFI = "Azerbaijan";
+
+    private static final String ENGLISHAZ = "İngilis dili";
+    private static final String FINNISHAZ = "Fin dili";
+    private static final String JAPANESEAZ = "Yapon dili";
+    private static final String AZERBAIJANAZ = "Azərbaycan dili";
+
+    private static final String ENGLISHJP = "英語";
+    private static final String FINNISHJP = "フィンランド語";
+    private static final String JAPANESEJP = "日本語";
+    private static final String AZERBAIJANJP = "アゼルバイジャン語";
+
     @Setter
     private static ApplicationContext springContext;
 
     private static String localeString = "EN";
+
+    private UIUtils() {
+        throw new IllegalStateException("Utility class");
+    }
+
 
     public static void setLocale(String locale) {
         localeString = locale;
@@ -33,20 +60,24 @@ public class UIUtils {
         return localeString;
     }
 
-    private static List<String> languagesEnglish = List.of("English", "Finnish", "Japanese", "Azerbaijani");
+    private static List<String> languagesEnglish = List.of(ENGLISHSTRING, FINNISHSTRING, JAPANESESTRING, AZERBAIJANSTRING);
 
-    private static List<String> langaugesFinnish = List.of("Englanti", "Suomi", "Japani", "Azerbaijan");
+    private static List<String> langaugesFinnish = List.of(ENGLISHFI, FINNISHFI, JAPANESEFI, AZERBAIJANFI);
 
-    private static List<String> languagesAzerbaijan = List.of("İngilis dili", "Fin dili", "Yapon dili",
-            "Azərbaycan dili");
+    private static List<String> languagesAzerbaijan = List.of(ENGLISHAZ, FINNISHAZ, JAPANESEAZ,
+            AZERBAIJANAZ);
 
-    private static List<String> languagesJapanese = List.of("英語", "フィンランド語", "日本語", "アゼルバイジャン語");
+    private static List<String> languagesJapanese = List.of(ENGLISHJP, FINNISHJP, JAPANESEJP, AZERBAIJANJP);
 
-    private static String language;
+    public static final String ERRORTITLE = "alert.error";
+    public static final String VALIDATETITLE = "alert.validationError";
+    public static final String SUCCESSTITLE = "alert.success";
 
-    public static void setLanguageChoiceBox(ChoiceBox languageChoiceBox, String titleToSet, String fxmlPath,
+    private static final Logger logger = LoggerFactory.getLogger(UIUtils.class);
+
+    public static void setLanguageChoiceBox(ChoiceBox<String> languageChoiceBox, String titleToSet, String fxmlPath,
             double currentWidth, double currentHeight) {
-        language = UIUtils.getLocale();
+        String language = UIUtils.getLocale();
         List<String> languages = switch (language) {
             case "FI" -> langaugesFinnish;
             case "EN" -> languagesEnglish;
@@ -57,30 +88,33 @@ public class UIUtils {
         languageChoiceBox.getItems().addAll(languages);
         switch (UIUtils.getLocale()) {
             case "EN":
-                languageChoiceBox.setValue("English");
+                languageChoiceBox.setValue(ENGLISHSTRING);
                 break;
             case "FI":
-                languageChoiceBox.setValue("Suomi");
+                languageChoiceBox.setValue(FINNISHFI);
                 break;
             case "JP":
-                languageChoiceBox.setValue("日本語");
+                languageChoiceBox.setValue(JAPANESEJP);
                 break;
             case "AZ":
-                languageChoiceBox.setValue("Azərbaycan dili");
+                languageChoiceBox.setValue(AZERBAIJANAZ);
+                break;
+            default:
+                languageChoiceBox.setValue(ENGLISHSTRING);
                 break;
         }
         languageChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.equals("English") || newValue.equals("Englanti") || newValue.equals("英語")
-                    || newValue.equals("İngilis dili")) {
+            if (newValue.equals(ENGLISHSTRING) || newValue.equals(ENGLISHFI) || newValue.equals(ENGLISHJP)
+                    || newValue.equals(ENGLISHAZ)) {
                 UIUtils.setLocale("EN");
-            } else if (newValue.equals("Finnish") || newValue.equals("Suomi") || newValue.equals("フィンランド語")
-                    || newValue.equals("Fin dili")) {
+            } else if (newValue.equals(FINNISHSTRING) || newValue.equals(FINNISHFI) || newValue.equals(FINNISHJP)
+                    || newValue.equals(FINNISHAZ)) {
                 UIUtils.setLocale("FI");
-            } else if (newValue.equals("Japanese") || newValue.equals("Japani") || newValue.equals("日本語")
-                    || newValue.equals("Yapon dili")) {
+            } else if (newValue.equals(JAPANESESTRING) || newValue.equals(JAPANESEFI) || newValue.equals(JAPANESEJP)
+                    || newValue.equals(JAPANESEAZ)) {
                 UIUtils.setLocale("JP");
-            } else if (newValue.equals("Azerbaijani") || newValue.equals("Azerbaijan") || newValue.equals("アゼルバイジャン語")
-                    || newValue.equals("Azərbaycan dili")) {
+            } else if (newValue.equals(AZERBAIJANSTRING) || newValue.equals(AZERBAIJANFI) || newValue.equals(AZERBAIJANJP)
+                    || newValue.equals(AZERBAIJANAZ)) {
                 UIUtils.setLocale("AZ");
             } else {
                 UIUtils.setLocale("EN");
@@ -97,7 +131,7 @@ public class UIUtils {
             FXMLLoader fxmlLoader = new FXMLLoader(
                     UIUtils.class.getResource(fxmlPath));
 
-            fxmlLoader.setResources(ResourceBundle.getBundle("bundle_" + localeString, new Locale(localeString)));
+            fxmlLoader.setResources(ResourceBundle.getBundle("bundle_" + localeString, Locale.forLanguageTag(localeString)));
 
             fxmlLoader.setControllerFactory(springContext::getBean);
 
@@ -107,11 +141,11 @@ public class UIUtils {
 
             Scene scene = new Scene(fxmlLoader.load(), v, v1);
 
-            System.out.println("Loading FXML " + fxmlPath);
-            System.out.println("Scene " + scene);
-            System.out.println("Stage " + stage);
+            logger.info("Loading FXML {}", fxmlPath);
+            logger.info("Scene {}", scene);
+            logger.info("Stage {}", stage);
 
-            ResourceBundle bundle = ResourceBundle.getBundle("bundle_" + localeString, new Locale(localeString));
+            ResourceBundle bundle = ResourceBundle.getBundle("bundle_" + localeString, Locale.forLanguageTag(localeString));
 
             switch (title) {
                 case "Login":
@@ -135,26 +169,25 @@ public class UIUtils {
                 case "Reports":
                     stage.setTitle(bundle.getString("title.reports"));
                     break;
+                default:
+                    stage.setTitle(title);
+                    break;
             }
 
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            System.out.println("Error loading FXML " + fxmlPath + ": " + e.getMessage());
+            logger.error("Error loading FXML {}", fxmlPath + ": " + e.getMessage());
         }
     }
 
     public static void showAlert(Alert.AlertType alertType, String title, String headerText, String contentText) {
-        // Alert alert = new Alert(alertType);
-        // alert.setTitle(title);
-        // alert.setHeaderText(headerText);
-        // alert.setContentText(contentText);
-        // alert.showAndWait();
-        ResourceBundle bundle = ResourceBundle.getBundle("bundle", new Locale(localeString));
-        System.out.println("Bundle: " + bundle);
-        System.out.println("Title: " + title);
-        System.out.println("Header: " + headerText);
-        System.out.println("Content: " + contentText);
+        ResourceBundle bundle = ResourceBundle.getBundle("bundle", Locale.forLanguageTag(localeString));
+        logger.info("Bundle: {}", bundle);
+        logger.info("Title: {}", title);
+        logger.info("Header: {}", headerText);
+        logger.info("Content: {}", contentText);
+
         Alert alert = new Alert(alertType);
         alert.setTitle(bundle.getString(title));
         alert.setHeaderText(headerText != null ? bundle.getString(headerText) : null);

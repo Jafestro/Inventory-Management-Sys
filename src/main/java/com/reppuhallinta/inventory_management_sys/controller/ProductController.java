@@ -1,8 +1,6 @@
 package com.reppuhallinta.inventory_management_sys.controller;
 
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +12,15 @@ import com.reppuhallinta.inventory_management_sys.service.ProductService;
 @RequestMapping("/api/products")
 public class ProductController {
 
-    @Autowired
+    final
     ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @PostMapping
     public ResponseEntity<Products> createProduct(@RequestBody Products product, @RequestParam int userId) {
-        System.out.println("Received Product: " + product); //debug
-        System.out.println("Received UserId: " + userId); //debug
         Products createdProduct = productService.createProduct(product, userId);
 
         return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);

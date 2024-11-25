@@ -8,27 +8,22 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-
-import org.apache.tomcat.util.file.ConfigurationSource.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import com.reppuhallinta.inventory_management_sys.service.TransactionService;
-
 import javafx.fxml.FXML;
-import session.CustomSessionManager;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import static com.reppuhallinta.inventory_management_sys.utils.UIUtils.ERRORTITLE;
+
 @Controller
 public class EditTransactionController {
-    @Autowired
-    private TransactionService transactionService;
 
-    @Autowired
-    private UserService userService;
+    private final TransactionService transactionService;
+
+    private final UserService userService;
 
     @FXML
     private ComboBox<String> transactionTypeComboBox;
@@ -46,15 +41,14 @@ public class EditTransactionController {
 
     private Transaction transaction;
 
-    private User user;
+    public EditTransactionController(TransactionService transactionService, UserService userService) {
+        this.transactionService = transactionService;
+        this.userService = userService;
+    }
 
     public void setTransaction(Transaction transaction) {
         this.transaction = transaction;
         prefillData(); // Call prefillData after setting the transaction
-    }
-
-    private enum transactionType {
-        ADD, UPDATE
     }
 
     @FXML
@@ -67,15 +61,10 @@ public class EditTransactionController {
 
         String localeString = UIUtils.getLocale();
 
-        ResourceBundle bundle = ResourceBundle.getBundle("bundle_" + localeString, new Locale(localeString));
+        ResourceBundle bundle = ResourceBundle.getBundle("bundle_" + localeString, Locale.forLanguageTag(localeString));
 
         transactionTypeComboBox.getItems().add(bundle.getString("transaction.type.add"));
         transactionTypeComboBox.getItems().add(bundle.getString("transaction.type.update"));
-
-        //transactionTypeComboBox.getItems().add(transactionType.ADD.name());
-        //transactionTypeComboBox.getItems().add(transactionType.UPDATE.name());
-
-        user = (User) CustomSessionManager.getAttribute("user");
 
     }
 
@@ -86,7 +75,7 @@ public class EditTransactionController {
         String username = usernameComboBox.getValue();
         
         if (quantity.isEmpty() || transactionType == null || username == null) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.fillAllFields");
+            UIUtils.showAlert(Alert.AlertType.ERROR, ERRORTITLE, null, "error.fillAllFields");
             return;
         }
 
@@ -95,12 +84,12 @@ public class EditTransactionController {
         try {
             quantityInt = Integer.parseInt(quantity);
         } catch (NumberFormatException e) {
-            UIUtils.showAlert(Alert.AlertType.ERROR,"alert.error", null, "error.quantityValidNumber");
+            UIUtils.showAlert(Alert.AlertType.ERROR, ERRORTITLE, null, "error.quantityValidNumber");
             return;
         }
 
         if (quantityInt <= 0) {
-            UIUtils.showAlert(Alert.AlertType.ERROR, "alert.error", null, "error.invalidQuantity");
+            UIUtils.showAlert(Alert.AlertType.ERROR, ERRORTITLE, null, "error.invalidQuantity");
             return;
         }
 
@@ -116,8 +105,6 @@ public class EditTransactionController {
         transaction.setUserId(newUser.getId());
 
         transactionService.updateTransaction(transaction.getTransactionId(), transaction);
-
-        System.out.println("Transaction updated successfully: " + transaction);
 
         UIUtils.showAlert(Alert.AlertType.INFORMATION, "alert.success", null, "success.transactionUpdated");
 

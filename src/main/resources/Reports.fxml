@@ -19,8 +19,8 @@
     <!-- All Products in Stock -->
     <VBox alignment="CENTER" spacing="10">
         <Text text="%text.allProductsInStock" styleClass="section-title"/>
-        <Button fx:id="GetAllStockProductReportButton"
-                onAction="#GetAllStockProductReportButtonAction"
+        <Button fx:id="getAllStockProductReportButton"
+                onAction="#getAllStockProductReportButtonAction"
                 text="%button.export" styleClass="button"/>
     </VBox>
 
@@ -31,7 +31,7 @@
                    promptText="%prompt.productQuantity"
                    maxWidth="200" styleClass="text-field"/>
         <Button fx:id="transByIdButton"
-                onAction="#GetTransActionsByProductId"
+                onAction="#getTransActionsByProductId"
                 text="%button.export" styleClass="button"/>
     </VBox>
 
@@ -44,18 +44,18 @@
             <ChoiceBox fx:id="transByUserChoiceBox" />
 
         <Button fx:id="TransByUserButton"
-                onAction="#GetTransActionsByUserId"
+                onAction="#getTransActionsByUserId"
                 text="%button.export" styleClass="button"/>
     </VBox>
 
     <!-- Transactions by Date -->
     <VBox alignment="CENTER" spacing="10">
         <Text text="%text.transactionsByDate" styleClass="section-title"/>
-        <DatePicker fx:id="TransByDateDate"
+        <DatePicker fx:id="transByDateDate"
                     promptText="%text.transactionsByDate"
                     maxWidth="200" styleClass="date-picker"/>
-        <Button fx:id="TransByDateButton"
-                onAction="#GetTransActionsByDate"
+        <Button fx:id="transByDateButton"
+                onAction="#getTransActionsByDate"
                 text="%button.export" styleClass="button"/>
     </VBox>
 </VBox>

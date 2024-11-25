@@ -2,7 +2,6 @@ package com.reppuhallinta.inventory_management_sys.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,8 +20,12 @@ import com.reppuhallinta.inventory_management_sys.service.UserService;
 @RequestMapping("/api/users")
 public class UserController {
 
-    @Autowired
+    final
     UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {

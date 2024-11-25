@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import javafx.animation.Animation;
 import javafx.scene.control.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.reppuhallinta.inventory_management_sys.model.Transaction;
@@ -33,11 +33,9 @@ import session.CustomSessionManager;
 
 @Controller
 public class TransactionViewController extends LogoutController {
-    @Autowired
-    private TransactionService transactionService;
+    private final TransactionService transactionService;
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @FXML
     private TableView<Transaction> transactionTable;
@@ -73,23 +71,22 @@ public class TransactionViewController extends LogoutController {
     private ProgressBar autoRefreshProgressBar;
 
     @FXML
-    private ChoiceBox languageChoiceBox;
+    private ChoiceBox<String> languageChoiceBox;
+
+    public TransactionViewController(TransactionService transactionService, UserService userService) {
+        this.transactionService = transactionService;
+        this.userService = userService;
+    }
 
     @FXML
     public void initialize() {
 
-        String sessionId = CustomSessionManager.getSessionId();
-        System.out.println("Session ID in ProductViewController: " + sessionId);
-
         User user = (User) CustomSessionManager.getAttribute("user");
 
-        if (user != null) {
-            if (!"admin".equals(user.getAccessLevel())) 
-                editTransactionButton.setDisable(true);
+        if (user != null && !"admin".equals(user.getAccessLevel())) {
+            editTransactionButton.setDisable(true);
         } 
-        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filterTransactionList(newValue);
-        });
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> filterTransactionList(newValue));
 
         idColumn.setCellValueFactory(new PropertyValueFactory<>("transactionId"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("transactionDate"));
@@ -115,7 +112,7 @@ public class TransactionViewController extends LogoutController {
                 }),
                 new KeyFrame(Duration.seconds(15))
         );
-        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
         UIUtils.setLanguageChoiceBox(languageChoiceBox, "Transactions", "/Transactions.fxml", 1050, 600);
@@ -189,8 +186,8 @@ public class TransactionViewController extends LogoutController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/EditTransaction.fxml"));
             fxmlLoader.setControllerFactory(UIUtils.getSpringContext()::getBean);
-            String locale = UIUtils.getLocale();
-            fxmlLoader.setResources(ResourceBundle.getBundle("bundle_" + locale, new Locale(locale)));
+            String localeString = UIUtils.getLocale();
+            fxmlLoader.setResources(ResourceBundle.getBundle("bundle_" + localeString, Locale.forLanguageTag(localeString)));
             Parent root = fxmlLoader.load();
             EditTransactionController editTransactionController = fxmlLoader.getController();
             editTransactionController.setTransaction(selectedTransaction);

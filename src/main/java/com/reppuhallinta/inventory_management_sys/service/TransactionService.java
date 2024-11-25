@@ -4,14 +4,10 @@ package com.reppuhallinta.inventory_management_sys.service;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.reppuhallinta.inventory_management_sys.model.Transaction;
 import com.reppuhallinta.inventory_management_sys.repository.TransactionRepository;
-
 import jakarta.transaction.Transactional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,16 +15,19 @@ import org.slf4j.LoggerFactory;
 @Service
 public class TransactionService {
 
-    @Autowired
-    private TransactionRepository transactionRepository;
+    private final TransactionRepository transactionRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(TransactionService.class);
 
+    public TransactionService(TransactionRepository transactionRepository) {
+        this.transactionRepository = transactionRepository;
+    }
+
 
     public Transaction createTransaction(Transaction transaction) {
-        logger.info("Transaction creation called, transaction: " + transaction);
+        logger.info("Transaction creation called, transaction: {}", transaction);
         Transaction createdTransaction = transactionRepository.save(transaction);
-        logger.info("Transaction created: " + createdTransaction);
+        logger.info("Transaction created: {}", createdTransaction);
         return createdTransaction;
     }
 

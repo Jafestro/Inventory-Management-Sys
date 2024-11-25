@@ -1,0 +1,112 @@
+# Header 1 Inventory Management System Documentation
+Table of Contents
+Introduction
+Main Features
+System Requirements
+Getting Started
+Clone the Repository
+Database Setup
+Run the Application
+Technologies Used
+Diagrams
+Use Case Diagram
+Activity Diagram
+Contribution Guidelines
+FAQs
+Future Enhancements
+License
+Introduction
+The Inventory Management System (IMS) is a user-friendly solution designed to help businesses efficiently manage their inventory. It supports adding, deleting, and editing products, tracking transactions, and generating automated reorder requests. Whether you are a small business or an enterprise, IMS simplifies inventory management with its scalable and secure architecture.
+
+Main Features
+Product Management: Add, delete, and edit products in your inventory.
+Transaction Tracking: Keep track of product transactions and who made changes.
+Automated Reordering: Enable automated reorders when stock levels fall below a threshold.
+Reports: Export stock change reports to your computer for analysis.
+User Roles: Assign user roles as either Admin (full permissions) or Regular User (limited permissions).
+System Requirements
+Operating System: Windows 10+, macOS, Linux
+Java Version: Java 11 or higher
+Database: MariaDB 10.5 or later
+Memory (RAM): Minimum 2 GB
+Storage: Minimum 500 MB of free space
+Build Tools: Maven 3.6+
+Getting Started
+Clone the Repository
+Use the following command to clone the repository:
+
+bash
+Kopioi koodi
+git clone https://github.com/Jafestro/Inventory-Management-Sys.git
+Database Setup
+Create a database:
+
+sql
+Kopioi koodi
+CREATE DATABASE {yourdatabasename};
+USE {yourdatabasename};
+Run the SQL Script: Use THIS SQL Script to set up the required tables and columns.
+
+Set Up Database Connection
+Locate the application.properties file in the project directory.
+Update the following fields with your database information:
+database-name
+username
+password
+Run the Application
+Build the project:
+
+bash
+Kopioi koodi
+mvn clean install
+Run the application:
+
+bash
+Kopioi koodi
+mvn clean javafx:run
+Technologies Used
+Java: Core programming language.
+Spring Boot: Framework for backend development.
+Maven: Build and dependency management.
+JavaFX: GUI development.
+MariaDB: Relational database for storing inventory data.
+JUnit: Unit testing framework.
+Jacoco: Code coverage tool.
+Jenkins: CI/CD tool for automated builds and testing.
+Diagrams
+Use Case Diagram
+
+
+Activity Diagram
+
+
+Contribution Guidelines
+We welcome contributions to the Inventory Management System! Here's how you can contribute:
+
+Fork the Repository:
+
+Create your own copy of the repository.
+Make Changes:
+
+Implement your changes in a new branch.
+Submit a Pull Request:
+
+Submit your changes for review with a clear explanation of the update.
+Follow Coding Standards:
+
+Ensure your code is clean and follows the project style guide.
+FAQs
+What happens if I forget my admin password?
+
+Contact your database administrator to reset your credentials directly in the database.
+Can I use this system for multiple warehouses?
+
+Not currently, but future updates may include multi-location support.
+What should I do if the application doesn't connect to the database?
+
+Check your database credentials in the application.properties file.
+Ensure the database server is running.
+Future Enhancements
+Multi-Warehouse Support: Manage inventory across multiple locations.
+Mobile Application: Develop a mobile version of the system for Android and iOS.
+Advanced Reporting: Add predictive analytics and trend analysis to inventory reports.

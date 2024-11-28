@@ -157,61 +157,76 @@ mvn clean javafx:run
 [How to add JavaFX SDK to IntelliJ IDEA](https://www.jetbrains.com/help/idea/sdk.html)
 
 ### Tutorials
-<figure>
-  <img src="Screenshots/Login.png" alt="Login Screen" />
-  <figcaption style="color: #00a991; text-align: center;">Here you can login to the application.
+## Login Screen
+
+![Login Screen](Screenshots/Login.png)
+
+Here you can login to the application.  
 If you don't have an account, you can create one by clicking the "Are you not registered yet" button.
-</figcaption>
-</figure>
 
-<figure>
-  <img src="Screenshots/Register.png" alt="Register Screen" />
-  <figcaption style="color: #00a991; text-align: center;">Here you can register a new account.
+---
+
+## Register Screen
+
+![Register Screen](Screenshots/Register.png)
+
+Here you can register a new account.  
 Fill in the required fields and click the "Register" button.
-</figcaption>
-</figure>
 
-<figure>
-  <img src="Screenshots/Products.png" alt="Products Screen" />
-  <figcaption style="color: #00a991; text-align: center;">Here you can view all products.
-On the left you can manage different thing by using the buttons.
-</figcaption>
-</figure>
+---
 
-<figure>
-  <img src="Screenshots/Transactions.png" alt="Transactions Screen" />
-  <figcaption style="color: #00a991; text-align: center;">Here you can view all transactions.
-On the left you can manage different thing by using the buttons.
-</figcaption>
-</figure>
+## Products Screen
 
-<figure>
-  <img src="Screenshots/Reports.png" alt="Reports Screen" />
-  <figcaption style="color: #00a991; text-align: center;">Here you can export different reports.
-You can get to this page by clicking the "Reports" button on the left in products view.
-</figcaption>
-</figure>
+![Products Screen](Screenshots/Products.png)
 
-<figure>
-  <img src="Screenshots/Edit Product.png" alt="E Screen" />
-  <figcaption style="color: #00a991; text-align: center;">Here you can edit a product.
-You can get to this window from products view by selecting a product and then clicking the "Edit product" button.
-</figcaption>
-</figure>
+Here you can view all products.  
+On the left, you can manage different things by using the buttons.
 
-<figure>
-  <img src="Screenshots/Edit Transaction.png" alt="E Screen" />
-  <figcaption style="color: #00a991; text-align: center;">Here you can edit a transaction.
-You can get to this window from transactions view by selecting a transaction and then clicking the "Edit transaction" button.
-</figcaption>
-</figure>
+---
 
-<figure>
-  <img src="Screenshots/Create Product.png" alt="E Screen" />
-  <figcaption style="color: #00a991; text-align: center;">Here you can create a product.
-You can get to this window from products view by clicking the "Create product" button.
-</figcaption>
-</figure>
+## Transactions Screen
+
+![Transactions Screen](Screenshots/Transactions.png)
+
+Here you can view all transactions.  
+On the left, you can manage different things by using the buttons.
+
+---
+
+## Reports Screen
+
+![Reports Screen](Screenshots/Reports.png)
+
+Here you can export different reports.  
+You can get to this page by clicking the "Reports" button on the left in the products view.
+
+---
+
+## Edit Product Screen
+
+![Edit Product Screen](Screenshots/Edit%20Product.png)
+
+Here you can edit a product.  
+You can get to this window from the products view by selecting a product and then clicking the "Edit product" button.
+
+---
+
+## Edit Transaction Screen
+
+![Edit Transaction Screen](Screenshots/Edit%20Transaction.png)
+
+Here you can edit a transaction.  
+You can get to this window from the transactions view by selecting a transaction and then clicking the "Edit transaction" button.
+
+---
+
+## Create Product Screen
+
+![Create Product Screen](Screenshots/Create%20Product.png)
+
+Here you can create a product.
+You can get to this window from the products view by clicking the "Create product" button.
+
 
 
 ## Key-Features

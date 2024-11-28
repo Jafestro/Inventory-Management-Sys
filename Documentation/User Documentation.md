@@ -6,6 +6,7 @@
   - [User Manual](#User-Manual)
   - [Installation](#Installation)
   - [Tutorials](#Tutorials)
+      - [Login Screen](#LoginScreen)   
 - [Key Features](#Key-Features)
     - [Features](#Features)
     - [Step by Step](#Instructions)
@@ -155,7 +156,7 @@ mvn clean javafx:run
 
 [How to add JavaFX SDK to IntelliJ IDEA](https://www.jetbrains.com/help/idea/sdk.html)
 
-### Tutorials
+# Tutorials
 ## Login Screen
 
 ![Login Screen](Screenshots/Login.png)

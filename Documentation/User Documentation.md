@@ -1,27 +1,234 @@
-## Installation
-- Clone the repository
-- Run `mvn clean install` in the root directory of the project
-- Run `mvn clean javafx:run` to start the application
-- If you are using Intellij IDEA, you might need to add JavaFX to the Library. You can do this by following the steps below:
-    - Go to File -> Project Structure
-    - Click on Libraries
-    - Click on the '+' icon and select Java
-    - Navigate to the JavaFX lib folder and select the lib folder
-    - Click on Apply and OK
+# User Documentation
 
-### Prerequisites
+- [Purpose](#purpose)
+- [Audience](#Audience)
+- [Examples](#Examples)
+  - [User Manual](#User-Manual)
+  - [Installation](#Installation)
+  - [Tutorials](#Tutorials)
+- [Key Features](#Key-Features)
+    - [Features](#Features)
+    - [Screenshots, visuals, and examples](#Screenshots)
+    - [Step by Step](#Instructions)
 
-- [Maven](https://maven.apache.org/download.cgi)
-- [Java SDK](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
-- [JavaFX](https://openjfx.io/)
+## Purpose
 
-### Usage
-- Login: On the login screen, enter the username and password and click the login button to access the application.
-- Register: On the login screen, click on the 'Are you not registered yet' link to create a new account.
-- Product Creation: Click on the 'Create Product' button to create a new product.
-- Edit Product: Select a product from the table and click on the 'Edit Product' button to edit the product details.
-- Delete Product: Select a product from the table and click on the 'Delete Product' button to delete the product.
-- View Transaction: Click on the 'Transactions' button to view all the transactions.
-- Edit Transaction: Select a transaction from the table and click on the 'Edit Transaction' button to edit the transaction details.
-- Export Report: In Products page click on the 'Reports' button and select if you would like to export all, by username, by product id or by transaction date.
-- Logout: Click on the 'Logout' button to logout from the application.
+
+## Audience
+
+
+## Examples
+
+
+### User-Manual
+
+
+### Installation
+**1. Clone the repository**
+```sh
+git clone https://github.com/Jafestro/Inventory-Management-Sys.git
+```
+
+**2. Setup database**
+
+You can use for example MariaDB/MySQL.
+
+Copy this database script: 
+
+```sh
+create database invsys;
+
+use invsys;
+
+create table Category
+(
+    Id   int auto_increment
+        primary key,
+    Name varchar(255) null,
+    constraint Name
+        unique (Name)
+);
+
+create table Suppliers
+(
+    SupplierID   int auto_increment
+        primary key,
+    Name         varchar(255) null,
+    ContactEmail varchar(255) null,
+    constraint ContactEmail
+        unique (ContactEmail)
+);
+
+create table Products
+(
+    ProductID    int auto_increment
+        primary key,
+    Name         varchar(255)   null,
+    Price        decimal(38, 2) null,
+    Quantity     int            not null,
+    SupplierID   int            not null,
+    CategoryId   int            null,
+    CategoryName varchar(255)   null,
+    SupplierName varchar(255)   null,
+    constraint FK_Category
+        foreign key (CategoryId) references Category (Id),
+    constraint Products_ibfk_1
+        foreign key (SupplierID) references Suppliers (SupplierID)
+);
+
+create index SupplierID
+    on Products (SupplierID);
+
+create table Users
+(
+    UserId      int auto_increment
+        primary key,
+    username    varchar(255) null,
+    FirstName   varchar(255) null,
+    LastName    varchar(255) null,
+    Password    varchar(255) not null,
+    AccessLevel varchar(255) null,
+    constraint Username
+        unique (username)
+);
+
+create table Transactions
+(
+    TransactionID   int auto_increment
+        primary key,
+    ProductID       int          not null,
+    TransactionDate datetime(6)  null,
+    Quantity        int          not null,
+    TransactionType varchar(255) null,
+    UserId          int          not null,
+    constraint Transactions_ibfk_1
+        foreign key (ProductID) references Products (ProductID),
+    constraint Transactions_ibfk_2
+        foreign key (UserId) references Users (UserId)
+);
+
+create index ProductID
+    on Transactions (ProductID);
+
+create index UserId
+    on Transactions (UserId);
+```
+
+**3. Setup database connection in code**
+Navigate to following file in code:
+```sh
+src/main/resources/application.properties
+```
+
+Copy the following and replace the placeholders with your database credentials:
+
+Replace the file in src/main/resources/application.properties with the following:
+```sh 
+ spring.application.name=inventory_management_sys
+
+spring.datasource.url=jdbc:mariadb://localhost:3306
+spring.datasource.username={YOUR DATABASE USERNAME}
+spring.datasource.password={YOUR DATABASE PASSWORD}
+spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+spring.jpa.hibernate.ddl-auto=update
+
+# Custom properties for schemas
+app.datasource.schema.default=jdbc:mariadb://localhost:3306/invsys
+
+# Show SQL queries in the console
+spring.jpa.show-sql=true
+
+# Use PhysicalNamingStrategyStandardImpl to respect table and column names
+spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+```
+
+**4. Run the application**
+```sh
+mvn clean install
+```
+
+**5. Start the application**
+```sh
+mvn clean javafx:run
+```
+
+**IF YOU ARE USING INTELLIJ YOU MIGHT HAVE TO ADD JAVAFX SDK FILE**
+
+[How to add JavaFX SDK to IntelliJ IDEA](https://www.jetbrains.com/help/idea/sdk.html)
+
+### Tutorials
+<figure>
+  <img src="Screenshots/Login.png" alt="Login Screen" />
+  <figcaption style="color: #00a991; text-align: center;">Here you can login to the application.
+If you don't have an account, you can create one by clicking the "Are you not registered yet" button.
+</figcaption>
+</figure>
+
+<figure>
+  <img src="Screenshots/Register.png" alt="Register Screen" />
+  <figcaption style="color: #00a991; text-align: center;">Here you can register a new account.
+Fill in the required fields and click the "Register" button.
+</figcaption>
+</figure>
+
+<figure>
+  <img src="Screenshots/Products.png" alt="Products Screen" />
+  <figcaption style="color: #00a991; text-align: center;">Here you can view all products.
+On the left you can manage different thing by using the buttons.
+</figcaption>
+</figure>
+
+<figure>
+  <img src="Screenshots/Transactions.png" alt="Transactions Screen" />
+  <figcaption style="color: #00a991; text-align: center;">Here you can view all transactions.
+On the left you can manage different thing by using the buttons.
+</figcaption>
+</figure>
+
+<figure>
+  <img src="Screenshots/Reports.png" alt="Reports Screen" />
+  <figcaption style="color: #00a991; text-align: center;">Here you can export different reports.
+You can get to this page by clicking the "Reports" button on the left in products view.
+</figcaption>
+</figure>
+
+<figure>
+  <img src="Screenshots/Edit Product.png" alt="E Screen" />
+  <figcaption style="color: #00a991; text-align: center;">Here you can edit a product.
+You can get to this window from products view by selecting a product and then clicking the "Edit product" button.
+</figcaption>
+</figure>
+
+<figure>
+  <img src="Screenshots/Edit Transaction.png" alt="E Screen" />
+  <figcaption style="color: #00a991; text-align: center;">Here you can edit a transaction.
+You can get to this window from transactions view by selecting a transaction and then clicking the "Edit transaction" button.
+</figcaption>
+</figure>
+
+<figure>
+  <img src="Screenshots/Create Product.png" alt="E Screen" />
+  <figcaption style="color: #00a991; text-align: center;">Here you can create a product.
+You can get to this window from products view by clicking the "Create product" button.
+</figcaption>
+</figure>
+
+
+## Key-Features
+
+
+### Features
+1. Product Management:
+  - Create, update, and delete products.
+  - View a list of all products with detailed information including price, quantity, category, and supplier.
+2. Category and Supplier Management:
+  - Add new categories and suppliers.
+  - View and select categories and suppliers when creating or updating products.
+3. Transaction Tracking:
+  - Automatic logging of transactions (add, update) for products.
+  - View transaction history for auditing purposes.
+
+### Screenshots
+
+
+### Instructions

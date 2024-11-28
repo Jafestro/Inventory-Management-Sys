@@ -8,7 +8,6 @@
   - [Tutorials](#Tutorials)
 - [Key Features](#Key-Features)
     - [Features](#Features)
-    - [Screenshots, visuals, and examples](#Screenshots)
     - [Step by Step](#Instructions)
 
 ## Purpose
@@ -242,8 +241,5 @@ You can get to this window from the products view by clicking the "Create produc
 3. Transaction Tracking:
   - Automatic logging of transactions (add, update) for products.
   - View transaction history for auditing purposes.
-
-### Screenshots
-
 
 ### Instructions

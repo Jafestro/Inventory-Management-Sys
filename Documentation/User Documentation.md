@@ -6,7 +6,6 @@
   - [User Manual](#User-Manual)
   - [Installation](#Installation)
   - [Tutorials](#Tutorials)
-      - [Login Screen](#LoginScreen)   
 - [Key Features](#Key-Features)
     - [Features](#Features)
     - [Step by Step](#Instructions)

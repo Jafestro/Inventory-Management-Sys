@@ -90,7 +90,7 @@ Non-functional testing ensures that the application performs well under various 
 |------------------------|---------------------------------------------------------------------------------------------------|----------------------|---------------|-------------|
 | Performance Testing     | Evaluate the speed, responsiveness, and stability of the application under load.                  | Ville Timonen           | 29/11/2024  | Pending     |
 | Load Testing            | Simulate multiple users accessing the system simultaneously to test its behavior under stress.    | Jafar Jafarov, Jonne Koivisto, Jasper Kaira              | 29/11/2024  | Pending     |
-| Security Testing        | Identify and mitigate potential vulnerabilities in the software.                                  | Jasper Kaira  | 29/11/2024  | Pending     |
+| Security Testing        | Identify and mitigate potential vulnerabilities in the software.                                  | Jasper Kaira  | 29/11/2024  | Done     |
 | Compatibility Testing   | Test the software on different browsers, devices, and operating systems to ensure compatibility.   | Jonne Koivisto, Patrik Hyytiäinen, Jafar Jafarov              | 18/11/2024  | Done    |
 | Usability Testing       | Evaluate the ease of use and overall user experience of the application.                          | Ville Timonen     | 29/11/2024  | Pending     |
 
@@ -100,7 +100,7 @@ Static code review involves analyzing the code without executing it to ensure qu
 | **Task**               | **Description**                                                                                   | **Responsibility**    | **Due Date**  | **Status**  |
 |------------------------|---------------------------------------------------------------------------------------------------|-----------------------|---------------|-------------|
 | Code Quality Check      | Review code to ensure adherence to coding standards, clarity, and proper documentation.          | Jafar Jafarov | 29/11/2024 | Pending     |
-| Code Duplication Check  | Identify and eliminate duplicated code to improve maintainability.                                | Jasper Kaira             | 29/11/2024  | Pending     |
+| Code Duplication Check  | Identify and eliminate duplicated code to improve maintainability.                                | Jasper Kaira             | 29/11/2024  | Done     |
 | Code Refactoring        | Refactor sections of code to improve readability and efficiency without changing functionality.   | Jonne Koivisto             | 29/11/2024  | Pending     |
 
 ### 3.4 Clean Coding Practices
@@ -109,7 +109,7 @@ Ensure that the code is maintainable, scalable, and readable by following best p
 | **Task**               | **Description**                                                                                   | **Responsibility**  | **Due Date**  | **Status**  |
 |------------------------|---------------------------------------------------------------------------------------------------|---------------------|---------------|-------------|
 | Code Consistency        | Ensure that naming conventions, indentation, and formatting are consistent across the codebase.   | Jonne Koivisto           | 29/11/2024  | Pending     |
-| Commenting Code         | Ensure that all functions, classes, and complex sections of code are well-documented.             | Jasper Kaira           | 29/11/2024  | Pending     |
+| Commenting Code         | Ensure that all functions, classes, and complex sections of code are well-documented.             | Jasper Kaira           | 29/11/2024  | Done     |
 | Code Reviews and Feedback | Conduct regular code reviews with peers to ensure coding best practices are followed.           | Jafar Jafarov, Jonne Koivisto, Jasper Kaira, Patrik Hyytiäinen, Ville Timonen    | 29/11/2024  | Pending     |
 
 ---

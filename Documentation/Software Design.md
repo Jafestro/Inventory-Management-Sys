@@ -16,7 +16,7 @@ This document will provide a detailed description of the system's design, includ
 
 **2. User Register**
 
-- The user registers with their username and password.
+- The user enters first name, last name, username, password.
 
 **3. Token Generation**: On successful login, a token is generated.
 

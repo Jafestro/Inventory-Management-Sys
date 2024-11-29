@@ -83,6 +83,8 @@ public class TransactionViewController extends LogoutController {
     @FXML
     private ChoiceBox<String> languageChoiceBox;
 
+    private Timeline timeline;
+
     /**
      * Constructor for TransactionViewController.
      * 
@@ -124,7 +126,12 @@ public class TransactionViewController extends LogoutController {
 
         loadTransactionData();
 
-        Timeline timeline = new Timeline(
+        if (timeline != null) {
+            timeline.stop();
+            timeline.setCycleCount(0);
+        }
+
+        timeline = new Timeline(
                 new KeyFrame(Duration.seconds(0), event -> {
                     loadTransactionData();
                     updateProgressBar();

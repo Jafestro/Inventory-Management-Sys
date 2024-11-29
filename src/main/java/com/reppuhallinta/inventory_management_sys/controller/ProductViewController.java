@@ -8,16 +8,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.util.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -25,15 +15,35 @@ import org.springframework.stereotype.Controller;
 import com.reppuhallinta.inventory_management_sys.model.Products;
 import com.reppuhallinta.inventory_management_sys.model.User;
 import com.reppuhallinta.inventory_management_sys.service.ProductService;
+import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import session.CustomSessionManager;
 
+/**
+ * Controller class for managing product views.
+ */
 @Controller
 public class ProductViewController extends LogoutController {
 
@@ -92,10 +102,18 @@ public class ProductViewController extends LogoutController {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductViewController.class);
 
+    /**
+     * Constructor for ProductViewController.
+     * 
+     * @param productService the service for managing products
+     */
     public ProductViewController(ProductService productService) {
         this.productService = productService;
     }
 
+    /**
+     * Initializes the controller class.
+     */
     @FXML
     public void initialize() {
 
@@ -140,6 +158,12 @@ public class ProductViewController extends LogoutController {
         UIUtils.setLanguageChoiceBox(languageChoiceBox, "Products", "/Products.fxml", 1050, 600);
     }
   
+    /**
+     * Adds a sort event handler to the given table column.
+     * 
+     * @param column the table column to add the sort event handler to
+     * @param <T> the type of the column
+     */
     private <T> void addSortEventHandler(TableColumn<Products, T> column) {
        Label label = new Label();
        column.setGraphic(label);
@@ -154,6 +178,11 @@ public class ProductViewController extends LogoutController {
         });
     }
 
+    /**
+     * Filters the product list based on the search word.
+     * 
+     * @param searchWord the search word to filter the product list
+     */
     private void filterProductList(String searchWord) {
         ObservableList<Products> filteredList = FXCollections.observableArrayList();
 
@@ -166,12 +195,18 @@ public class ProductViewController extends LogoutController {
         productTable.setItems(filteredList);
     }
 
+    /**
+     * Loads the product data and sets it to the table.
+     */
     private void loadProductData() {
         List<Products> products = productService.getAllProducts();
         ObservableList<Products> productObservableList = FXCollections.observableArrayList(products);
         productTable.setItems(productObservableList);
     }
 
+    /**
+     * Checks the stock levels of products and triggers reorder if necessary.
+     */
     private void checkStockLevels() {
         List<Products> products = productService.getAllProducts();
         for (Products product : products) {
@@ -181,6 +216,11 @@ public class ProductViewController extends LogoutController {
         }
     }
 
+    /**
+     * Triggers reorder for the given product.
+     * 
+     * @param product the product to reorder
+     */
     private void triggerReorder(Products product) {
         // Implement the reorder logic here
         // For example, create a new order or notify the supplier
@@ -193,6 +233,9 @@ public class ProductViewController extends LogoutController {
         alert.showAndWait();
     }
 
+    /**
+     * Handles the action when the transaction button is clicked.
+     */
     public void handleTransactionButtonAction() {
 
         Stage stage = (Stage) transactionButton.getScene().getWindow();
@@ -201,12 +244,18 @@ public class ProductViewController extends LogoutController {
 
     }
 
+    /**
+     * Handles the action when the create product button is clicked.
+     */
     public void handleCreateProductButtonAction() {
         Stage stage = new Stage();
 
         UIUtils.loadFXML("/CreateProduct.fxml", stage, "Create Product", 500, 600, null);
     }
 
+    /**
+     * Handles the action when the edit product button is clicked.
+     */
     @FXML
     private void handleEditProduct() {
         Products selectedProduct = productTable.getSelectionModel().getSelectedItem();
@@ -234,12 +283,18 @@ public class ProductViewController extends LogoutController {
         }
     }
 
+    /**
+     * Handles the action when the reports button is clicked.
+     */
     public void handleReportsButtonAction() {
         Stage stage = new Stage();
 
         UIUtils.loadFXML("/Reports.fxml", stage, "Reports", 524, 600, null);
     }
 
+    /**
+     * Handles the action when the delete product button is clicked.
+     */
     @FXML
     public void handleDeleteProductButtonAction() {
         Products selectedProduct = productTable.getSelectionModel().getSelectedItem();
@@ -253,10 +308,16 @@ public class ProductViewController extends LogoutController {
         loadProductData();
     }
 
+    /**
+     * Handles the action when the refresh button is clicked.
+     */
     public void handleRefreshButtonAction() {
         loadProductData();
     }
 
+    /**
+     * Updates the progress bar.
+     */
     private void updateProgressBar() {
         Timeline progressBarTimeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(autoRefreshProgressBar.progressProperty(), 0)),

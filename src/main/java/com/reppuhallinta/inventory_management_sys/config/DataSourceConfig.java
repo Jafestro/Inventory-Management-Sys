@@ -10,6 +10,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+/**
+ * Configuration class for setting up data sources.
+ */
 @Configuration
 public class DataSourceConfig {
 
@@ -34,6 +37,11 @@ public class DataSourceConfig {
     @Value("${app.datasource.schema.jp}")
     private String jpSchema;
 
+   /**
+     * Configures the data source with routing based on the current language.
+     * 
+     * @return the configured DataSource
+    */
    @Bean
     public DataSource dataSource() {
         // Define data sources for each language
@@ -57,6 +65,14 @@ public class DataSourceConfig {
         return routingDataSource;
     }
 
+    /**
+     * Creates a data source for the given schema.
+     * 
+     * @param url the URL of the schema
+     * @param username the username for the data source
+     * @param password the password for the data source
+     * @return the created DataSource
+     */
     private DataSource createDataSource(String url, String username, String password) {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUrl(url);

@@ -19,6 +19,10 @@ import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 import lombok.Setter;
 
+
+/**
+ * Utility class for managing UI-related tasks.
+ */
 public class UIUtils {
 
     private static final String ENGLISHSTRING = "English";
@@ -50,16 +54,26 @@ public class UIUtils {
         throw new IllegalStateException("Utility class");
     }
 
-
+    /**
+     * Sets the locale for the application.
+     * 
+     * @param locale the locale to set
+     */
     public static void setLocale(String locale) {
         localeString = locale;
         LanguageContext.setLanguage(locale); // Update the ThreadLocal context
     }
 
+    /**
+     * Retrieves the current locale.
+     * 
+     * @return the current locale
+     */
     public static String getLocale() {
         return localeString;
     }
 
+    
     private static List<String> languagesEnglish = List.of(ENGLISHSTRING, FINNISHSTRING, JAPANESESTRING, AZERBAIJANSTRING);
 
     private static List<String> langaugesFinnish = List.of(ENGLISHFI, FINNISHFI, JAPANESEFI, AZERBAIJANFI);
@@ -75,6 +89,15 @@ public class UIUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(UIUtils.class);
 
+    /**
+     * Sets the language choice box with available languages and handles language selection.
+     * 
+     * @param languageChoiceBox the choice box to set
+     * @param titleToSet the title to set
+     * @param fxmlPath the path to the FXML file
+     * @param currentWidth the current width of the stage
+     * @param currentHeight the current height of the stage
+     */
     public static void setLanguageChoiceBox(ChoiceBox<String> languageChoiceBox, String titleToSet, String fxmlPath,
             double currentWidth, double currentHeight) {
         String language = UIUtils.getLocale();
@@ -126,6 +149,17 @@ public class UIUtils {
         });
     }
 
+    /**
+     * Loads an FXML file and sets the scene for the given stage.
+     * 
+     * @param fxmlPath the path to the FXML file
+     * @param stage the stage to set the scene for
+     * @param title the title to set for the stage
+     * @param width the width of the scene
+     * @param height the height of the scene
+     * @param controller the controller to set for the FXML loader, can be null
+     * @throws IOException if the FXML file cannot be loaded
+     */
     public static void loadFXML(String fxmlPath, Stage stage, String title, double v, double v1, Object controller) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(
@@ -181,6 +215,14 @@ public class UIUtils {
         }
     }
 
+    /**
+     * Shows an alert dialog with the given message and title.
+     * 
+     * @param alertType the type of alert
+     * @param title the title of the alert
+     * @param headerText the header text of the alert
+     * @param contentText the content text of the alert
+     */
     public static void showAlert(Alert.AlertType alertType, String title, String headerText, String contentText) {
         ResourceBundle bundle = ResourceBundle.getBundle("bundle", Locale.forLanguageTag(localeString));
         logger.info("Bundle: {}", bundle);
@@ -195,6 +237,14 @@ public class UIUtils {
         alert.showAndWait();
     }
 
+     /**
+     * Shows a confirmation dialog with the given message and title.
+     * 
+     * @param title the title of the confirmation dialog
+     * @param headerText the header text of the confirmation dialog
+     * @param contentText the content text of the confirmation dialog
+     * @return an Optional containing the user's response
+     */
     public static Optional<ButtonType> showConfirmationDialog(String title, String headerText, String contentText) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
@@ -203,10 +253,20 @@ public class UIUtils {
         return alert.showAndWait();
     }
 
+    /**
+     * Retrieves the Spring application context.
+     * 
+     * @return the Spring application context
+     */
     public static ApplicationContext getSpringContext() {
         return springContext;
     }
 
+    /**
+     * Closes the window associated with the given button.
+     * 
+     * @param button the button whose window to close
+     */
     public static void closeWindow(Button button) {
 
         Stage stage = (Stage) button.getScene().getWindow();

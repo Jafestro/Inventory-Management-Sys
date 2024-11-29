@@ -1,5 +1,10 @@
 package com.reppuhallinta.inventory_management_sys.controller;
 
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+
 import com.reppuhallinta.inventory_management_sys.model.Category;
 import com.reppuhallinta.inventory_management_sys.model.Products;
 import com.reppuhallinta.inventory_management_sys.model.Suppliers;
@@ -7,22 +12,20 @@ import com.reppuhallinta.inventory_management_sys.model.User;
 import com.reppuhallinta.inventory_management_sys.service.CategoryService;
 import com.reppuhallinta.inventory_management_sys.service.ProductService;
 import com.reppuhallinta.inventory_management_sys.service.SupplierService;
-
 import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
+import static com.reppuhallinta.inventory_management_sys.utils.UIUtils.ERRORTITLE;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.springframework.stereotype.Controller;
 import session.CustomSessionManager;
 
-import java.math.BigDecimal;
-import java.util.List;
-
-import static com.reppuhallinta.inventory_management_sys.utils.UIUtils.ERRORTITLE;
-
+/**
+ * Controller class for editing products.
+ */
 @Controller
 public class EditProductController {
 
@@ -58,12 +61,24 @@ public class EditProductController {
 
     private List<Suppliers> suppliers;
 
+    /**
+     * Constructor for EditProductController.
+     * 
+     * @param productService the service for managing products
+     * @param categoryService the service for managing categories
+     * @param supplierService the service for managing suppliers
+     */
     public EditProductController(ProductService productService, CategoryService categoryService, SupplierService supplierService) {
         this.productService = productService;
         this.categoryService = categoryService;
         this.supplierService = supplierService;
     }
 
+    /**
+     * Sets the product to be edited and pre-fills the data.
+     * 
+     * @param product the product to set
+     */
     public void setProduct(Products product) {
         this.product = product;
         if (categories != null && suppliers != null) {
@@ -71,6 +86,9 @@ public class EditProductController {
         }
     }
 
+    /**
+     * Initializes the controller class.
+     */
     @FXML
     public void initialize() {
         categories = getAllCategories();
@@ -91,6 +109,9 @@ public class EditProductController {
         user = (User) CustomSessionManager.getAttribute("user");
     }
 
+    /**
+     * Pre-fills the fields with the product data.
+     */
     private void prefillFields() {
         productNameField.setText(product.getProductName());
         productPriceField.setText(product.getPrice().toString());
@@ -110,6 +131,9 @@ public class EditProductController {
     }
 
 
+    /**
+     * Handles the action when the update product button is clicked.
+     */
     public void updateProductButtonOnAction() {
         String productName = productNameField.getText();
         String productPrice = productPriceField.getText();
@@ -173,10 +197,20 @@ public class EditProductController {
         }
     }
 
+     /**
+     * Retrieves all categories.
+     * 
+     * @return a list of all categories
+     */
     private List<Category> getAllCategories() {
         return categoryService.getAllCategories();
     }
 
+    /**
+     * Retrieves all suppliers.
+     * 
+     * @return a list of all suppliers
+     */
     private List<Suppliers> getAllSuppliers() {
         return supplierService.getAllSuppliers();
     }

@@ -1,23 +1,27 @@
 package com.reppuhallinta.inventory_management_sys.controller;
 
-import com.reppuhallinta.inventory_management_sys.model.Transaction;
-import com.reppuhallinta.inventory_management_sys.model.User;
-import com.reppuhallinta.inventory_management_sys.service.UserService;
-import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
-import org.springframework.stereotype.Controller;
-import com.reppuhallinta.inventory_management_sys.service.TransactionService;
-import javafx.fxml.FXML;
-
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import org.springframework.stereotype.Controller;
+
+import com.reppuhallinta.inventory_management_sys.model.Transaction;
+import com.reppuhallinta.inventory_management_sys.model.User;
+import com.reppuhallinta.inventory_management_sys.service.TransactionService;
+import com.reppuhallinta.inventory_management_sys.service.UserService;
+import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
 import static com.reppuhallinta.inventory_management_sys.utils.UIUtils.ERRORTITLE;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+
+/**
+ * Controller class for editing transactions.
+ */
 @Controller
 public class EditTransactionController {
 
@@ -41,16 +45,30 @@ public class EditTransactionController {
 
     private Transaction transaction;
 
+    /**
+     * Constructor for EditTransactionController.
+     * 
+     * @param transactionService the service for managing transactions
+     * @param userService the service for managing users
+     */
     public EditTransactionController(TransactionService transactionService, UserService userService) {
         this.transactionService = transactionService;
         this.userService = userService;
     }
 
+    /**
+     * Sets the transaction to be edited and pre-fills the data.
+     * 
+     * @param transaction the transaction to set
+     */
     public void setTransaction(Transaction transaction) {
         this.transaction = transaction;
         prefillData(); // Call prefillData after setting the transaction
     }
 
+    /**
+     * Initializes the controller class.
+     */
     @FXML
     public void initialize() {
         users = userService.getAllUsers();
@@ -68,6 +86,9 @@ public class EditTransactionController {
 
     }
 
+    /**
+     * Handles the action when the update transaction button is clicked.
+     */
     @FXML
     public void updateTransactionButtonOnAction() {
         String quantity = quantityField.getText();
@@ -111,6 +132,9 @@ public class EditTransactionController {
         UIUtils.closeWindow(editButton);
     }
 
+    /**
+     * Pre-fills the data for the transaction to be edited.
+     */
     private void prefillData() {
         if (transaction != null) {
             quantityField.setText(String.valueOf(transaction.getQuantity()));

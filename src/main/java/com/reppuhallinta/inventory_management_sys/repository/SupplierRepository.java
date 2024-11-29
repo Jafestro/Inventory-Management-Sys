@@ -5,7 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import com.reppuhallinta.inventory_management_sys.model.Suppliers;
 
+/**
+ * Repository interface for managing Supplier entities.
+ */
 @Repository
-public interface SupplierRepository extends JpaRepository<Suppliers, Integer>{
+public interface SupplierRepository extends JpaRepository<Suppliers, Integer> {
     
 }

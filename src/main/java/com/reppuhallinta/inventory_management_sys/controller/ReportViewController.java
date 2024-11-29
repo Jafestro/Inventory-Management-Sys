@@ -1,29 +1,35 @@
 package com.reppuhallinta.inventory_management_sys.controller;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+
 import com.reppuhallinta.inventory_management_sys.model.Products;
 import com.reppuhallinta.inventory_management_sys.model.Transaction;
 import com.reppuhallinta.inventory_management_sys.model.User;
 import com.reppuhallinta.inventory_management_sys.service.ProductService;
 import com.reppuhallinta.inventory_management_sys.service.TransactionService;
 import com.reppuhallinta.inventory_management_sys.service.UserService;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.springframework.stereotype.Controller;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.ZoneId;
-import java.util.Date;
-import java.util.List;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
-
-
+/**
+ * Controller class for managing report views.
+ */
 @Controller
 public class ReportViewController {
 
@@ -49,13 +55,22 @@ public class ReportViewController {
     LocalDate date = LocalDate.now();
     String time = notFormattedTime.format(myFormatObj);
 
+    /**
+     * Constructor for ReportViewController.
+     * 
+     * @param productService the service for managing products
+     * @param transactionService the service for managing transactions
+     * @param userService the service for managing users
+     */
     public ReportViewController(ProductService productService, TransactionService transactionService, UserService userService) {
         this.productService = productService;
         this.transactionService = transactionService;
         this.userService = userService;
     }
 
-
+    /**
+     * Initializes the controller class.
+     */
     @FXML
     private void initialize() {
         users = userService.getAllUsers();
@@ -66,6 +81,9 @@ public class ReportViewController {
 
     }
 
+    /**
+     * Handles the action for generating a report of all stock products.
+     */
     @FXML
     private void getAllStockProductReportButtonAction() {
         List<Products> products = productService.getAllProducts();
@@ -86,6 +104,12 @@ public class ReportViewController {
         generateDownloadableFile(report.toString(), filename);
     }
 
+    /**
+     * Generates a downloadable file with the given content and filename.
+     * 
+     * @param content the content to write to the file
+     * @param filename the name of the file
+     */
     private void generateDownloadableFile(String content, String filename) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Report");
@@ -102,6 +126,9 @@ public class ReportViewController {
         }
     }
 
+    /**
+     * Handles the action for generating a report of transactions by product ID.
+     */
     @FXML
     private void getTransActionsByProductId() {
         int id = Integer.parseInt(transByIdField.getText());
@@ -123,6 +150,9 @@ public class ReportViewController {
         generateDownloadableFile(report.toString(), filename);
     }
 
+    /**
+     * Handles the action for generating a report of transactions by user ID.
+     */
     @FXML
     private void getTransActionsByUserId() {
 
@@ -157,6 +187,9 @@ public class ReportViewController {
         generateDownloadableFile(report.toString(), filename);
     }
 
+    /**
+     * Handles the action for generating a report of transactions by date.
+     */
     @FXML
     private void getTransActionsByDate() {
         LocalDate localDate = transByDateDate.getValue();

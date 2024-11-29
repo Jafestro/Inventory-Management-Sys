@@ -28,54 +28,53 @@
 
 # 1. Introduction
 
----
+
 
 
 
 # 2. Customer Requirements
 
----
+
 
 
 
 # 3. Development Methods
 
----
+
 
 
 
 # 4. System Design and Architecture
 
----
+
 
 
 
 # 5. Implementation
 
----
+
 
 ## 5.1 UI
 
----
+
 
 ## 5.2 Database
 
----
+
 
 # 6. QA
 
----
+
 
 ## 6.1 Testing
 
----
+
 
 ## 6.2 Clean Code
 
----
+
 
 
 
 # 7. Summary
 
----

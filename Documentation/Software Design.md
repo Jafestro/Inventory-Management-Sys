@@ -93,4 +93,4 @@ This document will provide a detailed description of the system's design, includ
 - The system saves the file to the user's computer to selected location
 
 ##### Key Classes:
-- [ReportController](/src/main/java/com/reppuhallinta/inventory_management_sys/controller/ReportController.java): Handles report generation requests.
+- [ReportController](/src/main/java/com/reppuhallinta/inventory_management_sys/controller/ReportViewController.java): Handles report generation requests.

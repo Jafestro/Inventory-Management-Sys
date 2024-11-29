@@ -60,6 +60,8 @@
 
 ## 5.2 Database
 
+[Database Script](..%2Fsqlscript)
+
 ## Tables and Purpose
 
 ### 1. `Category`
@@ -122,8 +124,6 @@
 4. **Transactions ↔ Users**: Linked via `UserId`.
 
 ---
-
-[Database Script](..%2Fsqlscript)
 
 # 6. QA
 

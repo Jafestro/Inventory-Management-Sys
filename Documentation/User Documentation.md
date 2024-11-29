@@ -34,7 +34,7 @@ You can use for example MariaDB/MySQL.
 
 You can get sql script from here:
 
-[SQL SCRIPT](sqlscript)
+[SQL SCRIPT](../sqlscript)
 
 **3. Setup database connection in code**
 Navigate to following file in code:

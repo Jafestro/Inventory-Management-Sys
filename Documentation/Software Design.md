@@ -14,11 +14,15 @@ This document will provide a detailed description of the system's design, includ
 
 - The system checks the credentials against the stored user data.
 
-**2. Token Generation**: On successful login, a token is generated.
+**2. User Register**
+
+- The user registers with their username and password.
+
+**3. Token Generation**: On successful login, a token is generated.
 
 - This token is used for secure access to user-specific data.
 
-**3. Token Validation**: For each subsequent request, the token is validated to ensure the user is authenticated.
+**4. Token Validation**: For each subsequent request, the token is validated to ensure the user is authenticated.
 
 - If the token is valid, the request is processed; otherwise, an authentication error is returned.
 

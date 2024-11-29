@@ -1,6 +1,7 @@
 package com.reppuhallinta.inventory_management_sys.controller;
 
 import java.math.BigDecimal;
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -102,6 +103,8 @@ public class ProductViewController extends LogoutController {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductViewController.class);
 
+    private Timeline timeline;
+
     /**
      * Constructor for ProductViewController.
      * 
@@ -123,7 +126,9 @@ public class ProductViewController extends LogoutController {
             createProductButton.setDisable(true);
             editProductButton.setDisable(true);
             deleteProductButton.setDisable(true);
-        } 
+        }
+
+
 
         searchField.textProperty().addListener((observable, oldValue, newValue) -> filterProductList(newValue));
 
@@ -143,7 +148,14 @@ public class ProductViewController extends LogoutController {
 
         loadProductData();
 
-        Timeline timeline = new Timeline(
+        System.out.println(timeline);
+
+        if (timeline != null) {
+            timeline.stop();
+            timeline.setCycleCount(0);
+        }
+
+         timeline = new Timeline(
                 new KeyFrame(Duration.seconds(0), event -> {
                     loadProductData();
                     updateProgressBar();

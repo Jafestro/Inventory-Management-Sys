@@ -318,7 +318,60 @@ This document will provide a detailed description of the system's design, includ
 
 
 # 7. Deployment Process
+**1. Clone the repository**
+```sh
+git clone https://github.com/Jafestro/Inventory-Management-Sys.git
+```
 
+**2. Setup database**
+
+You can use for example MariaDB/MySQL.
+
+You can get sql script from here:
+
+[SQL SCRIPT](../sqlscript)
+
+**3. Setup database connection in code**
+Navigate to following file in code:
+```sh
+src/main/resources/application.properties
+```
+
+Copy the following and replace the placeholders with your database credentials:
+
+Replace the file in src/main/resources/application.properties with the following:
+```sh 
+ spring.application.name=inventory_management_sys
+
+spring.datasource.url=jdbc:mariadb://localhost:3306
+spring.datasource.username={YOUR DATABASE USERNAME}
+spring.datasource.password={YOUR DATABASE PASSWORD}
+spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+spring.jpa.hibernate.ddl-auto=update
+
+# Custom properties for schemas
+app.datasource.schema.default=jdbc:mariadb://localhost:3306/invsys
+
+# Show SQL queries in the console
+spring.jpa.show-sql=true
+
+# Use PhysicalNamingStrategyStandardImpl to respect table and column names
+spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+```
+
+**4. Run the application**
+```sh
+mvn clean install
+```
+
+**5. Start the application**
+```sh
+mvn clean javafx:run
+```
+
+**IF YOU ARE USING INTELLIJ YOU MIGHT HAVE TO ADD JAVAFX SDK FILE**
+
+[How to add JavaFX SDK to IntelliJ IDEA](https://www.jetbrains.com/help/idea/sdk.html)
 
 # 8. Summary
 

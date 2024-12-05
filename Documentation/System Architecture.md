@@ -8,5 +8,10 @@
 - Backend: Spring Boot
 - Database: MariaDB
 
-## Diagram
+## Diagrams
+
+### Deployment diagram
 ![System Architecture Diagram](Diagrams/Sijoittelukaavio.png)
+
+### Database diagram
+![Database Diagram](Diagrams/database-diagram.png)

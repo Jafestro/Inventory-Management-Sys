@@ -36,15 +36,86 @@
 
 
 
-# 2. Customer Requirements
+## 2. Customer Requirements
+
+For invetory management system, the customer requires the following features:
+
+### 2.1 Product Management
+- **Add Product**  
+  Capability to add new products to the inventory, including fields for:
+  - Product name
+  - Product price
+  - Quantity
+  - Category
+  - Supplier
 
 
+- **Delete Product**  
+  Option to permanently remove products from the inventory when no longer needed.
 
 
+- **Edit/Update Product**  
+  Allow updates to:
+  - Product name
+  - Product price
+  - Quantity
+  - Category
+  - Supplier
+---
 
+### 2.2 Product Search and Sorting
+- **Search Products**  
+  A search bar to quickly locate products by:
+  - Product name
+
+
+- **Sort Products in Tables**  
+  Sort tables by:
+  - Name
+  - Price
+  - Quantity
+  - Supplier
+  - Category
+---
+
+### 2.3 Reports
+- **Generate Reports**
+
+  Create inventory reports:
+  - All stock products
+  - Transactions by product ID
+  - Transactions by user ID
+  - Transactions by date
+---
+
+### 2.4 Transactions Page
+- **View Transactions**  
+  Display all transactions in a table with the following columns:
+  - Transaction ID
+  - Product ID
+  - Transaction date
+  - Quantity
+  - Transaction type (Add, Update, Delete)
+  - User that made the transaction
+---
+
+### 2.5 Reports
+- **Generate Reports**  
+  Create inventory reports:
+  - All stock products
+  - Transactions by product ID
+  - Transactions by user ID
+  - Transactions by date
+---
+
+### 2.6 User Management
+- **User Authentication**  
+  Login and register for users with:
+  - Name
+  - Username
+  - Password
+---
 # 3. Development Methods
-
-
 
 
 

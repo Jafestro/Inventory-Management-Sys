@@ -9,7 +9,9 @@
 - [3. Development Methods](#3-development-methods)
 
 - [4. System Design and Architecture](#4-system-design-and-architecture)
+
   - [4.1 Technologies Used](#41-Technologies-Used)
+  
   - [4.2 Software Design](#42-Software-Design)
 
 - [5. Implementation](#5-implementation)

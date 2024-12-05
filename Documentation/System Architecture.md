@@ -14,4 +14,4 @@
 ![System Architecture Diagram](Diagrams/Sijoittelukaavio.png)
 
 ### Database diagram
-![Database Diagram](Diagrams/databasediagram.png)
+![Database Diagram](Diagrams/database-diagram.png)

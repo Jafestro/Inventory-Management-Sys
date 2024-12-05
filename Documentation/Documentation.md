@@ -36,7 +36,7 @@
 
 
 
-## 2. Customer Requirements
+# 2. Customer Requirements
 
 For invetory management system, the customer requires the following features:
 

@@ -11,20 +11,20 @@
 - [4. System Design and Architecture](#4-system-design-and-architecture)
 
   - [4.1 Technologies Used](#41-Technologies-Used)
-  
+
   - [4.2 Software Design](#42-Software-Design)
 
 - [5. Implementation](#5-implementation)
 
-    - [5.1 UI](#51-ui)
+  - [5.1 UI](#51-ui)
 
-    - [5.2 Database](#52-database)
+  - [5.2 Database](#52-database)
 
 - [6. QA](#6-qa)
 
-    - [6.1 Testing](#61-testing)
+  - [6.1 Testing](#61-testing)
 
-    - [6.2 Clean Code](#62-clean-code)
+  - [6.2 Clean Code](#62-clean-code)
 
 - [7. Deployment Process](#7-Deployment-Process)
 
@@ -248,53 +248,53 @@ This document will provide a detailed description of the system's design, includ
 ### 1. `Category`
 - **Purpose**: Organizes products by category.
 - **Columns**:
-    - `Id`: Primary key.
-    - `Name`: Unique category name.
+  - `Id`: Primary key.
+  - `Name`: Unique category name.
 
 ---
 
 ### 2. `Suppliers`
 - **Purpose**: Stores supplier details.
 - **Columns**:
-    - `SupplierID`: Primary key.
-    - `Name`: Supplier name.
-    - `ContactEmail`: Unique email.
+  - `SupplierID`: Primary key.
+  - `Name`: Supplier name.
+  - `ContactEmail`: Unique email.
 
 ---
 
 ### 3. `Products`
 - **Purpose**: Maintains product details and links to suppliers and categories.
 - **Columns**:
-    - `ProductID`: Primary key.
-    - `Name`: Product name.
-    - `Price`: Decimal price.
-    - `Quantity`: Stock count (not null).
-    - `SupplierID`: Foreign key to `Suppliers`.
-    - `CategoryId`: Foreign key to `Category`.
-    - **Indexes**: `SupplierID`.
+  - `ProductID`: Primary key.
+  - `Name`: Product name.
+  - `Price`: Decimal price.
+  - `Quantity`: Stock count (not null).
+  - `SupplierID`: Foreign key to `Suppliers`.
+  - `CategoryId`: Foreign key to `Category`.
+  - **Indexes**: `SupplierID`.
 
 ---
 
 ### 4. `Users`
 - **Purpose**: Manages user authentication and roles.
 - **Columns**:
-    - `UserId`: Primary key.
-    - `username`: Unique username.
-    - `Password`: Encrypted (not null).
-    - `AccessLevel`: User role.
+  - `UserId`: Primary key.
+  - `username`: Unique username.
+  - `Password`: Encrypted (not null).
+  - `AccessLevel`: User role.
 
 ---
 
 ### 5. `Transactions`
 - **Purpose**: Logs product sales or restocking.
 - **Columns**:
-    - `TransactionID`: Primary key.
-    - `ProductID`: Foreign key to `Products`.
-    - `TransactionDate`: Timestamp.
-    - `Quantity`: Transaction quantity.
-    - `TransactionType`: Sale or restock.
-    - `UserId`: Foreign key to `Users`.
-    - **Indexes**: `ProductID`, `UserId`.
+  - `TransactionID`: Primary key.
+  - `ProductID`: Foreign key to `Products`.
+  - `TransactionDate`: Timestamp.
+  - `Quantity`: Transaction quantity.
+  - `TransactionType`: Sale or restock.
+  - `UserId`: Foreign key to `Users`.
+  - **Indexes**: `ProductID`, `UserId`.
 
 ---
 

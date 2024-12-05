@@ -38,7 +38,7 @@
 
 # 2. Customer Requirements
 
-For invetory management system, the customer requires the following features:
+For inventory management system, the customer requires the following features:
 
 ### 2.1 Product Management
 - **Add Product**  

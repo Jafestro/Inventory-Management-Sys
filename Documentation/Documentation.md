@@ -14,6 +14,8 @@
 
   - [4.2 Software Design](#42-Software-Design)
 
+  - [4.3 System Architecture](#43-System-Architecture)
+
 - [5. Implementation](#5-implementation)
 
   - [5.1 UI](#51-ui)

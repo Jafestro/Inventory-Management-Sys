@@ -34,8 +34,32 @@
 
 # 1. Project Overview
 
+### Project Name
+**VectraVault**
 
+### Description
+VectraVault is a JavaFX-based inventory management system tailored for small businesses and individual users to effectively manage their item catalogs. The system simplifies tracking, updating, and managing inventory, ensuring seamless operations while reducing manual errors.
 
+### Goals
+- Deliver a robust and user-friendly platform for inventory management.
+- Enable easy tracking of inventory levels and transactions.
+- Provide tools for generating insightful reports for better decision-making.
+
+### Scope
+VectraVault incorporates the following features:
+- **User Authentication**: Registration and login functionality.
+- **Product Management**: Add, update, delete, and view products.
+- **Inventory Tracking**: Monitor inventory levels to prevent overstocking or stock outs.
+- **Transaction Management**: Log and analyze inventory movements.
+- **Report Generation**: Generate reports for better insights into inventory operations, things like stock of all products, transactions by product ID, transactions by user ID, and transactions by date.
+
+### Target Audience
+VectraVault is designed for businesses, inventory managers, and individuals seeking an efficient tool to manage their inventory.
+
+### Technology Stack
+- **Frontend**: JavaFX for a user-friendly graphical interface.
+- **Backend**: SpringBoot for robust backend functionality.
+- **Database**: MariaDB for storing inventory, transaction data and user information.
 
 
 # 2. Customer Requirements
@@ -123,9 +147,19 @@ For inventory management system, the customer requires the following features:
 
 # 4. System Design and Architecture
 
-
-
 ## 4.1 Technologies Used
+
+### Introduction
+This document provides an overview of the technologies used in the development of the project.
+
+**Frontend:** JavaFX
+**Backend:** Spring Boot
+**Database:** MariaDB
+**Authentication:** Spring Security
+**Version Control:** Git, GitHub
+**Build Tool:** Maven
+**CI/CD:** Jenkins
+**Testing:** JUnit, Jacoco, Mockito
 
 
 
@@ -163,7 +197,7 @@ This document will provide a detailed description of the system's design, includ
 
 ### Product Management Flow
 
-##### 1. Product Creation:
+#### 1. Product Creation:
 
 - The user fills in the product details (name, price, quantity, category, supplier) in the form.
 - The system validates the input fields.
@@ -206,7 +240,7 @@ This document will provide a detailed description of the system's design, includ
 - [TransactionService](/src/main/java/com/reppuhallinta/inventory_management_sys/service/TransactionService.java): Manages transaction-related operations.
 
 
-## Transaction Management Flow
+### Transaction Management Flow
 
 #### 1. Transaction Logging:
 - The system logs all product-related transactions (creation, update, deletion).
@@ -220,7 +254,7 @@ This document will provide a detailed description of the system's design, includ
 - [TransactionService](/src/main/java/com/reppuhallinta/inventory_management_sys/service/TransactionService.java): Manages transaction-related operations.
 - [TransactionController](/src/main/java/com/reppuhallinta/inventory_management_sys/controller/TransactionController.java): Handles transaction history requests.
 
-## Report Generation Flow
+### Report Generation Flow
 
 #### 1. Report Export:
 - The user selects if they want to export all products in stock, transactions by product id, transaction by user id or transaction by date
@@ -229,6 +263,41 @@ This document will provide a detailed description of the system's design, includ
 
 ##### Key Classes:
 - [ReportController](/src/main/java/com/reppuhallinta/inventory_management_sys/controller/ReportViewController.java): Handles report generation requests.
+
+### Search Functionality
+
+#### 1. Product Search:
+- The user enters a search query in the search bar.
+- The system retrieves products that match the search query.
+- The system displays the search results to the user in the table view.
+
+#### 3. Transaction Search:
+- The user enters a search query in the search bar.
+- The system retrieves transactions that match the search query.
+- The system displays the search results to the user in the table view.
+
+##### Key Classes:
+- [ProductViewController](/src/main/java/com/reppuhallinta/inventory_management_sys/controller/ProductViewController.java): Contains the method for product search.
+- [TransactionViewController](/src/main/java/com/reppuhallinta/inventory_management_sys/controller/TransactionViewController.java): Contains the method for transaction search.
+
+## 4.3 System Architecture
+
+### Overview
+- Overall architecture of the system
+
+### System Architecture
+- Frontend: JavaFX
+- Backend: Spring Boot
+- Database: MariaDB
+
+### Diagrams
+
+#### Deployment diagram
+![System Architecture Diagram](Diagrams/Sijoittelukaavio.png)
+
+#### Database diagram
+![Database Diagram](Diagrams/database-diagram.png)
+
 
 
 # 5. Implementation

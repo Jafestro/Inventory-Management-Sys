@@ -400,9 +400,55 @@ This document will provide a detailed description of the system's design, includ
 
 # 6. QA
 
+### User Acceptance Testing (UAT)
+
+- **Description**: Manual testing by project team members to validate the application against business requirements. Feedback is also gathered from real users to ensure the application meets their needs.
+- **Tools**: Manual testing by project team members
+- **Tools**: Discord for live testing sessions and reporting bugs. Team members communicated and documented any issues or feedback directly in Discord.
 
 
 ## 6.1 Testing
+### Unit Testing
+- **Framework**: JUnit
+- **Description**: JUnit is used for testing individual methods and classes in isolation to ensure they work as expected.
+- **Tools**: JUnit, Mockito
+- **Tests done**: 
+  - **testUser**
+  - **testProductAndSupplier**
+  - **testCategory**
+  - **testTransaction**
+
+### Integration Testing
+
+- **Framework**: Spring Boot Test
+- **Description**: Spring Boot Test is used for testing the integration of multiple components, such as controllers, services, and repositories, to ensure they work together correctly.
+- **Tools**: Spring Boot Test, Mockito
+
+### User Acceptance Testing (UAT)
+
+- **Description**: Manual testing by project team members to validate the application against business requirements. Feedback is also gathered from real users to ensure the application meets their needs.
+- **Tools**: Manual testing by project team members
+- **Tools**: Discord for live testing sessions and reporting bugs. Team members communicated and documented any issues or feedback directly in Discord.
+
+### Performance Testing
+
+- **Description**: Apache JMeter is used to simulate multiple users accessing the system simultaneously to test its behavior under stress.
+- **Tools**: Apache JMeter
+
+### Functional Testing
+- **Description**: Functional testing ensures that the system behaves according to the specified requirements.
+- **Tools**: Manual testing by project team members
+- **Tests done**: 
+  - **Registeration**
+  - **Login**
+  - **Changing language**
+  - **Product creation**
+  - **Changing product name**
+  - **Changing product amount**
+  - **Removing product**
+  - **Editing action**
+  - **Exporting report**
+  - **Exporting with user ID report**
 
 
 ## 6.2 Clean Code

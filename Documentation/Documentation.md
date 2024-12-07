@@ -144,7 +144,28 @@ For inventory management system, the customer requires the following features:
   - Password
 ---
 # 3. Development Methods
+## 1. Methodology Used
+We adopted the Agile methodology to ensure iterative development and regular feedback. We held daily (or every other day) Scrum meetings over Discord to review what we had accomplished in the previous day(s) and discuss our goals. During these meetings, we assessed whether we were on track to meet our objectives and ensured that we were heading in the right direction.
 
+## 2. Phases of Development
+
+### Planning
+We gathered information about the functionalities and qualities needed for our application to achieve the goals and vision we had set.
+
+### Design
+We brainstormed how the application should look and function during each phase. For now, the first version of our application can be considered complete. In this phase, we also discussed the application’s architecture, database design, and its localization implementation.
+
+### Implementation
+We began implementing the features and plans outlined during the planning and design phases.
+
+### Testing
+After the implementation phase (note that unit tests were written during implementation to test the core functionalities throughout), we conducted thorough testing of our application. This included both manual testing and tool-assisted testing. We performed various types of tests, such as regression, acceptance, load, stress, and end-to-end testing. During this phase, we welcomed a new team member, who contributed to accelerating the testing process.
+
+## 3. Team Collaboration
+We used a variety of tools to stay organized and on track as a team. Discord was our primary platform for daily meetings, where we discussed progress and planned the next steps. Additionally, we tracked our tasks using Trello, which made it easier to remember completed tasks, monitor ongoing ones, and plan future work.
+
+## 4. Why This Method?
+The Agile methodology allowed us to stay on track and up-to-date while enabling us to respond to changes quickly. This approach ensured we could adjust our processes whenever necessary.
 
 
 # 4. System Design and Architecture

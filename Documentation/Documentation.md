@@ -405,8 +405,32 @@ This document will provide a detailed description of the system's design, includ
 ## 6.1 Testing
 
 
-
 ## 6.2 Clean Code
+### 1. Principles Applied  
+We adhered to common programming conventions throughout the development process. This included writing meaningful names for variables, functions, and classes (e.g., `updateStock()` instead of `us()`). We also ensured that functions were designed to perform a single responsibility wherever possible (e.g., a function for "add inventory" only adds inventory and does not perform unrelated calculations).  
+
+### 2. Consistency  
+We followed the Google Java Style Guide wherever feasible. To ensure consistency, we used tools such as **Checkstyle**, **PMD**, **SpotBugs**, and **SonarLint** to check our code for adherence to coding standards.  
+
+### 3. Commenting and Documentation  
+We wrote proper comments where necessary and created detailed Javadoc for public methods and classes. Additionally, we prepared different types of documentation to clarify various aspects of the application. This included:  
+   - **Software Design Documentation**  
+   - **System Architecture Documentation**  
+   - **Testing Strategy Documentation**  
+   - **User Documentation**  
+
+### 4. Error Handling  
+We implemented error-handling mechanisms using `try-catch` blocks to print stack traces when errors occurred. Logging was also used to monitor application behavior and track errors. For front-end errors, we utilized `try-catch` blocks to handle issues and provided users with clear pop-up messages to notify them of incorrect actions or invalid inputs.  
+
+### 5. Code Review and Refactoring  
+We added a **CODEOWNERS** file to our GitHub repository and implemented a structured code review process. This included:  
+   - Configuring restrictions to prevent direct pushes to the main branch.  
+   - Requiring contributors to create new branches for changes and submit pull requests (PRs).  
+   - Mandating that at least one code owner review and approve the PR before it could be rebased and merged into the main branch.  
+Code reviews were performed for every PR to maintain clear, efficient, and high-quality code.  
+
+### 6. Impact on Maintainability  
+By following code conventions, using best practices, leveraging tools, and implementing thorough error handling and reviews, we ensured that the codebase remains easy to maintain and scalable for future development.  
 
 
 # 7. Deployment Process

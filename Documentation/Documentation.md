@@ -329,6 +329,73 @@ This document will provide a detailed description of the system's design, includ
 
 ## 5.1 UI
 
+### Overview
+The user interface of the inventory management system is designed to provide a seamless and efficient user experience. It simplifies key operations such as managing inventory, handling transactions, and generating reports while supporting multiple languages for a global user base.
+
+### Key Features
+
+#### Login Screen
+- The login screen provides fields for **username** and **password** input, ensuring a secure login process.
+- A language selection dropdown is included, allowing users to choose their preferred language, supporting multilingual users with options such as **English**, **Finnish**, **Japanese**, and **Azerbaijani**.
+
+#### Register Screen
+- The **Register Screen** allows new users to create an account.
+- It includes fields for **username**, **email**, **password**, and **confirm password**.
+- Once the user fills out the required information, they can submit the form to register and gain access to the system.
+
+#### Dashboard and Navigation Panel
+- The main dashboard features a **side navigation panel** for quick access to system functionalities, including:
+  - **Transactions** (viewing and managing)
+  - **Product creation, editing, and deletion**
+  - **Generating reports**
+  - **Refresh and logout options**
+- A **language dropdown** within the navigation panel lets users switch the UI language dynamically.
+
+#### Reports  
+- Clicking the **Reports** button on the **Products** page opens the **Reports Dialog**, allowing users to generate and export reports.  
+- Users can filter and customize reports based on specific timeframes, enabling detailed analysis of inventory and transaction data.
+
+#### Product Table
+- A central table displays inventory data such as:
+  - **Product ID**, **Name**, **Quantity**, **Price**, **Supplier**, and **Category**.
+- Users can easily analyze and sort data, facilitating efficient inventory management.
+
+#### Transactions Screen
+- The **Transactions** section lists all transactions related to the inventory, such as sales, purchases, and adjustments.
+- Key features include:
+  - A table displaying transaction details (e.g., **transaction ID**, **date**, **transaction type**, **quantity**, **name** and **username**).
+  - Buttons to  **Edit Existing Transactions** for better control over the records.
+
+#### Edit Product Dialog
+- A modal dialog for editing product information.
+- Includes input fields for:
+  - **Product Name**
+  - **Price**
+  - **Quantity**
+  - **Category**
+  - **Supplier**
+- A clear **"Edit Product"** button allows users to update records accurately.
+
+#### Edit Transactions Dialog
+- A dedicated modal for editing transactions.
+- Features include:
+  - Fields for selecting or modifying the **Product**, **Quantity**, **Transaction Type** (e.g., sale or purchase), and **Date**.
+  - A submit button (**Edit Transaction**) for saving changes.
+- This dialog ensures that all transaction updates are logged accurately for audit purposes.
+
+### UI Design Principles
+- **Simplicity**: The design is intuitive and eliminates unnecessary complexity for ease of use.
+- **Consistency**: Uniform layouts and styles are maintained across all screens for a coherent experience.
+- **Internationalization**: Support for multiple languages ensures accessibility to a global user base.
+- **Responsiveness**: The UI adapts to different screen sizes, maintaining usability across devices.
+
+### Tools and Technologies
+The user interface was developed using:
+- **JavaFX**: For building the graphical interface and managing layouts dynamically.
+- **CSS**: To provide a polished, professional look.
+- **Localization Libraries**: To implement multilingual capabilities seamlessly.
+
+
 
 
 ## 5.2 Database

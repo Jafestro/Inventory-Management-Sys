@@ -81,27 +81,27 @@ Functional testing ensures that the system behaves according to the specified re
 | Unit Testing            | Write unit tests for individual modules to ensure correctness.                                    | Patrik Hyytiäinen    | 18/11/2024  | Done     |
 | Integration Testing     | Verify that different modules or components work together as expected.                            | Patrik Hyytiäinen | 18/11/2024  | Done     |
 | System Testing          | Test the entire system to ensure all components function as intended.                            | Jafar Jafarov             | 18/11/2024  | Done     |
-| Regression Testing      | Test to ensure that recent changes haven't introduced new issues.                               | Jonne Koivisto             | 29/11/2024  | Pending     |
+| Regression Testing      | Test to ensure that recent changes haven't introduced new issues.                               | Jonne Koivisto             | 29/11/2024  | Done     |
 
 ### 3.2 Non-Functional Testing
 Non-functional testing ensures that the application performs well under various conditions.
 
 | **Task**               | **Description**                                                                                   | **Responsibility**   | **Due Date**  | **Status**  |
 |------------------------|---------------------------------------------------------------------------------------------------|----------------------|---------------|-------------|
-| Performance Testing     | Evaluate the speed, responsiveness, and stability of the application under load.                  | Ville Timonen           | 29/11/2024  | Pending     |
-| Load Testing            | Simulate multiple users accessing the system simultaneously to test its behavior under stress.    | Jafar Jafarov, Jonne Koivisto, Jasper Kaira              | 29/11/2024  | Pending     |
-| Security Testing        | Identify and mitigate potential vulnerabilities in the software.                                  | Jasper Kaira  | 29/11/2024  | Pending     |
+| Performance Testing     | Evaluate the speed, responsiveness, and stability of the application under load.                  | Ville Timonen           | 29/11/2024  | Done     |
+| Load Testing            | Simulate multiple users accessing the system simultaneously to test its behavior under stress.    | Jafar Jafarov, Jonne Koivisto, Jasper Kaira              | 29/11/2024  | Done     |
+| Security Testing        | Identify and mitigate potential vulnerabilities in the software.                                  | Jasper Kaira  | 29/11/2024  | Done     |
 | Compatibility Testing   | Test the software on different browsers, devices, and operating systems to ensure compatibility.   | Jonne Koivisto, Patrik Hyytiäinen, Jafar Jafarov              | 18/11/2024  | Done    |
-| Usability Testing       | Evaluate the ease of use and overall user experience of the application.                          | Ville Timonen     | 29/11/2024  | Pending     |
+| Usability Testing       | Evaluate the ease of use and overall user experience of the application.                          | Ville Timonen     | 29/11/2024  | Done     |
 
 ### 3.3 Static Code Review
 Static code review involves analyzing the code without executing it to ensure quality and adherence to coding standards.
 
 | **Task**               | **Description**                                                                                   | **Responsibility**    | **Due Date**  | **Status**  |
 |------------------------|---------------------------------------------------------------------------------------------------|-----------------------|---------------|-------------|
-| Code Quality Check      | Review code to ensure adherence to coding standards, clarity, and proper documentation.          | Jafar Jafarov | 29/11/2024 | Pending     |
-| Code Duplication Check  | Identify and eliminate duplicated code to improve maintainability.                                | Jasper Kaira             | 29/11/2024  | Pending     |
-| Code Refactoring        | Refactor sections of code to improve readability and efficiency without changing functionality.   | Jonne Koivisto             | 29/11/2024  | Pending     |
+| Code Quality Check      | Review code to ensure adherence to coding standards, clarity, and proper documentation.          | Jafar Jafarov | 29/11/2024 | Done     |
+| Code Duplication Check  | Identify and eliminate duplicated code to improve maintainability.                                | Jasper Kaira             | 29/11/2024  | Done     |
+| Code Refactoring        | Refactor sections of code to improve readability and efficiency without changing functionality.   | Jonne Koivisto             | 29/11/2024  | Done     |
 
 ### 3.4 Clean Coding Practices
 Ensure that the code is maintainable, scalable, and readable by following best practices.
@@ -109,8 +109,8 @@ Ensure that the code is maintainable, scalable, and readable by following best p
 | **Task**               | **Description**                                                                                   | **Responsibility**  | **Due Date**  | **Status**  |
 |------------------------|---------------------------------------------------------------------------------------------------|---------------------|---------------|-------------|
 | Code Consistency        | Ensure that naming conventions, indentation, and formatting are consistent across the codebase.   | Jonne Koivisto           | 29/11/2024  | Pending     |
-| Commenting Code         | Ensure that all functions, classes, and complex sections of code are well-documented.             | Jasper Kaira           | 29/11/2024  | Pending     |
-| Code Reviews and Feedback | Conduct regular code reviews with peers to ensure coding best practices are followed.           | Jafar Jafarov, Jonne Koivisto, Jasper Kaira, Patrik Hyytiäinen, Ville Timonen    | 29/11/2024  | Pending     |
+| Commenting Code         | Ensure that all functions, classes, and complex sections of code are well-documented.             | Jasper Kaira           | 29/11/2024  | Done     |
+| Code Reviews and Feedback | Conduct regular code reviews with peers to ensure coding best practices are followed.           | Jafar Jafarov, Jonne Koivisto, Jasper Kaira, Patrik Hyytiäinen, Ville Timonen    | 29/11/2024  | Done     |
 
 ---
 
@@ -138,8 +138,8 @@ The following deliverables are expected as part of the QA process:
 | **Milestone**            | **Date**          | **Responsibility**  | **Status**  |
 |--------------------------|-------------------|---------------------|-------------|
 | Test Plan Finalized       | 10/11/2024      | Jafar Jafarov, Jasper Kaira, Jonne Koivisto, Patrik Hyytiäinen, Ville Timonen            | Done     |
-| Test Execution            | 29/11/2024      |  Jafar Jafarov, Jasper Kaira, Jonne Koivisto, Patrik Hyytiäinen, Ville Timonen  | Pending     |
-| Static Code Review Complete | 29/11/2024   | Jafar Jafarov, Jasper Kaira, Jonne Koivisto, Patrik Hyytiäinen, Ville Timonen | Pending     |
+| Test Execution            | 29/11/2024      |  Jafar Jafarov, Jasper Kaira, Jonne Koivisto, Patrik Hyytiäinen, Ville Timonen  | Done     |
+| Static Code Review Complete | 29/11/2024   | Jafar Jafarov, Jasper Kaira, Jonne Koivisto, Patrik Hyytiäinen, Ville Timonen | Done     |
 | QA Report Finalized       | 29/11/2024      | Jafar Jafarov, Jasper Kaira, Jonne Koivisto, Patrik Hyytiäinen, Ville Timonen            | Pending     |
 
 ---

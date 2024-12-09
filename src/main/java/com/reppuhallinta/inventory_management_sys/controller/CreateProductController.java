@@ -1,27 +1,34 @@
 package com.reppuhallinta.inventory_management_sys.controller;
 
-import com.reppuhallinta.inventory_management_sys.model.*;
-import com.reppuhallinta.inventory_management_sys.service.CategoryService;
-import com.reppuhallinta.inventory_management_sys.service.SupplierService;
-import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.stage.Stage;
-import org.springframework.stereotype.Controller;
-
-import com.reppuhallinta.inventory_management_sys.service.ProductService;
-
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-import session.CustomSessionManager;
-
 import java.math.BigDecimal;
 import java.util.List;
 
-import static com.reppuhallinta.inventory_management_sys.utils.UIUtils.*;
+import org.springframework.stereotype.Controller;
 
+import com.reppuhallinta.inventory_management_sys.model.Category;
+import com.reppuhallinta.inventory_management_sys.model.Products;
+import com.reppuhallinta.inventory_management_sys.model.Suppliers;
+import com.reppuhallinta.inventory_management_sys.model.User;
+import com.reppuhallinta.inventory_management_sys.service.CategoryService;
+import com.reppuhallinta.inventory_management_sys.service.ProductService;
+import com.reppuhallinta.inventory_management_sys.service.SupplierService;
+import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
+import static com.reppuhallinta.inventory_management_sys.utils.UIUtils.ERRORTITLE;
+import static com.reppuhallinta.inventory_management_sys.utils.UIUtils.SUCCESSTITLE;
+import static com.reppuhallinta.inventory_management_sys.utils.UIUtils.VALIDATETITLE;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import session.CustomSessionManager;
+
+/**
+ * Controller class for creating products.
+ */
 @Controller
 public class CreateProductController {
 
@@ -65,12 +72,22 @@ public class CreateProductController {
     @FXML
     private TextField newCategoryTextField;
 
+    /**
+     * Constructor for CreateProductController.
+     * 
+     * @param productService the service for managing products
+     * @param categoryService the service for managing categories
+     * @param supplierService the service for managing suppliers
+     */
     public CreateProductController(ProductService productService, CategoryService categoryService, SupplierService supplierService) {
         this.productService = productService;
         this.categoryService = categoryService;
         this.supplierService = supplierService;
     }
 
+    /**
+     * Initializes the controller class.
+     */
     @FXML
     public void initialize() {
 
@@ -86,6 +103,9 @@ public class CreateProductController {
         }
     }
 
+    /**
+     * Handles the action when the create product button is clicked.
+     */
     @FXML
     private void handleCreateProduct() {
         if (!validateInputFields()) {
@@ -113,6 +133,11 @@ public class CreateProductController {
         createProduct(productPriceBigDecimal, quantityInt, categoryId, supplierId, user.getId());
     }
 
+    /**
+     * Validates the input fields.
+     * 
+     * @return true if the input fields are valid, false otherwise
+     */
     private boolean validateInputFields() {
         String productName = this.productNameField.getText();
         String productPrice = this.productPriceField.getText();
@@ -125,6 +150,11 @@ public class CreateProductController {
         return true;
     }
 
+    /**
+     * Gets the category ID based on the selected category name.
+     * 
+     * @return the category ID
+     */
     private int getCategoryId() {
         String categoryName = categoryComboBox.getValue();
         for (Category category : categories) {
@@ -135,6 +165,11 @@ public class CreateProductController {
         return 0;
     }
 
+    /**
+     * Gets the supplier ID based on the selected supplier name.
+     * 
+     * @return the supplier ID
+     */
     private int getSupplierId() {
         String supplierName = supplierComboBox.getValue();
         for (Suppliers supplier : suppliers) {
@@ -145,6 +180,11 @@ public class CreateProductController {
         return 0;
     }
 
+    /**
+     * Parses the product price from the input field.
+     * 
+     * @return the product price as BigDecimal, or null if invalid
+     */
     private BigDecimal parseProductPrice() {
         String productPrice = this.productPriceField.getText();
         try {
@@ -160,6 +200,11 @@ public class CreateProductController {
         }
     }
 
+    /**
+     * Parses the quantity from the input field.
+     * 
+     * @return the quantity as Integer, or null if invalid
+     */
     private Integer parseQuantity() {
         String quantity = this.quantityField.getText();
         try {
@@ -175,6 +220,15 @@ public class CreateProductController {
         }
     }
 
+     /**
+     * Creates a new product.
+     * 
+     * @param productPriceBigDecimal the product price
+     * @param quantityInt the quantity
+     * @param categoryId the category ID
+     * @param supplierId the supplier ID
+     * @param userId the user ID
+     */
     private void createProduct(BigDecimal productPriceBigDecimal, int quantityInt, int categoryId, int supplierId, int userId) {
         try {
             Products product = new Products();
@@ -192,14 +246,27 @@ public class CreateProductController {
     }
 
 
+     /**
+     * Retrieves all categories.
+     * 
+     * @return a list of all categories
+     */
     private List<Category> getAllTransactions() {
         return categoryService.getAllCategories();
     }
 
+    /**
+     * Retrieves all suppliers.
+     * 
+     * @return a list of all suppliers
+     */
     private List<Suppliers> getAllSuppliers() {
         return supplierService.getAllSuppliers();
     }
 
+    /**
+     * Shows a success alert and closes the current stage.
+     */
     private void success() {
         UIUtils.showAlert(AlertType.INFORMATION, SUCCESSTITLE, null, "success.productCreated");
 
@@ -208,6 +275,9 @@ public class CreateProductController {
 
     }
 
+    /**
+     * Handles the action when the add new category button is clicked.
+     */
     @FXML
     private void handleAddNewCategory() {
     	String newCategory = newCategoryTextField.getText();
@@ -233,7 +303,10 @@ public class CreateProductController {
     	newCategoryTextField.clear();
         UIUtils.showAlert(AlertType.INFORMATION, SUCCESSTITLE, null, "success.categoryAdded");
     }
-
+    
+    /**
+     * Handles the action when the add new supplier button is clicked.
+     */
     @FXML
     private void handleAddNewSupplier() {
     	String newSupplier = newSupplierTextField.getText();

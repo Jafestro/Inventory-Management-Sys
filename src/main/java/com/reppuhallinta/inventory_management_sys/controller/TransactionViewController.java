@@ -7,8 +7,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-import javafx.animation.Animation;
-import javafx.scene.control.*;
 import org.springframework.stereotype.Controller;
 
 import com.reppuhallinta.inventory_management_sys.model.Transaction;
@@ -17,6 +15,7 @@ import com.reppuhallinta.inventory_management_sys.service.TransactionService;
 import com.reppuhallinta.inventory_management_sys.service.UserService;
 import com.reppuhallinta.inventory_management_sys.utils.UIUtils;
 
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -26,11 +25,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import session.CustomSessionManager;
 
+/**
+ * Controller class for managing the transaction view.
+ */
 @Controller
 public class TransactionViewController extends LogoutController {
     private final TransactionService transactionService;
@@ -73,11 +83,22 @@ public class TransactionViewController extends LogoutController {
     @FXML
     private ChoiceBox<String> languageChoiceBox;
 
+    private Timeline timeline;
+
+    /**
+     * Constructor for TransactionViewController.
+     * 
+     * @param transactionService the service for managing transactions
+     * @param userService the service for managing users
+     */
     public TransactionViewController(TransactionService transactionService, UserService userService) {
         this.transactionService = transactionService;
         this.userService = userService;
     }
 
+    /**
+     * Initializes the controller class.
+     */
     @FXML
     public void initialize() {
 
@@ -105,7 +126,12 @@ public class TransactionViewController extends LogoutController {
 
         loadTransactionData();
 
-        Timeline timeline = new Timeline(
+        if (timeline != null) {
+            timeline.stop();
+            timeline.setCycleCount(0);
+        }
+
+        timeline = new Timeline(
                 new KeyFrame(Duration.seconds(0), event -> {
                     loadTransactionData();
                     updateProgressBar();
@@ -118,6 +144,12 @@ public class TransactionViewController extends LogoutController {
         UIUtils.setLanguageChoiceBox(languageChoiceBox, "Transactions", "/Transactions.fxml", 1050, 600);
     }
 
+    /**
+     * Adds a sort event handler to the given table column.
+     * 
+     * @param column the table column to add the sort event handler to
+     * @param <T> the type of the column
+     */
     private <T> void addSortEventHandler(TableColumn<Transaction, T> column) {
         Label label = new Label();
         column.setGraphic(label);
@@ -132,10 +164,18 @@ public class TransactionViewController extends LogoutController {
         });
     }
 
+    /**
+     * Filters the transaction list based on the search word.
+     * 
+     * @param searchWord the search word to filter the transaction list
+     */
     private void filterTransactionList(String searchWord) {
         // Implement filtering logic
     }
 
+    /**
+     * Loads the transaction data and sets it to the table.
+     */
     private void loadTransactionData() {
 
         List<Transaction> transactions = transactionService.getAllTransactions();
@@ -160,12 +200,17 @@ public class TransactionViewController extends LogoutController {
         transactionTable.setItems(transactionObservableList);
 
     }
-
+    /**
+     * Handles the action when the products button is clicked.
+     */
     public void handleProductsButton() {
         Stage stage = (Stage) productsButton.getScene().getWindow();
         UIUtils.loadFXML("/Products.fxml", stage, "Products", 1370, 600, null);
     }
 
+    /**
+     * Updates the progress bar.
+     */
     private void updateProgressBar() {
         Timeline progressBarTimeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(autoRefreshProgressBar.progressProperty(), 0)),
@@ -175,6 +220,9 @@ public class TransactionViewController extends LogoutController {
         progressBarTimeline.play();
     }
 
+    /**
+     * Handles the action when the edit transaction button is clicked.
+     */
     @FXML
     private void handleEditTransaction() {
         Transaction selectedTransaction = transactionTable.getSelectionModel().getSelectedItem();

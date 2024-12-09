@@ -33,6 +33,9 @@
 - [8. Summary](#8-summary)
 
 
+[TRELLO](https://trello.com/b/AtmNSMg6/otp2-inventory-management-system)
+
+[Project GITHUB](https://github.com/Jafestro/Inventory-Management-Sys.git)
 
 # 1. Project Overview
 

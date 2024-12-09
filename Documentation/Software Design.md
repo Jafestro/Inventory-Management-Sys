@@ -98,3 +98,19 @@ This document will provide a detailed description of the system's design, includ
 
 ##### Key Classes:
 - [ReportController](/src/main/java/com/reppuhallinta/inventory_management_sys/controller/ReportViewController.java): Handles report generation requests.
+
+## Search Functionality
+
+#### 1. Product Search:
+- The user enters a search query in the search bar.
+- The system retrieves products that match the search query.
+- The system displays the search results to the user in the table view.
+
+#### 3. Transaction Search:
+- The user enters a search query in the search bar.
+- The system retrieves transactions that match the search query.
+- The system displays the search results to the user in the table view.
+
+##### Key Classes:
+- [ProductViewController](/src/main/java/com/reppuhallinta/inventory_management_sys/controller/ProductViewController.java): Contains the method for product search.
+- [TransactionViewController](/src/main/java/com/reppuhallinta/inventory_management_sys/controller/TransactionViewController.java): Contains the method for transaction search.
